@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="Ziang Sun"><meta name="copyright" content="Ziang Sun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://localhost:4000/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://localhost:4000/img/butterfly-icon.png">
+<meta property="article:author" content="Ziang Sun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://localhost:4000/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-11-19T08:54:24.661Z" title="Created 2024-11-19 16:54:24">2024-11-19</time></span></div><div class="content"> Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment   ssh-rsa...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/macEnvironment/" title="Mac环境配置">Mac环境配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-11-17T12:43:56.938Z" title="Created 2024-11-17 20:43:56">2024-11-17</time></span></div><div class="content">https://blog.csdn.net/yb2020/article/details/128343187 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/ARFoundationLearning/" title="ARFoundation学习">ARFoundation学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-11-14T05:15:25.354Z" title="Created 2024-11-14 13:15:25">2024-11-14</time></span></div><div class="content">About ARFoundationARSessionAn AR scene should include an ARSession component. The AR Session controls the lifecycle of an AR experience, enabling or disabling AR on the target platform. The ARSession can be on any GameObject An AR scene should include an ARSession component. The AR Session controls the lifecycle of an AR experience, enabling or disabling AR on the target platform. The ARSession can be on any GameObject ARSessionOriginThe purpose of the ARSessionOrigin is to transform...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/react-guide/" title="React入门">React入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-11-04T07:45:19.239Z" title="Created 2024-11-04 15:45:19">2024-11-04</time></span></div><div class="content">JSXJSX是JavaScript和XML（HTML）的缩写，表示在JS代码中编写HTML模版结构，它是React编写UI的方式。   JSX并不是标准的JS语法，它是JS的语法扩展，浏览器本身不能识别，需要通过解析工具做解析之后才能在浏览器中运行。 在JSX中可以通过大括号语法{}识别JavaScript中的表达式，比如常见的变量，方法的调用等。 1234567891011121314151617181920212223242526272829//  项目的根组件const num = 1010;function func1()&#123;  return &quot;func1&quot;;&#125;function App() &#123;  return (    &lt;div className  =&quot;App&quot;&gt;      this is react App      &#123;/* 1.使用引号传递字符串 */&#125;      &#123;&#x27;this is message&#x27;&#125;     ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Spring/" title="Spring">Spring</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-11-03T09:34:50.969Z" title="Created 2024-11-03 17:34:50">2024-11-03</time></span></div><div class="content">MyBatisMyBatis是一款优秀的持久型（JavaEE三层架构：表现层、业务层和持久层&#x2F;数据访问层）框架，它支持自定义SQL、存储过程以及高级映射。MyBatis免除了几乎所有的JDBC代码以及设置参数和获取结果集的工作。MyBatis可以通过简单的XML或注解来配置和映射原始类型、接口和Java POJO（Plain Old Java Objects，普通老式Java对象）为数据库中的记录。  MyBatis快速入门创建user表，添加数据1234567891011121314create database mybatisDb; use mybatisDb;drop table if exists tb_user;create table tb_user( 	id int primary key auto_increment, 	username varchar(20), 	password varchar(20), 	gender char(1), 	addr varchar(30) ); INSERT INTO tb_user VALUES...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Java%E5%9F%BA%E7%A1%80/" title="Java基础">Java基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-11-03T09:34:50.963Z" title="Created 2024-11-03 17:34:50">2024-11-03</time></span></div><div class="content">Java IO操作IO 即 Input&#x2F;Output，数据输入到计算机内存的过程即输入，反之输出到外部存储（比如数据库，文件，远程主机）的过程即输出。数据传输过程类似于水流，因此称为 IO 流。IO 流在 Java 中分为输入流和输出流，而根据数据的处理方式又分为字节流和字符流。 字节输入流FileInputStream（它用于从文件系统中的文件读取数据）。当你实例化FileInputStream时，实际上是创建一个对象，这个对象可以用来打开一个到文件的输入流通道，以便后续从该文件中读取数据。 1FileInputStream fis = new FileInputStream(&quot;文件路径&quot;);    InputStream（字节输入流）常见的字节输入流FileInputStream（它用于从文件系统中的文件读取数据）。当你实例化FileInputStream时，实际上是创建一个对象，这个对象可以用来打开一个到文件的输入流通道，以便后续从该文件中读取数据。 1FileInputStream fis = new...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/JavaWeb%E5%9F%BA%E7%A1%80/" title="JavaWeb基础">JavaWeb基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-11-03T09:34:50.959Z" title="Created 2024-11-03 17:34:50">2024-11-03</time></span></div><div class="content">JSP页面元素  a.脚本Scriptlet  &lt;%         局部变量、java语句 %&gt;  &lt;%!         全局变量、定义方法  %&gt;  &lt;%= 输出表达式  %&gt; 这里的局部变量的作用域并不是局限于&lt;%	.....%&gt;，这是因为JSP最终都会转译为servlet，全局变量为该类的成员变量，作用域为整个类；而局部变量被写在了service方法当中，为客户端向服务端的servlet中，service()方法中的本地变量只能每响应一次请求就重建一次。 全局变量在关闭该网页、关闭浏览器、更换浏览器，再重新访问该jsp页面后仍然持续保留之前的值（服务器仍然保留着该servlet）； 但在清除tomcat的work文件夹，或重启tomcat后恢复初始值。 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta charset=&quot;UTF-8&quot;&gt; &lt;title&gt;Insert title...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8/" title="前端入门">前端入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-20T16:00:00.000Z" title="Created 2024-03-21 00:00:00">2024-03-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">  HTMLHTML 全称 Hypertext Markup Lanuage 超文本标记语言XML的标签可以由自己定义，而HTML的标签都是预定义好的 HTML代码直接在浏览器中运行，HTML标签由浏览器解析 HTML 的作用是为网页提供结构，它告诉浏览器哪些部分是标题，哪些部分是段落，哪些是列表…… HTML通过一系列的标签（也称为元素）来定义文本、图像、链接等等。HTML标签可以通过属性来提供更多的信息。 HTML标签是由尖括号包围起来的关键字。 标签通常成对出现，包括开始标签和结束标签（也称为双标签），内容位于这两个标签之间，例如： 123&lt;p&gt;这是一个段落&lt;/p&gt;&lt;h1&gt;这是一个标题&lt;/h1&gt;&lt;a href=&quot;www.baidu.com&quot;&gt;这是一个超链接&lt;/a&gt;  除了双标签，也存在单标签，顾名思义，单标签没有结束标签，例如input、换行、分割线标签： 123&lt;input type=&quot;text&quot;&gt;&lt;br&gt;...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ziang Sun</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/hello-world/" title="Hello World">Hello World</a><time datetime="2024-11-19T08:54:24.661Z" title="Created 2024-11-19 16:54:24">2024-11-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/macEnvironment/" title="Mac环境配置">Mac环境配置</a><time datetime="2024-11-17T12:43:56.938Z" title="Created 2024-11-17 20:43:56">2024-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ARFoundationLearning/" title="ARFoundation学习">ARFoundation学习</a><time datetime="2024-11-14T05:15:25.354Z" title="Created 2024-11-14 13:15:25">2024-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/react-guide/" title="React入门">React入门</a><time datetime="2024-11-04T07:45:19.239Z" title="Created 2024-11-04 15:45:19">2024-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Spring/" title="Spring">Spring</a><time datetime="2024-11-03T09:34:50.969Z" title="Created 2024-11-03 17:34:50">2024-11-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="card-category-list-name">编程</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">前端</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
+    </div>
+    <ul class="card-archive-list">
+  
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/11/">
+          <span class="card-archive-list-date">November 2024</span>
+          <span class="card-archive-list-count">7</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/03/">
+          <span class="card-archive-list-date">March 2024</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">8</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-11-22T06:49:07.219Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Ziang Sun</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
