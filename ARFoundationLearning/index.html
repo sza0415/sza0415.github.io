@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ARFoundation学习 | Ziang Sun's Blog</title><meta name="author" content="Ziang Sun"><meta name="copyright" content="Ziang Sun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="About ARFoundationARSessionAn AR scene should include an ARSession component. The AR Session controls the lifecycle of an AR experience, enabling or disabling AR on the target platform. The ARSession">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARFoundation学习">
+<meta property="og:url" content="https://sza0415.github.io/ARFoundationLearning/index.html">
+<meta property="og:site_name" content="Ziang Sun&#39;s Blog">
+<meta property="og:description" content="About ARFoundationARSessionAn AR scene should include an ARSession component. The AR Session controls the lifecycle of an AR experience, enabling or disabling AR on the target platform. The ARSession">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://sza0415.github.io/img/image1.png">
+<meta property="article:published_time" content="2024-11-14T05:15:25.354Z">
+<meta property="article:modified_time" content="2024-11-22T06:16:58.719Z">
+<meta property="article:author" content="Ziang Sun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sza0415.github.io/img/image1.png"><link rel="shortcut icon" href="/img/image1.png"><link rel="canonical" href="https://sza0415.github.io/ARFoundationLearning/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ARFoundation学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/image1.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/todo/"><i class="fa-fw fas fa-list-alt"></i><span> ToDo</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/image1.png" alt="Logo"><span class="site-name">Ziang Sun's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">ARFoundation学习</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/todo/"><i class="fa-fw fas fa-list-alt"></i><span> ToDo</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">ARFoundation学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-11-14T05:15:25.354Z" title="Created 2024-11-14 13:15:25">2024-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-11-22T06:16:58.719Z" title="Updated 2024-11-22 14:16:58">2024-11-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="About-ARFoundation"><a href="#About-ARFoundation" class="headerlink" title="About ARFoundation"></a>About ARFoundation</h1><h2 id="ARSession"><a href="#ARSession" class="headerlink" title="ARSession"></a>ARSession</h2><p>An AR scene should include an <code>ARSession</code> component. The AR Session controls the lifecycle of an AR experience, enabling or disabling AR on the target platform. The <code>ARSession</code> can be on any <code>GameObject</code></p>
+<p>An AR scene should include an <code>ARSession</code> component. The AR Session controls the lifecycle of an AR experience, enabling or disabling AR on the target platform. The <code>ARSession</code> can be on any <code>GameObject</code></p>
+<h2 id="ARSessionOrigin"><a href="#ARSessionOrigin" class="headerlink" title="ARSessionOrigin"></a>ARSessionOrigin</h2><p>The purpose of the <code>ARSessionOrigin</code> is to transform trackable features (such as planar surfaces and feature points) into their final position, orientation, and scale in the Unity scene. Because AR devices provide their data in “session space”, an unscaled space relative to the beginning of the AR session, the <code>ARSessionOrigin</code> performs the appropriate transformation into Unity space.</p>
+<h2 id="Tracked-Pose-Driver"><a href="#Tracked-Pose-Driver" class="headerlink" title="Tracked Pose Driver"></a>Tracked Pose Driver</h2><p>Parented to the <code>ARSessionOrigin</code>‘s’ <code>GameObject</code> should be (at least) one camera, which will be used to render any trackables you wish to visualize. The camera should also have a <code>TrackedPoseDriver</code> component on it, which will drive the camera’s local position and rotation according to the device’s tracking information. This setup allows the camera’s local space to match the AR “session space”.</p>
+<h1 id="ARFoundation－图像跟踪"><a href="#ARFoundation－图像跟踪" class="headerlink" title="ARFoundation－图像跟踪"></a>ARFoundation－图像跟踪</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yolon3000/article/details/96502120">https://blog.csdn.net/yolon3000/article/details/96502120</a></p>
+<p>图像跟踪技术，是指通过图像处理技术对摄像头中拍摄到的2D图像进行定位，并对其姿态进行跟踪的技术。</p>
+<p>在ARFoundation中，图像跟踪的操作使用分成两步，第一步是建立一个参考图像库Create-&gt;XR-&gt;Reference Image Library，第二步是在场景中挂载AR Tracked Image Manager组件，并将一个需要实例化的Prefab赋给其Tracked Image Prefab即可</p>
+<img src="image-20241114144129407.png" class title="image-20241114144129407.png">
+
+<p>Max Number of Moving Images属性指定了最大的可跟踪的动态图像数，因为动态图像跟踪是一个非常消耗CPU性能的任务，过多的动态图像跟踪会导致应用卡顿。</p>
+<h2 id="图像跟踪启用与禁用"><a href="#图像跟踪启用与禁用" class="headerlink" title="图像跟踪启用与禁用"></a>图像跟踪启用与禁用</h2><p>在ARFoundation中，实例化出来的虚拟对象并不会随着被跟踪物体的消失而消失，而是会继续停留在原来的位置上，这有时就会变得很不合适。而且，图像跟踪是一个非常消耗性能的操作，在不使用图像跟踪时一定要把图像跟踪功能关闭。参考平面检测功能的关闭与启用，类似的我们可以编写如下代码来控制图像跟踪的启用与禁用以及所跟踪对象的显示与隐藏。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Text m_TogglePlaneDetectionText;</span><br><span class="line"><span class="keyword">private</span> ARTrackedImageManager mARTrackedImageManager;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    mARTrackedImageManager = GetComponent&lt;ARTrackedImageManager&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">region</span> 启用与禁用图像跟踪</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ToggleImageTracking</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    mARTrackedImageManager.enabled = !mARTrackedImageManager.enabled;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> planeDetectionMessage = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (mARTrackedImageManager.enabled)</span><br><span class="line">    &#123;</span><br><span class="line">        planeDetectionMessage = <span class="string">&quot;禁用图像跟踪&quot;</span>;</span><br><span class="line">        SetAllImagesActive(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        planeDetectionMessage = <span class="string">&quot;启用图像跟踪&quot;</span>;</span><br><span class="line">        SetAllImagesActive(<span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (m_TogglePlaneDetectionText != <span class="literal">null</span>)</span><br><span class="line">        m_TogglePlaneDetectionText.text = planeDetectionMessage;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SetAllImagesActive</span>(<span class="params"><span class="built_in">bool</span> <span class="keyword">value</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> img <span class="keyword">in</span> mARTrackedImageManager.trackables)</span><br><span class="line">        img.gameObject.SetActive(<span class="keyword">value</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>enabled</code>属性（主要用于组件）</strong></p>
+<ul>
+<li><strong>功能</strong>：<code>enabled</code>是许多 Unity 组件（如<code>MonoBehaviour</code>、<code>ARTrackedImageManager</code>等）都具有的一个属性。它用于控制组件是否处于启用状态。</li>
+</ul>
+<p><strong><code>SetActive</code>方法（用于游戏对象）</strong></p>
+<ul>
+<li><strong>功能</strong>：<code>SetActive</code>是<code>GameObject</code>类的一个方法，用于控制游戏对象是否在场景中处于活动（可见和可交互）状态。当<code>SetActive(true)</code>时，游戏对象及其所有子对象（如果有）会变为可见状态，并且可以与场景中的其他对象进行交互，如接收碰撞检测、触发事件等；当<code>SetActive(false)</code>时，游戏对象及其所有子对象会被隐藏，并且不会参与场景中的大多数交互活动，如不会触发碰撞事件，也不会被渲染出来（不可见）。</li>
+</ul>
+<h2 id="多图像跟踪"><a href="#多图像跟踪" class="headerlink" title="多图像跟踪"></a>多图像跟踪</h2><p>在AR Tracked Image Manager组件中，有一个Tracked Image Prefab属性，这个属性即为需要实例化的虚拟对象。默认，ARFoundation是支持多图像跟踪的，如下图所示。</p>
+<p>但在AR应用运行时，只能有一个AR Tracked Image Manager组件运行（多个AR Tracked Image Manager组件会导致跟踪冲突），即只能设置一个Tracked Image Prefab，即不能实例化多个虚拟对象，这将极大的限制跟踪图像的实际应用，所以为了实例化多个虚拟对象，我们只能动态的修改Tracked Image Prefab属性。</p>
+<p>经过测试，我们发现在ARFoundation中，AR Tracked Image Manager组件在trackedImagesChanged事件触发之前就已经实例化了虚拟对象。</p>
+<blockquote>
+<p>直接看官网给的解释，也会方便我们后续的理解：</p>
+<h2 id="Tracked-Image-Prefab"><a href="#Tracked-Image-Prefab" class="headerlink" title="Tracked Image Prefab"></a>Tracked Image Prefab</h2><p>The <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImageManager.html">ARTrackedImageManager</a> has a <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImageManager.html#UnityEngine_XR_ARFoundation_ARTrackedImageManager_trackedImagePrefab">“Tracked Image Prefab”</a> field; however, this is not intended for content. When an image is detected, ARFoundation will create a new <a target="_blank" rel="noopener" href="https://docs.unity3d.com/2019.4/Documentation/Manual/GameObjects.html">GameObject</a> to represent it.</p>
+<p>ARTrackedImageManager（增强现实跟踪图像管理器）有一个 “跟踪图像预制体（Tracked Image Prefab）” 字段；然而，这个字段不是用于（直接关联）内容的（<font color="DodgerBlue">这也就解释了预制体中的预字</font>）。当一个图像被检测到时，ARFoundation（增强现实基础框架）将会创建一个新的游戏对象（GameObject）来表示它。</p>
+<p>If “Tracked Image Prefab” is <code>null</code>, then ARFoundation simply creates a GameObject with an <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImage.html">ARTrackedImage</a> component on it. However, if you want <em>every tracked image</em> to also include additional components, you can provide a prefab for ARFoundation to instantiate for each detected image. In other words, the purpose of the prefab field is to <em>extend</em> the default behavior of tracked images; it is not the recommended way to <em>place content</em> in the world.</p>
+<p>如果“跟踪图像预制件”为空，则 ARFoundation 只会创建一个带有 ARTrackedImage 组件的 GameObject。但是，如果您希望每个跟踪图像也包含其他组件，则可以为每个检测到的图像提供一个预制件，供 ARFoundation 实例化。换句话说，预制件字段的目的是扩展跟踪图像的默认行为；这不是在世界中放置内容的推荐方式。</p>
+<p><code>Tracked Image Prefab</code>为空，<code>ARTrackedImageManager</code>依然会创建一个GameObject，该GameObject会添加所检测到ARTrackedImage（Reference Image Library中设置的待检测的图像集）的组件；而<code>Tracked Image Prefab</code>不为空，那么GameObject下则会多一个预制件，ARTrackedImageManager则会根据该预制件对检测到的图像位置进行实例化。</p>
+</blockquote>
+<p>因此我们的解决思路是：在AR Tracked Image Manager组件Tracked Image Prefab中设置第一个需要实例化的Prefab（<font color="dodgerblue">若Tracked Image Prefab为空，那么当检测到第一个待检测图像added时候，ARTrackedImageManager不会为其实例化</font>），然后在trackedImagesChanged事件里捕捉到图像added操作，更改Tracked Image Prefab为下一个需要实例化的Prefab，这样来达到动态调整虚拟对象的目的。如正常设置Tracked Image Prefab为Spider Prefab，在检测到Spider图像后，我们将Tracked Image Prefab修改为Cat Prefab，这样，再检测到Cat图像后就会实例化Cat Prefab了。</p>
+<img src="image-20241114170149978.png" class title="image-20241114170149978">
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.XR.ARFoundation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MultiImageTracking</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    ARTrackedImageManager ImgTrackedManager;</span><br><span class="line">    <span class="keyword">public</span> GameObject[] ObjectPrefabs;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ImgTrackedManager = GetComponent&lt;ARTrackedImageManager&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ImgTrackedManager.trackedImagesChanged += OnTrackedImagesChanged;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnDisable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ImgTrackedManager.trackedImagesChanged -= OnTrackedImagesChanged;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnTrackedImagesChanged</span>(<span class="params">ARTrackedImagesChangedEventArgs eventArgs</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (eventArgs.added.Count != <span class="number">0</span>)Debug.Log(eventArgs.added.Count); </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> trackedImage <span class="keyword">in</span> eventArgs.added)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Debug.Log(trackedImage.referenceImage.name);</span></span><br><span class="line">            OnImagesChanged(trackedImage.referenceImage.name);</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//    foreach (var trackedImage in eventArgs.updated)</span></span><br><span class="line">    <span class="comment">//    &#123;</span></span><br><span class="line">    <span class="comment">//        OnImagesChanged(trackedImage.referenceImage.name);</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnImagesChanged</span>(<span class="params"><span class="built_in">string</span> referenceImageName</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (referenceImageName == <span class="string">&quot;prefab1&quot;</span>)</span><br><span class="line">        &#123;           </span><br><span class="line">            ImgTrackedManager.trackedImagePrefab = ObjectPrefabs[<span class="number">1</span>];</span><br><span class="line">            Debug.Log(<span class="string">&quot;Tracked Name is ..&quot;</span> + referenceImageName);</span><br><span class="line">            Debug.Log(<span class="string">&quot;Prefab Name is ..&quot;</span> + ImgTrackedManager.trackedImagePrefab.name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (referenceImageName == <span class="string">&quot;prefab2&quot;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Debug.Log(<span class="string">&quot;Tracked Name is ..&quot;</span> + referenceImageName);</span><br><span class="line">            Debug.Log(<span class="string">&quot;Prefab Name is ..&quot;</span> + ImgTrackedManager.trackedImagePrefab.name);</span><br><span class="line">            ImgTrackedManager.trackedImagePrefab = ObjectPrefabs[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>读者可能已经看到，这种方式其实有个很大的弊端，即必须要按顺序检测图像，因为我们无法在用户检测图像之前预测用户可能会检测的2D图像。为解决这个问题，就不能让AR Tracked Image Manager组件实例化对象，而由我们自己负责虚拟对象的实例化。将AR Tracked Image Manager组件下的Tracked Image Prefab属性清空，为MultiImageTracking脚本的ObjectPrefabs数组赋上相应的值，并编写如下代码。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.XR.ARFoundation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MultiImageTracking</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    ARTrackedImageManager ImgTrackedmanager;</span><br><span class="line">    <span class="keyword">public</span> GameObject[] ObjectPrefabs;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Awake</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ImgTrackedmanager = GetComponent&lt;ARTrackedImageManager&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ImgTrackedmanager.trackedImagesChanged += OnTrackedImagesChanged;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnDisable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        ImgTrackedmanager.trackedImagesChanged -= OnTrackedImagesChanged;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OnTrackedImagesChanged</span>(<span class="params">ARTrackedImagesChangedEventArgs eventArgs</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> trackedImage <span class="keyword">in</span> eventArgs.added)</span><br><span class="line">        &#123;</span><br><span class="line">            OnImagesChanged(trackedImage);</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="comment">// foreach (var trackedImage in eventArgs.updated)</span></span><br><span class="line">       <span class="comment">// &#123;</span></span><br><span class="line">       <span class="comment">//     OnImagesChanged(trackedImage.referenceImage.name);</span></span><br><span class="line">       <span class="comment">// &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnImagesChanged</span>(<span class="params">ARTrackedImage referenceImage</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (referenceImage.referenceImage.name == <span class="string">&quot;Spider&quot;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Instantiate(ObjectPrefabs[<span class="number">0</span>], referenceImage.transform);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (referenceImage.referenceImage.name == <span class="string">&quot;Cat&quot;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Instantiate(ObjectPrefabs[<span class="number">1</span>], referenceImage.transform);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="AR-tracked-image-manager"><a href="#AR-tracked-image-manager" class="headerlink" title="AR tracked image manager"></a>AR tracked image manager</h1><p>The tracked image manager is a type of <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/manual/trackable-managers.html">trackable manager</a> and performs <code>2D image tracking</code>.</p>
+<p>The tracked image manager <code>creates</code> <a target="_blank" rel="noopener" href="https://docs.unity3d.com/2019.4/Documentation/Manual/GameObjects.html">GameObjects</a> for <code>each detected image</code> in the environment. </p>
+<p><code>Before </code> an image can be detected, the manager must be instructed to look for a set of reference images compiled into a reference image library. It <u><code>only</code> detects images in this library</u>.</p>
+<h3 id="Responding-to-detected-images"><a href="#Responding-to-detected-images" class="headerlink" title="Responding to detected images"></a>Responding to detected images</h3><p><code>Subscribe </code> to the ARTrackedImageManager’s <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImageManager.html#UnityEngine_XR_ARFoundation_ARTrackedImageManager_trackedImagesChanged">trackedImagesChanged</a> <code>event</code> to be notified whenever an image is <code>added</code> (i.e., first detected), ≈<code>removed</code>, or <code>updated</code>:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">SerializeField</span>]</span><br><span class="line">ARTrackedImageManager m_TrackedImageManager;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnEnable</span>()</span> =&gt; m_TrackedImageManager.trackedImagesChanged += OnChanged;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnDisable</span>()</span> =&gt; m_TrackedImageManager.trackedImagesChanged -= OnChanged;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OnChanged</span>(<span class="params">ARTrackedImagesChangedEventArgs eventArgs</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> newImage <span class="keyword">in</span> eventArgs.added)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Handle added event</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> updatedImage <span class="keyword">in</span> eventArgs.updated)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Handle updated event</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> removedImage <span class="keyword">in</span> eventArgs.removed)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Handle removed event</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can also get all the currently tracked images with the ARTrackedImageManager’s <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackableManager-4.html#UnityEngine_XR_ARFoundation_ARTrackableManager_4_trackables">trackables</a> property. This acts like an <a target="_blank" rel="noopener" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a> collection, so you can use it in a <code>foreach</code> statement:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListAllImages</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    Debug.Log(</span><br><span class="line">        <span class="string">$&quot;There are <span class="subst">&#123;m_TrackedImageManager.trackables.count&#125;</span> images being tracked.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> trackedImage <span class="keyword">in</span> m_TrackedImageManager.trackables)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(<span class="string">$&quot;Image: <span class="subst">&#123;trackedImage.referenceImage.name&#125;</span> is at &quot;</span> +</span><br><span class="line">                  <span class="string">$&quot;<span class="subst">&#123;trackedImage.transform.position&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Or access a specific image by its <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.1/api/UnityEngine.XR.ARSubsystems.TrackableId.html">TrackableId</a>:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ARTrackedImage <span class="title">GetImageAt</span>(<span class="params">TrackableId trackableId</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> m_TrackedImageManager.trackables[trackableId];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Class-ARTrackedImageManager"><a href="#Class-ARTrackedImageManager" class="headerlink" title="Class ARTrackedImageManager"></a>Class ARTrackedImageManager</h2><ul>
+<li><p>Properties</p>
+<ul>
+<li><p>trackedImagePrefab</p>
+<p>If not null, instantiates this prefab for each detected image.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> GameObject trackedImagePrefab &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>The purpose of this property is to <em>extend</em> the functionality of <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImage.html">ARTrackedImage</a>s. It is not the recommended way to instantiate <em>content</em> associated with an <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImage.html">ARTrackedImage</a>. （该属性只是为了扩展ARTrackedImage的功能，当不是为空时，会自动为其实例化，但是这个并不是为ARTrackedImage实例化的推荐方式）</p>
+</li>
+<li><p>referenceLibrary</p>
+<p>Get or set the reference image library, the set of images to search for in the physical environment.</p>
+<p>Declaration</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> IReferenceImageLibrary referenceLibrary &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他属性可以在<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImageManager.html#UnityEngine_XR_ARFoundation_ARTrackedImageManager_trackedImagesChanged">Class ARTrackedImageManager</a>查看</p>
+</li>
+</ul>
+</li>
+<li><p>Methods </p>
+<p>重点讲解OnTrackablesChanged</p>
+<ul>
+<li><p>OnTrackablesChanged(List<ARTrackedImage>, List<ARTrackedImage>, List<ARTrackedImage>)</ARTrackedImage></ARTrackedImage></ARTrackedImage></p>
+<p>Invokes the <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImageManager.html#UnityEngine_XR_ARFoundation_ARTrackedImageManager_trackedImagesChanged">trackedImagesChanged</a> event.</p>
+<p> Declaration</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnTrackablesChanged</span>(<span class="params">List&lt;ARTrackedImage&gt; added, List&lt;ARTrackedImage&gt; updated, List&lt;ARTrackedImage&gt; removed</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p> Parameters</p>
+<table>
+<thead>
+<tr>
+<th align="left">Type</th>
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">List<ARTrackedImage></ARTrackedImage></td>
+<td align="left"><em>added</em></td>
+<td align="left">A list of images added this frame.</td>
+</tr>
+<tr>
+<td align="left">List<ARTrackedImage></ARTrackedImage></td>
+<td align="left"><em>updated</em></td>
+<td align="left">A list of images updated this frame.</td>
+</tr>
+<tr>
+<td align="left">List<ARTrackedImage></ARTrackedImage></td>
+<td align="left"><em>removed</em></td>
+<td align="left">A list of images removed this frame.</td>
+</tr>
+</tbody></table>
+<img src="0798c75c9e2f80e0554f7c7cbc93bb95.png" class title="img">
+
+
+
+<p><code>added</code> 参数是一个列表，其中包含了自上一帧以来新添加的可跟踪对象 。这些对象是在当前帧中被 AR 系统检测到并添加到跟踪列表中的。</p>
+<p><code>updated</code> 列表包含了自上一帧以来发生了更新的可跟踪对象。这些对象已经被 AR 系统跟踪，并且在当前帧中其某些属性或状态发生了变化，例如位置、旋转、缩放等。</p>
+<p><code>removed</code> 列表则包含了自上一帧以来被移除的可跟踪对象，即这些对象在上一帧还在被跟踪，但在当前帧中由于某种原因不再被 AR 系统跟踪，例如超出了跟踪范围、被遮挡时间过长等。</p>
+<img src="image-20241115142916837.png" class title="image-20241115142916837">
+
+<p>Tracking State</p>
+<p>There are three possible tracking states for <code>ARTrackedImages</code>:</p>
+<table>
+<thead>
+<tr>
+<th align="center">TrackingState</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.0/api/UnityEngine.XR.ARSubsystems.TrackingState.html#UnityEngine_XR_ARSubsystems_TrackingState_None">None</a></td>
+<td align="left">The image is not being tracked. Note that this may be the initial state when the image is first detected.</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.0/api/UnityEngine.XR.ARSubsystems.TrackingState.html#UnityEngine_XR_ARSubsystems_TrackingState_Limited">Limited</a></td>
+<td align="left">The image is being tracked, but not as well. The situations in which an image is considered <code>Limited</code> instead of <code>Tracking</code> depend on the underlying AR framework. Examples that may cause <code>Limited</code> tracking include: Obscuring the image so that it is not visible to the camera.The image is not tracked as a moving image. This can happen, for example, if the <code>maxNumberOfMovingImages</code> is exceeded.</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arsubsystems@4.0/api/UnityEngine.XR.ARSubsystems.TrackingState.html#UnityEngine_XR_ARSubsystems_TrackingState_Tracking">Tracking</a></td>
+<td align="left">The underlying AR SDK reports that it is actively tracking the image.</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>Events</p>
+<ul>
+<li><p>trackedImagesChanged</p>
+<p>Invoked once per frame with information about the <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImage.html">ARTrackedImage</a>s that have changed, i.e., been added, updated, or removed. This happens just before <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/api/UnityEngine.XR.ARFoundation.ARTrackedImage.html">ARTrackedImage</a>s are destroyed, so you can set <code>ARTrackedImage.destroyOnRemoval</code> to <code>false</code> from this event to suppress this behavior.</p>
+<h5 id="Declaration"><a href="#Declaration" class="headerlink" title="Declaration"></a>Declaration</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">event</span> Action&lt;ARTrackedImagesChangedEventArgs&gt; trackedImagesChanged</span><br></pre></td></tr></table></figure>
+
+<h5 id="Event-Type"><a href="#Event-Type" class="headerlink" title="Event Type"></a>Event Type</h5><table>
+<thead>
+<tr>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Action<ARTrackedImagesChangedEventArgs></ARTrackedImagesChangedEventArgs></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<p>​	</p>
+<img src="image-20241115142640377.png" class title="image-20241115142640377">
+
+<p><a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/arfoundation-samples/issues/365">https://github.com/Unity-Technologies/arfoundation-samples/issues/365</a></p>
+<p>ƒ</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://sza0415.github.io">Ziang Sun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://sza0415.github.io/ARFoundationLearning/">https://sza0415.github.io/ARFoundationLearning/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/image1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/macEnvironment/" title="Mac环境配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Mac环境配置</div></div><div class="info-2"><div class="info-item-1">https://blog.csdn.net/yb2020/article/details/128343187 </div></div></div></a><a class="pagination-related" href="/react-guide/" title="React入门"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">React入门</div></div><div class="info-2"><div class="info-item-1">JSXJSX是JavaScript和XML（HTML）的缩写，表示在JS代码中编写HTML模版结构，它是React编写UI的方式。   JSX并不是标准的JS语法，它是JS的语法扩展，浏览器本身不能识别，需要通过解析工具做解析之后才能在浏览器中运行。 在JSX中可以通过大括号语法{}识别JavaScript中的表达式，比如常见的变量，方法的调用等。 1234567891011121314151617181920212223242526272829//  项目的根组件const num = 1010;function func1()&#123;  return &quot;func1&quot;;&#125;function App() &#123;  return (    &lt;div className  =&quot;App&quot;&gt;      this is react App      &#123;/* 1.使用引号传递字符串 */&#125;      &#123;&#x27;this is message&#x27;&#125;     ...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/image1.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ziang Sun</div><div class="author-info-description">直到有另一个人 能体会我的感觉</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sza0415"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#About-ARFoundation"><span class="toc-number">1.</span> <span class="toc-text">About ARFoundation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ARSession"><span class="toc-number">1.1.</span> <span class="toc-text">ARSession</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARSessionOrigin"><span class="toc-number">1.2.</span> <span class="toc-text">ARSessionOrigin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tracked-Pose-Driver"><span class="toc-number">1.3.</span> <span class="toc-text">Tracked Pose Driver</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ARFoundation%EF%BC%8D%E5%9B%BE%E5%83%8F%E8%B7%9F%E8%B8%AA"><span class="toc-number">2.</span> <span class="toc-text">ARFoundation－图像跟踪</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E8%B7%9F%E8%B8%AA%E5%90%AF%E7%94%A8%E4%B8%8E%E7%A6%81%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">图像跟踪启用与禁用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%9B%BE%E5%83%8F%E8%B7%9F%E8%B8%AA"><span class="toc-number">2.2.</span> <span class="toc-text">多图像跟踪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tracked-Image-Prefab"><span class="toc-number">2.3.</span> <span class="toc-text">Tracked Image Prefab</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AR-tracked-image-manager"><span class="toc-number">3.</span> <span class="toc-text">AR tracked image manager</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Responding-to-detected-images"><span class="toc-number">3.0.1.</span> <span class="toc-text">Responding to detected images</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-ARTrackedImageManager"><span class="toc-number">3.1.</span> <span class="toc-text">Class ARTrackedImageManager</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Declaration"><span class="toc-number">3.1.0.0.1.</span> <span class="toc-text">Declaration</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Event-Type"><span class="toc-number">3.1.0.0.2.</span> <span class="toc-text">Event Type</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/macEnvironment/" title="Mac环境配置">Mac环境配置</a><time datetime="2024-11-17T12:43:56.938Z" title="Created 2024-11-17 20:43:56">2024-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ARFoundationLearning/" title="ARFoundation学习">ARFoundation学习</a><time datetime="2024-11-14T05:15:25.354Z" title="Created 2024-11-14 13:15:25">2024-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/react-guide/" title="React入门">React入门</a><time datetime="2024-11-04T07:45:19.239Z" title="Created 2024-11-04 15:45:19">2024-11-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Spring/" title="Spring">Spring</a><time datetime="2024-11-03T09:34:50.969Z" title="Created 2024-11-03 17:34:50">2024-11-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Java%E5%9F%BA%E7%A1%80/" title="Java基础">Java基础</a><time datetime="2024-11-03T09:34:50.963Z" title="Created 2024-11-03 17:34:50">2024-11-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Ziang Sun</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
