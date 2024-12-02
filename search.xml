@@ -1072,6 +1072,12 @@ jsp注释 &lt;%-- --%&gt;
       </tags>
   </entry>
   <entry>
+    <title>Mac环境配置</title>
+    <url>/macEnvironment/</url>
+    <content><![CDATA[<p><a href="https://blog.csdn.net/yb2020/article/details/128343187">https://blog.csdn.net/yb2020/article/details/128343187</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Java基础</title>
     <url>/Java%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><blockquote>
@@ -2279,12 +2285,6 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
       <tags>
         <tag>Java基础</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Mac环境配置</title>
-    <url>/macEnvironment/</url>
-    <content><![CDATA[<p><a href="https://blog.csdn.net/yb2020/article/details/128343187">https://blog.csdn.net/yb2020/article/details/128343187</a></p>
-]]></content>
   </entry>
   <entry>
     <title>Spring</title>
