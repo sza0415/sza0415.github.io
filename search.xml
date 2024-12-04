@@ -843,12 +843,6 @@ jsp注释 &lt;%-- --%&gt;
       </tags>
   </entry>
   <entry>
-    <title>Mac环境配置</title>
-    <url>/macEnvironment/</url>
-    <content><![CDATA[<p><a href="https://blog.csdn.net/yb2020/article/details/128343187">https://blog.csdn.net/yb2020/article/details/128343187</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>MyBatis</title>
     <url>/MyBatis/</url>
     <content><![CDATA[<h1 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h1><p>MyBatis是一款优秀的持久型（JavaEE三层架构：表现层、业务层和持久层&#x2F;数据访问层）框架，它支持自定义SQL、存储过程以及高级映射。MyBatis免除了几乎所有的JDBC代码以及设置参数和获取结果集的工作。MyBatis可以通过简单的XML或注解来配置和映射原始类型、接口和Java POJO（Plain Old Java Objects，普通老式Java对象）为数据库中的记录。</p>
@@ -873,8 +867,21 @@ jsp注释 &lt;%-- --%&gt;
 <p>在上述配置中，我们使用<code>&lt;mappers&gt;</code>元素引入了Mapper XML文件，使用<code>&lt;mapper&gt;</code>元素的<code>resource</code>属性指定了XML文件的路径。</p>
 <h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><h3 id="定义POJO类"><a href="#定义POJO类" class="headerlink" title="定义POJO类"></a>定义POJO类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sza.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUsername</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setUsername</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPassword</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPassword</span><span class="params">(String password)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getGender</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> gender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setGender</span><span class="params">(String gender)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.gender = gender;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAddress</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAddress</span><span class="params">(String address)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;User&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                <span class="string">&quot;, username=&#x27;&quot;</span> + username + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, password=&#x27;&quot;</span> + password + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, gender=&#x27;&quot;</span> + gender + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, address=&#x27;&quot;</span> + address + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="加载核心配置文件，获取sqlSessionFactory对象，执行sql语句"><a href="#加载核心配置文件，获取sqlSessionFactory对象，执行sql语句" class="headerlink" title="加载核心配置文件，获取sqlSessionFactory对象，执行sql语句"></a>加载核心配置文件，获取sqlSessionFactory对象，执行sql语句</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sza;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sza.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1.加载mybatis的核心配置文件，获取sqlSessionFactory</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">resource</span> <span class="operator">=</span> <span class="string">&quot;mybatis-config.xml&quot;</span>;</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> Resources.getResourceAsStream(resource);</span><br><span class="line">        <span class="type">SqlSessionFactory</span> <span class="variable">sqlSessionFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(inputStream);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.获取sqlSession对象，用它来执行sql</span></span><br><span class="line">        <span class="type">SqlSession</span> <span class="variable">sqlSession</span> <span class="operator">=</span> sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.执行sql</span></span><br><span class="line">        List&lt;User&gt; users = sqlSession.selectList(<span class="string">&quot;com.sza.mapper.UserMapper.selectAll&quot;</span>);</span><br><span class="line">        System.out.println(users);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4.释放资源</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="加载核心配置文件，获取sqlSessionFactory对象，执行sql语句"><a href="#加载核心配置文件，获取sqlSessionFactory对象，执行sql语句" class="headerlink" title="加载核心配置文件，获取sqlSessionFactory对象，执行sql语句"></a>加载核心配置文件，获取sqlSessionFactory对象，执行sql语句</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sza;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sza.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MybatisDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1.加载mybatis的核心配置文件，获取sqlSessionFactory</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">resource</span> <span class="operator">=</span> <span class="string">&quot;mybatis-config.xml&quot;</span>;</span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> Resources.getResourceAsStream(resource);</span><br><span class="line">        <span class="type">SqlSessionFactory</span> <span class="variable">sqlSessionFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(inputStream);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.获取sqlSession对象，用它来执行sql</span></span><br><span class="line">        <span class="type">SqlSession</span> <span class="variable">sqlSession</span> <span class="operator">=</span> sqlSessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.执行sql</span></span><br><span class="line">      	<span class="comment">// </span></span><br><span class="line">        List&lt;User&gt; users = sqlSession.selectList(<span class="string">&quot;com.sza.mapper.UserMapper.selectAll&quot;</span>);</span><br><span class="line">        System.out.println(users);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4.释放资源</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>sqlSession：</p>
+<p>sqlSession 是 MyBatis 提供的一个会话对象，负责与数据库交互。通过它可以执行 SQL 查询、插入、更新和删除操作。</p>
+<p>selectList <strong>方法</strong>：</p>
+<p>这是 MyBatis 的核心方法之一，用于执行 SELECT 查询，并将查询结果封装为一个 List。</p>
+<p>“com.sza.mapper.UserMapper.selectAll”：</p>
+<p>这是 MyBatis 中映射的 SQL 语句的唯一标识符，通常由 <strong>命名空间</strong> 和 <strong>方法名</strong> 组成。</p>
+<ul>
+<li>com.sza.mapper.UserMapper：Mapper 文件的命名空间。</li>
+<li>selectAll：Mapper 文件中对应的方法名称。</li>
+<li>List<User>：表示查询结果是一个 User 对象的列表。MyBatis 会根据查询结果中的每一行记录创建一个 User 对象。</User></li>
+</ul>
+</blockquote>
 <h2 id="解决SQL映射文件的警告提示"><a href="#解决SQL映射文件的警告提示" class="headerlink" title="解决SQL映射文件的警告提示"></a>解决SQL映射文件的警告提示</h2><p>产生原因：idea没和数据库建立连接，不识别表信息</p>
 <p>解决方式：在idea中配置MySQL数据库连接</p>
  <img src="image-20241112101828715.png" class title="image-20241112101828715">
@@ -890,7 +897,9 @@ jsp注释 &lt;%-- --%&gt;
 <p>使用maven的compile编译一下：</p>
 <img src="image-20241112103252060.png" class title="image-20241112103252060">
 <p>因此：我们在<code>java</code>目录下和<code>resources</code>下创建相同的路径，最后编译就会在同一目录下：</p>
-<img src="image-20241112103912680.png" class title="image-20241112103912680">
+<img src="image-20241204142200302.png" class title="image-20241204142200302">
+
+<img src="image-20241204142224720.png" class title="image-20241204142224720">
 
 <ul>
 <li>设置SQL映射文件的namespace属性为Mapper接口全限定名</li>
@@ -1076,6 +1085,16 @@ jsp注释 &lt;%-- --%&gt;
       <tags>
         <tag>数据库</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Mac相关问题</title>
+    <url>/macEnvironment/</url>
+    <content><![CDATA[<h1 id="mac上安装多版本JDK，并解决-zshrc-export不生效的问题"><a href="#mac上安装多版本JDK，并解决-zshrc-export不生效的问题" class="headerlink" title="mac上安装多版本JDK，并解决.zshrc export不生效的问题"></a>mac上安装多版本JDK，并解决.zshrc export不生效的问题</h1><p><a href="https://blog.csdn.net/yb2020/article/details/128343187">https://blog.csdn.net/yb2020/article/details/128343187</a></p>
+<h1 id="markdown转word"><a href="#markdown转word" class="headerlink" title="markdown转word"></a>markdown转word</h1><p>使用Pandac将markdown转换为word<br>对于其中的公式：在word使用 control +&#x3D; 划取对应的latex公式</p>
+<img src="image-20241203203339053.png" class title="image-20241203203339053">
+
+<p>选中latex格式进行转换，可以先划取所有的latex公式，全部转换。</p>
+]]></content>
   </entry>
   <entry>
     <title>Java基础</title>
@@ -2165,23 +2184,33 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
   <entry>
     <title>Spring</title>
     <url>/Spring/</url>
-    <content><![CDATA[<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h2 id="Spring-Framework系统框架"><a href="#Spring-Framework系统框架" class="headerlink" title="Spring Framework系统框架"></a>Spring Framework系统框架</h2><img src="image-20241105170720691.png" class title="image-20241105170720691">
+    <content><![CDATA[<blockquote>
+<p>参考 黑马程序员的SSM课程<a href="https://www.bilibili.com/video/BV1Fi4y1S7ix/?vd_source=65c9204c97b8b1867c1d577ee29c3fc1">https://www.bilibili.com/video/BV1Fi4y1S7ix/?vd_source=65c9204c97b8b1867c1d577ee29c3fc1</a> 此课程偏实践 基本不涉及原理 仅适合快速入门上手</p>
+<p>博客笔记：<a href="https://cyborg2077.github.io/2022/08/29/Spring/">https://cyborg2077.github.io/2022/08/29/Spring/</a></p>
+<p>廖雪峰 spring开发教程 <a href="https://liaoxuefeng.com/books/java/spring/index.html">https://liaoxuefeng.com/books/java/spring/index.html</a></p>
+</blockquote>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h2 id="Spring-Framework系统框架"><a href="#Spring-Framework系统框架" class="headerlink" title="Spring Framework系统框架"></a>Spring Framework系统框架</h2><img src="image-20241105170720691.png" class title="image-20241105170720691">
 
-<h2 id="IoC（Inversion-of-Control）控制反转"><a href="#IoC（Inversion-of-Control）控制反转" class="headerlink" title="IoC（Inversion of Control）控制反转"></a>IoC（Inversion of Control）控制反转</h2><p>背景引入：</p>
+<h2 id="IoC（Inversion-of-Control）控制反转"><a href="#IoC（Inversion-of-Control）控制反转" class="headerlink" title="IoC（Inversion of Control）控制反转"></a>IoC（Inversion of Control）控制反转</h2><blockquote>
+<p>IoC（控制反转） 定义： IoC是一种设计原则，其核心思想是将对象的创建和管理的控制权从程序代码转移到外部容器，这个外部容器通常是一个框架。这样做的目的是为了降低程序代码之间的耦合度，提高代码的模块化和可维护性。</p>
+<p>工作原理： 在传统的程序设计中，我们创建和管理对象的生命周期通常是通过直接在代码中进行new操作和调用方法来实现的。而在IoC模式下，对象的创建和管理工作由IoC容器负责，程序员只需要通过配置来告诉容器需要哪些对象，以及它们之间的依赖关系是什么。</p>
+<p>优点： 降低耦合度：因为对象的创建和生命周期管理都是由容器负责，所以组件之间不需要相互了解，减少了耦合。 增强模块化：IoC允许将应用程序划分为独立的组件，这些组件可以在不同的环境中重用。 易于测试：由于组件的依赖关系可以通过配置来定义，所以在单元测试时可以更容易地替换这些依赖。 AOP（面向切面编程） 定义： AOP是一种编程范式，它允许开发者通过分离横切关注点来增加模块化。横切关注点是指那些跨越多个模块的方法或功能，如日志、事务管理和安全性等。</p>
+</blockquote>
+<p>背景引入：</p>
 <img src="image-20241105165152863.png" class title="image-20241105165152863">
 
-<p><font color="yellow">代码耦合度偏高：</font>原先在业务逻辑层的实现类（BookServiceImpl）中会new一个数据访问层的实现类（BookDaoImpl），当出现一个数据访问层迎来了一个全新的实现（BookDaoImpl2），业务逻辑层的相关代码就需要改变。</p>
-<p>解决方案：使用对象时，在程序中不要主动使用new产生对象，转换为<font color="yellow">外部提供对象</font>，这就是IoC（Inversion of Control）控制反转 &#x3D;&gt; <u>对象的创建控制权由程序转移到<font color="yellow">外部</font></u></p>
+<p><font color="green">代码耦合度偏高：</font>原先在业务逻辑层的实现类（BookServiceImpl）中会new一个数据访问层的实现类（BookDaoImpl），当出现一个数据访问层迎来了一个全新的实现（BookDaoImpl2），业务逻辑层的相关代码就需要改变。</p>
+<p>解决方案：使用对象时，在程序中不要主动使用new产生对象，转换为<font color="green">外部提供对象</font>，这就是IoC（Inversion of Control）控制反转 &#x3D;&gt; <u>对象的创建控制权由程序转移到<font color="green">外部</font></u></p>
 <p>Spring技术对IoC思想进行了实现：</p>
 <ul>
-<li>Spring提供了一个容器，称为<font color="yellow">IoC容器<br></font>，用来充当IoC思想中的<font color="yellow">“外部”</font></li>
-<li>IoC容器负责对象的创建、初始化等一系列的工作，被创建或管理的对象在IoC容器中统称为<font color="yellow">Bean</font></li>
+<li>Spring提供了一个容器，称为<font color="green">IoC容器<br></font>，用来充当IoC思想中的<font color="green">“外部”</font></li>
+<li>IoC容器负责对象的创建、初始化等一系列的工作，被创建或管理的对象在IoC容器中统称为<font color="green">Bean</font></li>
 </ul>
 <p>业务逻辑层（service）的对象与数据访问层（dao）的对象都可以放入IoC容器当中</p>
 <p>service层的对象的运行依赖于dao层对象</p>
 <img src="image-20241105171824851.png" class title="image-20241105171824851">
 
-<p>使用<font color="yellow">DI（Dependency Injection）依赖注入</font>进行解决：</p>
+<p>使用<font color="green">DI（Dependency Injection）依赖注入</font>进行解决：</p>
 <ul>
 <li>依赖注入，在容器中建立bean于bean之间的依赖关系的整个过程。</li>
 </ul>
@@ -2214,14 +2243,17 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 </ul>
 </li>
 </ol>
-<h4 id="入门案例代码实现"><a href="#入门案例代码实现" class="headerlink" title="入门案例代码实现"></a>入门案例代码实现</h4><p>需求分析:将BookServiceImpl和BookDaoImpl交给Spring管理，并从容器中获取对应的bean对象进行方法调用。</p>
+<h4 id="入门案例代码实现"><a href="#入门案例代码实现" class="headerlink" title="入门案例代码实现"></a>入门案例代码实现</h4><p>整个工程文件的结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   └── com</span><br><span class="line">        │       └── itheima</span><br><span class="line">        │           ├── App.java</span><br><span class="line">        │           ├── App2.java</span><br><span class="line">        │           ├── dao</span><br><span class="line">        │           │   ├── BookDao.java</span><br><span class="line">        │           │   └── impl</span><br><span class="line">        │           │       └── BookDaoImpl.java</span><br><span class="line">        │           └── service</span><br><span class="line">        │               ├── BookService.java</span><br><span class="line">        │               └── impl</span><br><span class="line">        │                   └── BookServiceImpl.java</span><br><span class="line">        └── resources</span><br><span class="line">            └── applicationContext.xml</span><br></pre></td></tr></table></figure>
+
+<p>需求分析:将BookServiceImpl和BookDaoImpl交给Spring管理，并从容器中获取对应的bean对象进行方法调用。</p>
 <ol>
 <li><p>创建Maven的java项目</p>
 </li>
 <li><p>pom.xml添加Spring的依赖jar包</p>
 </li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>6.1.14<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>6.1.14<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>创建BookDao，BookDaoImpl，BookService和BookServiceImpl四个类</li>
@@ -2235,13 +2267,20 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BookServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">BookService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">BookDao</span> <span class="variable">bookDao</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BookDaoImpl</span>();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;book service save ...&quot;</span>);</span><br><span class="line">        bookDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
-<li>resources下添加spring配置文件，这个spring配置文件就是将被管理的类告知IoC容器</li>
+<li>resources下添加spring配置文件，<code>application.xml</code>配置文件，告诉Spring的IoC容器应该如何创建并组装Bean：</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- applicationContext.xml spring配置文件 =&gt; 将所要管理的类添加至配置文件当中   --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- bean标签配置bean   --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- id属性在同一个上下文中(配置文件)不能重复 标识bean    --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- class属性给bean定义类型 得是具体的实现类 IoC通过调用该类创造对象 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bookDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.example.dao.impl.BookDaoImpl&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bookService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.example.service.impl.BookServiceImpl&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>获取IOC容器，从容器中获取对象进行方法调用</li>
 </ol>
+<p>我们需要创建一个Spring的IoC容器实例，然后加载配置文件，让Spring容器为我们创建并装配好配置文件中指定的所有Bean，这只需要一行代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们就可以从Spring容器中“取出”装配好的Bean然后使用它：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//        使用getBean(String name)方法，其name参数就是我们在bean配置的id，通过这个id来创造对象</span></span><br><span class="line">        <span class="type">bookService</span> <span class="variable">bookService</span> <span class="operator">=</span> (bookService)context.getBean(<span class="string">&quot;bookService&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>完整代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// main.java 调用service方法</span></span><br><span class="line"><span class="keyword">package</span> org.sza;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.sza.dao.bookDao;</span><br><span class="line"><span class="keyword">import</span> org.sza.service.bookService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="comment">//        使用Spring ClassPathXmlApplicationContext 完成IOC容器的创建</span></span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line"><span class="comment">//        使用getBean(String name)方法，其name参数就是我们在bean配置的id，通过这个id来创造对象</span></span><br><span class="line">        <span class="type">bookService</span> <span class="variable">bookService</span> <span class="operator">=</span> (bookService)context.getBean(<span class="string">&quot;bookService&quot;</span>);</span><br><span class="line">        bookService.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// bookServiceImpl.java 调用 Dao层方法</span></span><br><span class="line"><span class="keyword">package</span> org.sza.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.sza.dao.bookDao;</span><br><span class="line"><span class="keyword">import</span> org.sza.service.bookService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">bookServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">bookService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> bookDao bookDao;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;save book service&quot;</span>);</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        bookDao = (bookDao) context.getBean(<span class="string">&quot;bookDao&quot;</span>);</span><br><span class="line">        bookDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2276,6 +2315,15 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 </ol>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bookDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.sza.dao.impl.BookDaoImpl&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bookService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.sza.service.impl.BookServiceImpl&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 配置Service与Dao之间的关系 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;bookDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;bookDao&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>把上述XML配置文件用Java代码写出来，就像这样：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">BookServiceImpl</span> <span class="variable">bookServiceImpl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BookServiceImpl</span>();</span><br><span class="line"><span class="type">BookDaoImpl</span> <span class="variable">bookDaoImpl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BookDaoImpl</span>();</span><br><span class="line">bookServiceImpl.setBookDao(bookDaoImpl);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>只不过Spring容器是通过读取XML文件后使用反射完成的</p>
+</blockquote>
+<p>如果注入的不是Bean，而是<code>boolean</code>、<code>int</code>、<code>String</code>这样的数据类型，则通过<code>value</code>注入，例如，创建一个<code>HikariDataSource</code>：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.zaxxer.hikari.HikariDataSource&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;jdbcUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/test&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maximumPoolSize&quot;</span> <span class="attr">value</span>=<span class="string">&quot;10&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;autoCommit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <img src="image-20241106113808631.png" class title="image-20241106113808631">
 
 <img src="image-20241111094123811.png" class title="image-20241111094123811">
@@ -2288,6 +2336,8 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 </li>
 </ul>
 <img src="image-20241116154455412.png" class title="image-20241116154455412">
+
+
 
 <h2 id="IOC相关内容"><a href="#IOC相关内容" class="headerlink" title="IOC相关内容"></a>IOC相关内容</h2><h3 id="bean基础配置"><a href="#bean基础配置" class="headerlink" title="bean基础配置"></a>bean基础配置</h3><ul>
 <li>bean的基础配置 id class</li>
@@ -2438,7 +2488,7 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 </blockquote>
 </li>
 </ul>
-<p>值的注意的是，BookDaoImpl的构造函数和BookServiceImpl的构造函数并没有实质上的前后关系，<font color="yellow">因为BookDaoImpl使用的是依赖注入中的通过setter方法进行注入</font>：如果某个依赖是通过 <strong>setter 方法</strong> 注入的，Spring 不需要立即初始化这个依赖，而是在注入时才会实例化。</p>
+<p>值的注意的是，BookDaoImpl的构造函数和BookServiceImpl的构造函数并没有实质上的前后关系，<font color="green">因为BookDaoImpl使用的是依赖注入中的通过setter方法进行注入</font>：如果某个依赖是通过 <strong>setter 方法</strong> 注入的，Spring 不需要立即初始化这个依赖，而是在注入时才会实例化。</p>
 <p>依赖注入的bean与bean之间是通过setter进行注入，那么bean的构造函数取决于applicationContext.xml中bean的声明顺序。从上面的bean的声明顺序为bookDao在前，因此其构造函数会在bookService的前面。</p>
 <p>我们把 顺序调换：</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bookService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.sza.service.impl.BookServiceImpl&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置Service与Dao之间的关系 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;bookDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;bookDao&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;bookDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.sza.dao.impl.BookDaoImpl&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
@@ -2456,7 +2506,7 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <blockquote>
 <p>BookDaoImpl &#x2F;&#x2F; 执行bookDaoImpl的构造函数</p>
 </blockquote>
-<p>BookDaoImpl 先调用构造函数，初始化类的属性，后调用bookDao bean生命周期的初始化init方法，<font color="yellow">你从afterPropertiesSet名字也可以看出来其含义</font></p>
+<p>BookDaoImpl 先调用构造函数，初始化类的属性，后调用bookDao bean生命周期的初始化init方法，<font color="green">你从afterPropertiesSet名字也可以看出来其含义</font></p>
 <blockquote>
 <p>afterPropertiesSet book dao &#x2F;&#x2F; bookDao bean生命周期的初始化init方法</p>
 </blockquote>
@@ -2632,7 +2682,7 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <li>自己开发的模块推荐使用setter注入</li>
 </ol>
 </blockquote>
-<h3 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h3><p>IOC容器根据bean所依赖的资源在容器中<font color="yellow">自动查找并注入</font>到bean中的过程称为自动装配</p>
+<h3 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h3><p>IOC容器根据bean所依赖的资源在容器中<font color="green">自动查找并注入</font>到bean中的过程称为自动装配</p>
 <blockquote>
 <p>自动装配方式有哪些:</p>
 <ul>
@@ -2778,9 +2828,9 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <h2 id="核心容器"><a href="#核心容器" class="headerlink" title="核心容器"></a>核心容器</h2><p>这里所说的核心容器，我们可以把它简单的理解为<code>ApplicationContex</code></p>
 <h4 id="容器的创建方式"><a href="#容器的创建方式" class="headerlink" title="容器的创建方式"></a>容器的创建方式</h4><ul>
 <li><p>案例中创建<code>ApplicationContext</code>的方式如下</p>
-</li>
-<li><p>这种方式翻译为：类路径下的XML配置文件</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，Spring容器就是<code>ApplicationContext</code>，它是一个接口，有很多实现类，这里我们选择<code>ClassPathXmlApplicationContext</code>，表示它会自动从classpath中查找指定的XML配置文件。</p>
 </li>
 <li><p>除了上面这种方式，Spring还提供了另外一种创建方式</p>
 </li>
@@ -2791,21 +2841,25 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 </ul>
 <h4 id="获取bean的三种方式"><a href="#获取bean的三种方式" class="headerlink" title="获取bean的三种方式"></a>获取bean的三种方式</h4><ul>
 <li><p>方式一，就是我们之前用的方式</p>
-</li>
-<li><p>这种方式存在的问题是每次获取的时候都需要进行类型转换，有没有更简单的方式呢?</p>
+<p>这种方式存在的问题是每次获取的时候都需要进行类型转换，有没有更简单的方式呢?</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">BookDao</span> <span class="variable">bookDao</span> <span class="operator">=</span> (BookDao) ctx.getBean(<span class="string">&quot;bookDao&quot;</span>);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>方式二<br>这种方式可以解决类型强转问题，但是参数又多加了一个，相对来说没有简化多少。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">BookDao</span> <span class="variable">bookDao</span> <span class="operator">=</span> ctx.getBean(<span class="string">&quot;bookDao&quot;</span>，BookDao.class);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>方式三</p>
-</li>
-<li><p>这种方式就类似我们之前所学习依赖注入中的按类型注入。必须要确保IOC容器中该类型对应的bean对象只能有一个。</p>
+<p>这种方式就类似我们之前所学习依赖注入中的按类型注入。必须要确保IOC容器中该类型对应的bean对象只能有一个。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">BookDao</span> <span class="variable">bookDao</span> <span class="operator">=</span> ctx.getBean(BookDao.class);</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="BeanFactory的使用"><a href="#BeanFactory的使用" class="headerlink" title="BeanFactory的使用"></a>BeanFactory的使用</h4><p>容器的最上级的父接口为<code>BeanFactory</code><br>使用<code>BeanFactory</code>也可以创建IOC容器</p>
+<h4 id="BeanFactory的使用"><a href="#BeanFactory的使用" class="headerlink" title="BeanFactory的使用"></a>BeanFactory的使用</h4><p>Spring还提供另一种IoC容器叫<code>BeanFactory</code>，使用方式和<code>ApplicationContext</code>类似：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">BeanFactory</span> <span class="variable">bf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XmlBeanFactory</span>(<span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;applicationContext.xml&quot;</span>));</span><br><span class="line"><span class="type">BookDao</span> <span class="variable">bookDao</span> <span class="operator">=</span> bf.getBean(BookDao.class);</span><br></pre></td></tr></table></figure>
+
+<p>容器的最上级的父接口为<code>BeanFactory</code>，使用<code>BeanFactory</code>也可以创建IOC容器</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppForBeanFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Resource</span> <span class="variable">resources</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        <span class="type">BeanFactory</span> <span class="variable">bf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XmlBeanFactory</span>(resources);</span><br><span class="line">        <span class="type">BookDao</span> <span class="variable">bookDao</span> <span class="operator">=</span> bf.getBean(BookDao.class);</span><br><span class="line">        bookDao.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p><code>BeanFactory</code>和<code>ApplicationContext</code>的区别在于，<code>BeanFactory</code>的实现是按需创建，即第一次获取Bean时才创建这个Bean，而<code>ApplicationContext</code>会一次性创建所有的Bean。实际上，<code>ApplicationContext</code>接口是从<code>BeanFactory</code>接口继承而来的，并且，<code>ApplicationContext</code>提供了一些额外的功能，包括国际化支持、事件和通知机制等。通常情况下，我们总是使用<code>ApplicationContext</code>，很少会考虑使用<code>BeanFactory</code>。</p>
+</blockquote>
 <p>为了更好的看出<code>BeanFactory</code>和<code>ApplicationContext</code>之间的区别，在BookDaoImpl添加如下构造函数</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BookDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BookDaoImpl</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;constructor&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;book dao save ...&quot;</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -2835,7 +2889,12 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 
 <h4 id="依赖注入相关"><a href="#依赖注入相关" class="headerlink" title="依赖注入相关"></a>依赖注入相关</h4><img src="image-20241116221701034.png" class title="image-20241116221701034">
 
-<h2 id="IOC-DI注解开发"><a href="#IOC-DI注解开发" class="headerlink" title="IOC&#x2F;DI注解开发"></a>IOC&#x2F;DI注解开发</h2><p>Spring的IOC&#x2F;DI对应的配置开发就已经讲解完成，但是使用起来相对来说还是比较复杂的，复杂的地方在<code>配置文件</code>。</p>
+<h2 id="IOC-DI注解开发"><a href="#IOC-DI注解开发" class="headerlink" title="IOC&#x2F;DI注解开发"></a>IOC&#x2F;DI注解开发</h2><blockquote>
+<p>使用Spring的IoC容器，实际上就是通过类似XML这样的配置文件，把我们自己的Bean的依赖关系描述出来，然后让容器来创建并装配Bean。一旦容器初始化完毕，我们就直接从容器中获取Bean使用它们。</p>
+<p>使用XML配置的优点是所有的Bean都能一目了然地列出来，并通过配置注入能直观地看到每个Bean的依赖。它的缺点是写起来非常繁琐，每增加一个组件，就必须把新的Bean配置到XML中。</p>
+<p>有没有其他更简单的配置方式呢？</p>
+<p>有！我们可以使用Annotation配置，可以完全不需要XML，让Spring自动扫描Bean并组装它们。</p>
+</blockquote>
 <p>两块内容<code>注解开发定义bean</code>和<code>纯注解开发</code>。</p>
 <h3 id="注解开发定义bean"><a href="#注解开发定义bean" class="headerlink" title="注解开发定义bean"></a>注解开发定义bean</h3><ul>
 <li><code>步骤一：</code>删除原有的XML配置，将配置文件中的bean标签删除掉</li>
@@ -2845,6 +2904,9 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <ul>
 <li><code>步骤二：</code>在Dao上添加注解，在BookDaoImpl类上添加<code>@Component</code>注解</li>
 </ul>
+<blockquote>
+<p>这个<code>@Component</code>注解就相当于定义了一个Bean，它有一个可选的名称，默认是<code>BookDaoImpl</code>，即小写开头的类名。</p>
+</blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;bookDao&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BookDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;book dao save ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -2988,6 +3050,13 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <li><code>ClassPathXmlApplicationContext</code>是加载XML配置文件</li>
 <li><code>AnnotationConfigApplicationContext</code>是加载配置类</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   └── com</span><br><span class="line">        │       └── itheima</span><br><span class="line">        │           ├── App.java</span><br><span class="line">        │           ├── config</span><br><span class="line">        │           │   └── SpringConfig.java</span><br><span class="line">        │           ├── dao</span><br><span class="line">        │           │   ├── BookDao.java</span><br><span class="line">        │           │   └── impl</span><br><span class="line">        │           │       ├── BookDaoImpl.java</span><br><span class="line">        │           │       └── BookDaoImpl2.java</span><br><span class="line">        │           └── service</span><br><span class="line">        │               ├── BookService.java</span><br><span class="line">        │               └── impl</span><br><span class="line">        │                   └── BookServiceImpl.java</span><br><span class="line">        └── resources</span><br><span class="line">            └── jdbc.properties</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">App</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(SpringConfig.class);</span><br><span class="line">        <span class="type">BookService</span> <span class="variable">bookService</span> <span class="operator">=</span> ctx.getBean(BookService.class);</span><br><span class="line">        bookService.save();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>AppConfig</code>标注了<code>@Configuration</code>，表示它是一个配置类，因为我们创建<code>ApplicationContext</code>时使用<code>AnnotationConfigApplicationContext</code>进行创建：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">AnnotationConfigApplicationContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(SpringConfig.class);</span><br></pre></td></tr></table></figure>
+
 <h3 id="注解开发bean的作用范围和生命周期"><a href="#注解开发bean的作用范围和生命周期" class="headerlink" title="注解开发bean的作用范围和生命周期"></a>注解开发bean的作用范围和生命周期</h3><p>使用注解已经完成了bean的管理，接下来按照前面所学习的内容，将通过配置实现的内容都换成对应的注解实现，包含两部分内容:<code>bean作用范围(scope)</code>和<code>bean生命周期(init和destroy)</code></p>
 <p>要想将BookDaoImpl变成非单例，只需要在其类上添加<code>@scope</code>注解</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;bookDao&quot;)</span></span><br><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BookDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;book dao save ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -3247,6 +3316,10 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 </tbody></table>
 <h2 id="IOC-DI注解开发管理第三方bean"><a href="#IOC-DI注解开发管理第三方bean" class="headerlink" title="IOC&#x2F;DI注解开发管理第三方bean"></a>IOC&#x2F;DI注解开发管理第三方bean</h2><p>前面定义bean的时候都是在自己开发的类上面写个注解就完成了，但如果是第三方的类，这些类都是在jar包中，我们没有办法在类上面添加注解：</p>
 <p>遇到上述问题，我们就需要有一种更加灵活的方式来定义bean,这种方式不能在原始代码上面书写注解，一样能定义bean,这就用到了一个全新的注解<code>@Bean</code>。</p>
+<blockquote>
+<p>如何创建第三方的Bean</p>
+<p>答案是我们自己在<code>@Configuration</code>类中编写一个Java方法创建并返回它，注意给方法标记一个<code>@Bean</code>注解</p>
+</blockquote>
 <h3 id="注解开发管理第三方bean"><a href="#注解开发管理第三方bean" class="headerlink" title="注解开发管理第三方bean"></a>注解开发管理第三方bean</h3><p>在上述环境中完成对<code>Druid</code>数据源的管理，具体的实现步骤为</p>
 <ul>
 <li><p>步骤一：导入对应的jar包</p>
@@ -3380,7 +3453,10 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 </ul>
 <h2 id="注解开发总结"><a href="#注解开发总结" class="headerlink" title="注解开发总结"></a>注解开发总结</h2><img src="image-20241117143708520.png" class title="image-20241117143708520">
 
-<h2 id="Spring整合"><a href="#Spring整合" class="headerlink" title="Spring整合"></a>Spring整合</h2><h3 id="Spring整合MyBatis"><a href="#Spring整合MyBatis" class="headerlink" title="Spring整合MyBatis"></a>Spring整合MyBatis</h3><ul>
+<h2 id="Spring整合"><a href="#Spring整合" class="headerlink" title="Spring整合"></a>Spring整合</h2><p>整个项目结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── pom.xml</span><br><span class="line">└── src</span><br><span class="line">    └── main</span><br><span class="line">        ├── java</span><br><span class="line">        │   ├── App.java</span><br><span class="line">        │   ├── App2.java</span><br><span class="line">        │   └── com</span><br><span class="line">        │       └── itheima</span><br><span class="line">        │           ├── config</span><br><span class="line">        │           │   ├── JdbcConfig.java</span><br><span class="line">        │           │   ├── MybatisConfig.java</span><br><span class="line">        │           │   └── SpringConfig.java</span><br><span class="line">        │           ├── dao</span><br><span class="line">        │           │   └── AccountDao.java</span><br><span class="line">        │           ├── domain</span><br><span class="line">        │           │   └── Account.java</span><br><span class="line">        │           └── service</span><br><span class="line">        │               ├── AccountService.java</span><br><span class="line">        │               └── impl</span><br><span class="line">        │                   └── AccountServiceImpl.java</span><br><span class="line">        └── resources</span><br><span class="line">            ├── SqlMapConfig.xml.bak</span><br><span class="line">            └── jdbc.properties</span><br></pre></td></tr></table></figure>
+
+<h3 id="Spring整合MyBatis"><a href="#Spring整合MyBatis" class="headerlink" title="Spring整合MyBatis"></a>Spring整合MyBatis</h3><ul>
 <li><p>步骤一：准备数据库表，MyBatis是用来操作数据库表的，所以我们先来创建库和表</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database spring_db <span class="type">character</span> <span class="keyword">set</span> utf8;</span><br><span class="line">use spring_db;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tbl_account(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">35</span>),</span><br><span class="line">    money <span class="keyword">double</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tbl_account(`name`,money) <span class="keyword">VALUES</span></span><br><span class="line">(<span class="string">&#x27;Tom&#x27;</span>,<span class="number">2800</span>),</span><br><span class="line">(<span class="string">&#x27;Jerry&#x27;</span>,<span class="number">3000</span>),</span><br><span class="line">(<span class="string">&#x27;Jhon&#x27;</span>,<span class="number">3100</span>);</span><br></pre></td></tr></table></figure>
 </li>
@@ -3391,7 +3467,29 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> org.sza.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Account</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Double money;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Account</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Account</span><span class="params">(Integer id, String name, <span class="type">double</span> money)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.money = money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getMoney</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMoney</span><span class="params">(<span class="type">double</span> money)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.money = money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Account&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                <span class="string">&quot;, name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, money=&quot;</span> + money +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>步骤四：创建Mapper接口，一般是要配置一个对应的xml文件，不过这里没涉及到复杂的sql语句，所以没配置xml文件，采用注解开发）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">AccountMapper</span> &#123;</span><br><span class="line">    <span class="meta">@Insert(&quot;insert into tbl_account(name, money) VALUES (#&#123;name&#125;, #&#123;money&#125;)&quot;)</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Account account)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from tbl_account where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Update(&quot;update tbl_account set `name` = #&#123;name&#125;, money = #&#123;money&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Account account)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_account&quot;)</span></span><br><span class="line">    List&lt;Account&gt; <span class="title function_">findAll</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_account where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    Account <span class="title function_">findById</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">AccountMapper</span> &#123;</span><br><span class="line">    <span class="meta">@Insert(&quot;insert into tbl_account(name, money) VALUES (#&#123;name&#125;, #&#123;money&#125;)&quot;)</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Account account)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from tbl_account where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Update(&quot;update tbl_account set `name` = #&#123;name&#125;, money = #&#123;money&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Account account)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_account&quot;)</span></span><br><span class="line">    List&lt;Account&gt; <span class="title function_">findAll</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_account where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    Account <span class="title function_">findById</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>步骤五：创建Service接口和实现类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">AccountService</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Account account)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Account account)</span>;</span><br><span class="line"></span><br><span class="line">    List&lt;Account&gt; <span class="title function_">findAll</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    Account <span class="title function_">findById</span><span class="params">(Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">AccountService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AccountDao accountDao;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Account account)</span> &#123;</span><br><span class="line">        accountDao.save(account);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        accountDao.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Account account)</span> &#123;</span><br><span class="line">        accountDao.update(account);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;Account&gt; <span class="title function_">findAll</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> accountDao.findAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Account <span class="title function_">findById</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> accountDao.findById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>步骤六：添加jdbc.properties文件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql:<span class="comment">//localhost:13306/spring_db</span></span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=PASSWORD.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>步骤七：添加Mybatis核心配置文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">configuration</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--读取外部properties配置文件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;jdbc.properties&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--别名扫描的包路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;com.blog.domain&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;mysql&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;mysql&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.driver&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--映射文件扫描包路径--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;com.blog.dao&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>步骤八：编写应用程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class App &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        // 1. 创建SqlSessionFactoryBuilder对象</span><br><span class="line">        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();</span><br><span class="line">        // 2. 加载mybatis-config.xml配置文件</span><br><span class="line">        InputStream inputStream = Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;);</span><br><span class="line">        // 3. 创建SqlSessionFactory对象</span><br><span class="line">        SqlSessionFactory factory = sqlSessionFactoryBuilder.build(inputStream);</span><br><span class="line">        // 4. 获取SqlSession 用它来执行sql</span><br><span class="line">        SqlSession sqlSession = factory.openSession();</span><br><span class="line">        // 5. 获取mapper</span><br><span class="line">        AccountDao mapper = sqlSession.getMapper(AccountDao.class);</span><br><span class="line">        //6. 执行方法进行查询</span><br><span class="line">        Account account = mapper.findById(2);</span><br><span class="line">        System.out.println(account);</span><br><span class="line">        //7. 释放资源</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
@@ -3733,6 +3831,253 @@ double d = 10.5; // 非原子操作（可能被拆分为两步）
 <p>完整代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.sql.Time;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicProxyDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">ExecutorInterface</span> <span class="variable">executor</span> <span class="operator">=</span> (ExecutorInterface) Proxy.newProxyInstance(Executor.class.getClassLoader(), <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;ExecutorInterface.class&#125;, <span class="keyword">new</span> <span class="title class_">TimeLogHandler</span>(<span class="keyword">new</span> <span class="title class_">Executor</span>()));</span><br><span class="line">        executor.execute(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Executor</span> <span class="keyword">implements</span> <span class="title class_">ExecutorInterface</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;execute method executed&quot;</span> + x + y);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TimeLogHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TimeLogHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;invoke method executed start&quot;</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;invoke method executed end&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>Java基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>注解</title>
+    <url>/%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<blockquote>
+<p>参考：<a href="https://www.cnblogs.com/ziph/p/13056092.html">https://www.cnblogs.com/ziph/p/13056092.html</a> &amp;&amp; chatgpt</p>
+</blockquote>
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><p>什么是注解（Annotation）？注解是放在Java源码的类、方法、字段、参数前的一种特殊“注释”：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// this is a component:</span></span><br><span class="line"><span class="meta">@Resource(&quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">    <span class="meta">@Inject</span></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">(<span class="meta">@Param</span> String name)</span> &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注释会被编译器直接忽略，注解则可以被编译器打包进入class文件，因此，注解是一种用作标注的“元数据”。</p>
+<p>从JVM的角度看，注解本身对代码逻辑没有任何影响，如何使用注解完全由工具决定。</p>
+<h2 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h2><p>Java语言使用<code>@interface</code>语法来定义注解（<code>Annotation</code>），它的格式如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注解的参数类似无参数方法，可以用<code>default</code>设定一个默认值（强烈推荐）。最常用的参数应当命名为<code>value</code>。</p>
+<h3 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h3><blockquote>
+<p>有一些注解可以修饰其他注解，这些注解就称为元注解（meta annotation）。Java标准库已经定义了一些元注解，我们只需要使用元注解，通常不需要自己去编写元注解。</p>
+</blockquote>
+<h4 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h4><p>最常用的元注解是<code>@Target</code>。使用<code>@Target</code>可以定义<code>Annotation</code>能够被应用于源码的哪些位置：</p>
+<ul>
+<li><code>ElementType.TYPE</code>：允许被修饰的注解作用在类、接口和枚举上</li>
+<li><code>ElementType.FIELD</code>：允许作用在属性字段上</li>
+<li><code>ElementType.METHOD</code>：允许作用在方法上</li>
+<li><code>ElementType.PARAMETER</code>：允许作用在方法参数上</li>
+<li><code>ElementType.CONSTRUCTOR</code>：允许作用在构造器上</li>
+<li><code>ElementType.LOCAL_VARIABLE</code>：允许作用在本地局部变量上</li>
+<li><code>ElementType.ANNOTATION_TYPE</code>：允许作用在注解上</li>
+<li><code>ElementType.PACKAGE</code>：允许作用在包上</li>
+</ul>
+<p>例如，定义注解<code>@Report</code>可用在方法上，我们必须添加一个<code>@Target(ElementType.METHOD)</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义注解<code>@Report</code>可用在方法或字段上，可以把<code>@Target</code>注解参数变为数组<code>&#123; ElementType.METHOD, ElementType.FIELD &#125;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;</span></span><br><span class="line"><span class="meta">    ElementType.METHOD,</span></span><br><span class="line"><span class="meta">    ElementType.FIELD</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际上<code>@Target</code>定义的<code>value</code>是<code>ElementType[]</code>数组，只有一个元素时，可以省略数组的写法。</p>
+<h4 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h4><p>另一个重要的元注解<code>@Retention</code>定义了<code>Annotation</code>的生命周期：</p>
+<ul>
+<li><code>RetentionPolicy.SOURCE</code>：当前注解编译期可见，不会写入 class 文件</li>
+<li><code>RetentionPolicy.CLASS</code>：类加载阶段丢弃，在class文件的属性表中用 <strong>RuntimeInvisibleAnnotations</strong>表示</li>
+<li><code>RetentionPolicy.RUNTIME</code>：<strong>永久保存，可以反射获取，一般自定义注解都是RUNTIME</strong>，在class文件的属性表中用<strong>RuntimeVisibleAnnotations</strong> 表示</li>
+</ul>
+<p>如果<code>@Retention</code>不存在，则该<code>Annotation</code>默认为<code>CLASS</code>。因为通常我们自定义的<code>Annotation</code>都是<code>RUNTIME</code>，所以，务必要加上<code>@Retention(RetentionPolicy.RUNTIME)</code>这个元注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Repeatable"><a href="#Repeatable" class="headerlink" title="@Repeatable"></a>@Repeatable</h4><p>使用<code>@Repeatable</code>这个元注解可以定义<code>Annotation</code>是否可重复。这个注解应用不是特别广泛。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repeatable(Reports.class)</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Reports &#123;</span><br><span class="line">    Report[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过<code>@Repeatable</code>修饰后，在某个类型声明处，就可以添加多个<code>@Report</code>注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Report(type=1, level=&quot;debug&quot;)</span></span><br><span class="line"><span class="meta">@Report(type=2, level=&quot;warning&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h4><p>使用<code>@Inherited</code>定义子类是否可继承父类定义的<code>Annotation</code>。<code>@Inherited</code>仅针对<code>@Target(ElementType.TYPE)</code>类型的<code>annotation</code>有效，并且仅针对<code>class</code>的继承，对<code>interface</code>的继承无效：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在使用的时候，如果一个类用到了<code>@Report</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Report(type=1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>则它的子类默认也定义了该注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何定义Annotation"><a href="#如何定义Annotation" class="headerlink" title="如何定义Annotation"></a>如何定义Annotation</h3><p>我们总结一下定义<code>Annotation</code>的步骤：</p>
+<p>第一步，用<code>@interface</code>定义注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步，添加参数、默认值：</p>
+<blockquote>
+<p>我们的注解中也是可以写有属性的，它的属性不同于普通的属性，它的属性是抽象方法。既然注解也是一个接口，那么我们可以说接口体中可以定义什么，它同样也可以定义，而它的修饰符与接口一样，也是默认被<code>public abstract</code>修饰。</p>
+</blockquote>
+<blockquote>
+<p>而注解体中的属性也是有要求的。其属性要求如下：</p>
+<ul>
+<li><strong>属性的返回值类型必须是以下几种：</strong></li>
+<li>基本数据类型</li>
+<li>String类型</li>
+<li>枚举类型</li>
+<li>注解</li>
+<li>以上类型的数组</li>
+<li><strong>注意：</strong> 在这里不能有void的无返回值类型和以上类型以外的类型</li>
+<li><strong>定义的属性，在使用时需要给注解中的属性赋值</strong></li>
+<li>如果定义属性时，使用<code>default</code>关键字给属性默认初始化值，则使用注解时可以不为属性赋值，它取的是默认值。如果为它再次传入值，那么就发生了对原值的覆盖。</li>
+<li>如果只有一个属性需要赋值，并且属性的名称为value，则赋值时value可以省略，可以直接定义值</li>
+<li>数组赋值时，值使用<code>&#123;&#125;</code>存储值。如果数组中只有一个值，则可以省略<code>&#123;&#125;</code>。</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnno &#123;</span><br><span class="line">    <span class="comment">//基本数据类型</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">num</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//String类型</span></span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//枚举类型</span></span><br><span class="line">    Lamp <span class="title function_">lamp</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注解类型</span></span><br><span class="line">    MyAnno2 <span class="title function_">myAnno2</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//以上类型的数组</span></span><br><span class="line">    String[] values();</span><br><span class="line">    Lamp[] lamps();</span><br><span class="line">    MyAnno2[] myAnno2s();</span><br><span class="line">    <span class="type">int</span>[] nums();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没有默认初始化，那么在使用注解时需要进行传参赋值</p>
+<img src="image-20241203133211951.png" class title="image-20241203133211951">
+
+<p>格式为：<code>名称 = 返回值类型参数</code></p>
+<img src="image-20241203133236797.png" class title="image-20241203133236797">
+
+<img src="image-20241203133301572.png" class title="image-20241203133301572">
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把最常用的参数定义为<code>value()</code>，推荐所有参数都尽量设置默认值。</p>
+<p>第三步，用元注解配置注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，必须设置<code>@Target</code>和<code>@Retention</code>，<code>@Retention</code>一般设置为<code>RUNTIME</code>，因为我们自定义的注解通常要求在运行期读取。一般情况下，不必写<code>@Inherited</code>和<code>@Repeatable</code>。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>Java使用<code>@interface</code>定义注解；</p>
+<p>可定义多个参数和默认值，核心参数使用<code>value</code>名称；</p>
+<p>必须设置<code>@Target</code>来指定<code>Annotation</code>可以应用的范围；</p>
+<p>应当设置<code>@Retention(RetentionPolicy.RUNTIME)</code>便于运行期读取该<code>Annotation</code>。</p>
+<h2 id="注解分类"><a href="#注解分类" class="headerlink" title="注解分类"></a>注解分类</h2><h3 id="jdk的内置注解"><a href="#jdk的内置注解" class="headerlink" title="jdk的内置注解"></a>jdk的内置注解</h3><blockquote>
+<ul>
+<li><strong>@Override：</strong> 标记在成员方法上，用于标识当前方法是重写父类（父接口）方法，编译器在对该方法进行编译时会检查是否符合重写规则，如果不符合，编译报错。</li>
+<li><strong>@Deprecated：</strong> 用于标记当前类、成员变量、成员方法或者构造方法过时如果开发者调用了被标记为过时的方法，编译器在编译期进行警告。</li>
+<li><strong>@SuppressWarnings：</strong> 压制警告注解，可放置在类和方法上，该注解的作用是阻止编译器发出某些警告信息。</li>
+</ul>
+</blockquote>
+<h3 id="根据注解参数分类"><a href="#根据注解参数分类" class="headerlink" title="根据注解参数分类"></a>根据注解参数分类</h3><p>注解可以根据注解参数分为三大类：</p>
+<blockquote>
+<ul>
+<li>标记注解： 没有参数的注解，仅用自身的存在与否为程序提供信息，如@Override注解，该注解没有参数，用于表示当前方法为重写方法。</li>
+<li>单值注解： 只有一个参数的注解，如果该参数的名字为value，那么可以省略参数名，如 @SuppressWarnings(value &#x3D; “all”)，可以简写为@SuppressWarnings(“all”)。</li>
+<li>完整注解： 有多个参数的注解。</li>
+</ul>
+</blockquote>
+<h4 id="标记注解"><a href="#标记注解" class="headerlink" title="标记注解"></a>标记注解</h4><blockquote>
+<p>说到@Override注解是一个标记注解，那我们进入到该注解的源码查看一下。从上往下看该注解源码，发现它继承了导入了<code>java.lang.annotation.*</code>，也就是有使用到该包的内容。然后下面就是元注解，其实发现注解的定义格式是public修饰的@Interface，最终看到该注解中方法体并没有任何参数，也就是只起到标记作用。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>  Peter von der Ah&amp;eacute;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>  Joshua Bloch</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 8.4.8 Inheritance, Overriding, and Hiding</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 9.4.1 Inheritance and Overriding</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 9.6.4.4 <span class="doctag">@Override</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Override &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="单值注解"><a href="#单值注解" class="headerlink" title="单值注解"></a>单值注解</h4><blockquote>
+<p>我们用到的@SuppressWarnings注解就是一个单值注解。那我们进入到它的源码看一下是怎么个情况。其实，和标记注解比较，它就多一个value参数而已，而这就是单值注解的必要条件，即只有一个参数。并且这一个参数为value时，我们可以省略value。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Josh Bloch</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.5</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 4.8 Raw Types</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 4.12.2 Variables of Reference Type</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 5.1.9 Unchecked Conversion</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 5.5.2 Checked Casts and Unchecked Casts</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 9.6.4.5 <span class="doctag">@SuppressWarnings</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(&#123;TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE, MODULE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SuppressWarnings &#123;</span><br><span class="line">    String[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="完整注解"><a href="#完整注解" class="headerlink" title="完整注解"></a>完整注解</h4><blockquote>
+<p>有多个参数，每个参数都需要明确指定。</p>
+<ul>
+<li><p>参数可以是 <strong>基本类型</strong>、<strong>字符串</strong>、<strong>枚举</strong>、<strong>类对象</strong> 或 <strong>其他注解</strong>。</p>
+</li>
+<li><p>所有参数都需要在注解使用时赋值，除非参数定义了默认值。</p>
+</li>
+<li><p>例如：@RequestMapping（Spring 中）：用于映射 HTTP 请求。</p>
+<ul>
+<li><pre><code class="java">@RequestMapping(
+    value = &quot;/home&quot;,
+    method = RequestMethod.GET,
+    produces = &quot;application/json&quot;
+)
+public String home() &#123;
+    return &quot;Welcome to the home page&quot;;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">package org.springframework.web.bind.annotation;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Documented;</span><br><span class="line">import java.lang.annotation.ElementType;</span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line">import java.lang.annotation.Target;</span><br><span class="line">import org.springframework.core.annotation.AliasFor;</span><br><span class="line"></span><br><span class="line">@Target(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Mapping</span><br><span class="line">public @interface RequestMapping &#123;</span><br><span class="line">   String name() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">   @AliasFor(&quot;path&quot;)</span><br><span class="line">   String[] value() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   @AliasFor(&quot;value&quot;)</span><br><span class="line">   String[] path() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   RequestMethod[] method() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] params() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] headers() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] consumes() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] produces() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="注解、反射与动态代理"><a href="#注解、反射与动态代理" class="headerlink" title="注解、反射与动态代理"></a>注解、反射与动态代理</h2><h3 id="使用反射机制解析注解"><a href="#使用反射机制解析注解" class="headerlink" title="使用反射机制解析注解"></a>使用反射机制解析注解</h3><p>自定义注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 要想使用反射解析必须是RUNTIME</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Sign &#123;</span><br><span class="line">    String <span class="title function_">methodName</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">className</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Cat：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;猫吃鱼&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>准备好，上述代码后，我们就可以开始编写使用反射技术来解析注解的测试类。如下：</p>
+<p>首先，我们先通过反射来获取注解中的methodName和className参数。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.mylifes1110.anno.Sign;</span><br><span class="line"><span class="meta">@Sign(className = &quot;com.mylifes1110.java.Cat&quot;, methodName = &quot;eat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//获取该类的类对象</span></span><br><span class="line">        Class&lt;SignTest&gt; signTestClass = SignTest.class;</span><br><span class="line">        <span class="comment">//获取类对象中的注解对象</span></span><br><span class="line">        <span class="comment">//原理实际上是在内存中生成了一个注解接口的子类实现对象</span></span><br><span class="line">        <span class="type">Sign</span> <span class="variable">sign</span> <span class="operator">=</span> signTestClass.getAnnotation(Sign.class);</span><br><span class="line">        <span class="comment">//调用注解对象中定义的抽象方法（注解中的属性）来获取返回值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> sign.className();</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> sign.methodName();</span><br><span class="line">        System.out.println(className);</span><br><span class="line">        System.out.println(methodName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> 获取类对象中的注解对象时，其原理实际上是在内存中生成了一个注解接口的子类实现对象并返回的字符串内容。如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignImpl</span> <span class="keyword">implements</span> <span class="title class_">Sign</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">methodName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;eat&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">className</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;com.mylifes1110.java.Cat&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完整代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.mylifes1110.anno.Sign;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Sign(className = &quot;com.mylifes1110.java.Cat&quot;, methodName = &quot;eat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        <span class="comment">//获取该类的类对象</span></span><br><span class="line">        Class&lt;SignTest&gt; signTestClass = SignTest.class;</span><br><span class="line">        <span class="comment">//获取类对象中的注解对象</span></span><br><span class="line">        <span class="comment">//原理实际上是在内存中生成了一个注解接口的子类实现对象</span></span><br><span class="line">        <span class="type">Sign</span> <span class="variable">sign</span> <span class="operator">=</span> signTestClass.getAnnotation(Sign.class);</span><br><span class="line">        <span class="comment">//调用注解对象中定义的抽象方法（注解中的属性）来获取返回值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> sign.className();</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> sign.methodName();</span><br><span class="line">        <span class="comment">//获取className名称的类对象</span></span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(className);</span><br><span class="line">        <span class="comment">//创建对象</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> clazz.newInstance();</span><br><span class="line">        <span class="comment">//获取methodName名称的方法对象</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> clazz.getMethod(methodName);</span><br><span class="line">        <span class="comment">//执行该方法</span></span><br><span class="line">        method.invoke(o);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注解与动态代理"><a href="#注解与动态代理" class="headerlink" title="注解与动态代理"></a>注解与动态代理</h3><blockquote>
+<p><strong>Java 注解</strong> 和 <strong>动态代理</strong> 是两个独立的功能，但在实际开发中，这两者常被结合使用，尤其是在框架开发（如 Spring、MyBatis）中，动态代理通过解析注解实现功能增强。以下从基础到结合使用的原理和实现逐步展开讲解。</p>
+</blockquote>
+<h4 id="1-注解的作用"><a href="#1-注解的作用" class="headerlink" title="1. 注解的作用"></a><strong>1. 注解的作用</strong></h4><p>注解本质上是 <strong>元数据</strong>，用于标记类、方法、字段等，并可以附加额外信息。注解的主要功能是：</p>
+<ul>
+<li>在 <strong>编译期</strong> 提供信息（通过 APT）；</li>
+<li>在 <strong>运行时</strong> 提供信息（通过反射）；</li>
+<li>用于扩展框架功能（如依赖注入、事务管理）；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LogExecution &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;Executing method&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-动态代理的作用"><a href="#2-动态代理的作用" class="headerlink" title="2. 动态代理的作用"></a><strong>2. 动态代理的作用</strong></h4><p>动态代理是 Java 提供的一种 <strong>动态生成代理类</strong> 的机制，用于在运行时对目标方法进行增强，例如添加日志、事务处理、权限校验等。</p>
+<ul>
+<li><strong>代理模式</strong>：通过代理对象访问目标对象。</li>
+<li><strong>动态代理的特点</strong>：<ul>
+<li><strong>JDK 动态代理</strong>：只能代理实现了接口的类。</li>
+<li><strong>CGLIB 动态代理</strong>：可代理类本身（通过子类继承方式）。</li>
+</ul>
+</li>
+</ul>
+<p>JDK 动态代理实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Service</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">perform</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RealService</span> <span class="keyword">implements</span> <span class="title class_">Service</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">perform</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;RealService performing...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProxyHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ProxyHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Before method call...&quot;</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;After method call...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicProxyDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Service</span> <span class="variable">realService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RealService</span>();</span><br><span class="line">        <span class="type">Service</span> <span class="variable">proxy</span> <span class="operator">=</span> (Service) Proxy.newProxyInstance(</span><br><span class="line">                realService.getClass().getClassLoader(),</span><br><span class="line">                realService.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ProxyHandler</span>(realService)</span><br><span class="line">        );</span><br><span class="line">        proxy.perform();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<blockquote>
+<p>Before method call…<br>RealService performing…<br>After method call…</p>
+</blockquote>
+<h4 id="3-注解与动态代理的结合"><a href="#3-注解与动态代理的结合" class="headerlink" title="3. 注解与动态代理的结合"></a><strong>3. 注解与动态代理的结合</strong></h4><p>在实际开发中，动态代理通过读取注解的元数据来实现特定逻辑，例如：</p>
+<ul>
+<li><strong>日志增强</strong>：根据注解添加日志功能。</li>
+<li><strong>权限校验</strong>：通过注解标记需要校验的方法。</li>
+<li><strong>事务管理</strong>：基于注解动态开启或关闭事务。</li>
+</ul>
+<p>使用注解标记方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RealService</span> <span class="keyword">implements</span> <span class="title class_">Service</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">perform</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;RealService performing...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在代理类中通过反射读取注解信息，并在执行目标方法前后添加逻辑</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LogInvocationHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LogInvocationHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">// 检查是否存在 LogExecution 注解</span></span><br><span class="line">        <span class="keyword">if</span> (method.isAnnotationPresent(LogExecution.class)) &#123;</span><br><span class="line">            <span class="type">LogExecution</span> <span class="variable">logExecution</span> <span class="operator">=</span> method.getAnnotation(LogExecution.class);</span><br><span class="line">            System.out.println(<span class="string">&quot;Before method: &quot;</span> + logExecution.value());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行目标方法</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方法后增强逻辑</span></span><br><span class="line">        System.out.println(<span class="string">&quot;After method execution&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用动态代理生成代理对象，并执行增强功能：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AnnotationProxyDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Service</span> <span class="variable">realService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RealService</span>();</span><br><span class="line">        <span class="type">Service</span> <span class="variable">proxy</span> <span class="operator">=</span> (Service) Proxy.newProxyInstance(</span><br><span class="line">                realService.getClass().getClassLoader(),</span><br><span class="line">                realService.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">LogInvocationHandler</span>(realService)</span><br><span class="line">        );</span><br><span class="line">        proxy.perform();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="框架中的应用场景"><a href="#框架中的应用场景" class="headerlink" title="框架中的应用场景"></a>框架中的应用场景</h3><p><strong>Spring 框架中的注解与动态代理</strong></p>
+<ul>
+<li><p>事务管理（@Transactional）</p>
+</li>
+<li><p>Spring 使用动态代理拦截标记了 @Transactional 的方法，在调用方法前开启事务，方法执行后提交或回滚事务。</p>
+</li>
+<li><p>AOP（Aspect-Oriented Programming）</p>
+<ul>
+<li><p>通过注解（如 @Around, @Before）定义切面逻辑。</p>
+</li>
+<li><p>Spring 使用动态代理或 CGLIB 实现切面增强。</p>
+</li>
+</ul>
+</li>
+<li><p>日志记录（@Loggable）</p>
+<ul>
+<li>自定义注解配合动态代理实现方法调用的日志记录。</li>
+</ul>
+</li>
+</ul>
+<p><strong>MyBatis 中的注解与动态代理</strong></p>
+<ul>
+<li><p>MyBatis 使用动态代理生成 DAO 接口的实现类。</p>
+</li>
+<li><p>注解（如 @Select, @Insert）直接标记 SQL 查询，动态代理读取注解内容执行数据库操作。</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>编程</category>
@@ -4432,253 +4777,6 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
       </categories>
       <tags>
         <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>注解</title>
-    <url>/%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<blockquote>
-<p>参考：<a href="https://www.cnblogs.com/ziph/p/13056092.html">https://www.cnblogs.com/ziph/p/13056092.html</a> &amp;&amp; chatgpt</p>
-</blockquote>
-<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><p>什么是注解（Annotation）？注解是放在Java源码的类、方法、字段、参数前的一种特殊“注释”：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// this is a component:</span></span><br><span class="line"><span class="meta">@Resource(&quot;hello&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">    <span class="meta">@Inject</span></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">(<span class="meta">@Param</span> String name)</span> &#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注释会被编译器直接忽略，注解则可以被编译器打包进入class文件，因此，注解是一种用作标注的“元数据”。</p>
-<p>从JVM的角度看，注解本身对代码逻辑没有任何影响，如何使用注解完全由工具决定。</p>
-<h2 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h2><p>Java语言使用<code>@interface</code>语法来定义注解（<code>Annotation</code>），它的格式如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注解的参数类似无参数方法，可以用<code>default</code>设定一个默认值（强烈推荐）。最常用的参数应当命名为<code>value</code>。</p>
-<h3 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h3><blockquote>
-<p>有一些注解可以修饰其他注解，这些注解就称为元注解（meta annotation）。Java标准库已经定义了一些元注解，我们只需要使用元注解，通常不需要自己去编写元注解。</p>
-</blockquote>
-<h4 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h4><p>最常用的元注解是<code>@Target</code>。使用<code>@Target</code>可以定义<code>Annotation</code>能够被应用于源码的哪些位置：</p>
-<ul>
-<li><code>ElementType.TYPE</code>：允许被修饰的注解作用在类、接口和枚举上</li>
-<li><code>ElementType.FIELD</code>：允许作用在属性字段上</li>
-<li><code>ElementType.METHOD</code>：允许作用在方法上</li>
-<li><code>ElementType.PARAMETER</code>：允许作用在方法参数上</li>
-<li><code>ElementType.CONSTRUCTOR</code>：允许作用在构造器上</li>
-<li><code>ElementType.LOCAL_VARIABLE</code>：允许作用在本地局部变量上</li>
-<li><code>ElementType.ANNOTATION_TYPE</code>：允许作用在注解上</li>
-<li><code>ElementType.PACKAGE</code>：允许作用在包上</li>
-</ul>
-<p>例如，定义注解<code>@Report</code>可用在方法上，我们必须添加一个<code>@Target(ElementType.METHOD)</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>定义注解<code>@Report</code>可用在方法或字段上，可以把<code>@Target</code>注解参数变为数组<code>&#123; ElementType.METHOD, ElementType.FIELD &#125;</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;</span></span><br><span class="line"><span class="meta">    ElementType.METHOD,</span></span><br><span class="line"><span class="meta">    ElementType.FIELD</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际上<code>@Target</code>定义的<code>value</code>是<code>ElementType[]</code>数组，只有一个元素时，可以省略数组的写法。</p>
-<h4 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h4><p>另一个重要的元注解<code>@Retention</code>定义了<code>Annotation</code>的生命周期：</p>
-<ul>
-<li><code>RetentionPolicy.SOURCE</code>：当前注解编译期可见，不会写入 class 文件</li>
-<li><code>RetentionPolicy.CLASS</code>：类加载阶段丢弃，在class文件的属性表中用 <strong>RuntimeInvisibleAnnotations</strong>表示</li>
-<li><code>RetentionPolicy.RUNTIME</code>：<strong>永久保存，可以反射获取，一般自定义注解都是RUNTIME</strong>，在class文件的属性表中用<strong>RuntimeVisibleAnnotations</strong> 表示</li>
-</ul>
-<p>如果<code>@Retention</code>不存在，则该<code>Annotation</code>默认为<code>CLASS</code>。因为通常我们自定义的<code>Annotation</code>都是<code>RUNTIME</code>，所以，务必要加上<code>@Retention(RetentionPolicy.RUNTIME)</code>这个元注解：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Repeatable"><a href="#Repeatable" class="headerlink" title="@Repeatable"></a>@Repeatable</h4><p>使用<code>@Repeatable</code>这个元注解可以定义<code>Annotation</code>是否可重复。这个注解应用不是特别广泛。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repeatable(Reports.class)</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Reports &#123;</span><br><span class="line">    Report[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>经过<code>@Repeatable</code>修饰后，在某个类型声明处，就可以添加多个<code>@Report</code>注解：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Report(type=1, level=&quot;debug&quot;)</span></span><br><span class="line"><span class="meta">@Report(type=2, level=&quot;warning&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h4><p>使用<code>@Inherited</code>定义子类是否可继承父类定义的<code>Annotation</code>。<code>@Inherited</code>仅针对<code>@Target(ElementType.TYPE)</code>类型的<code>annotation</code>有效，并且仅针对<code>class</code>的继承，对<code>interface</code>的继承无效：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在使用的时候，如果一个类用到了<code>@Report</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Report(type=1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>则它的子类默认也定义了该注解：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="如何定义Annotation"><a href="#如何定义Annotation" class="headerlink" title="如何定义Annotation"></a>如何定义Annotation</h3><p>我们总结一下定义<code>Annotation</code>的步骤：</p>
-<p>第一步，用<code>@interface</code>定义注解：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第二步，添加参数、默认值：</p>
-<blockquote>
-<p>我们的注解中也是可以写有属性的，它的属性不同于普通的属性，它的属性是抽象方法。既然注解也是一个接口，那么我们可以说接口体中可以定义什么，它同样也可以定义，而它的修饰符与接口一样，也是默认被<code>public abstract</code>修饰。</p>
-</blockquote>
-<blockquote>
-<p>而注解体中的属性也是有要求的。其属性要求如下：</p>
-<ul>
-<li><strong>属性的返回值类型必须是以下几种：</strong></li>
-<li>基本数据类型</li>
-<li>String类型</li>
-<li>枚举类型</li>
-<li>注解</li>
-<li>以上类型的数组</li>
-<li><strong>注意：</strong> 在这里不能有void的无返回值类型和以上类型以外的类型</li>
-<li><strong>定义的属性，在使用时需要给注解中的属性赋值</strong></li>
-<li>如果定义属性时，使用<code>default</code>关键字给属性默认初始化值，则使用注解时可以不为属性赋值，它取的是默认值。如果为它再次传入值，那么就发生了对原值的覆盖。</li>
-<li>如果只有一个属性需要赋值，并且属性的名称为value，则赋值时value可以省略，可以直接定义值</li>
-<li>数组赋值时，值使用<code>&#123;&#125;</code>存储值。如果数组中只有一个值，则可以省略<code>&#123;&#125;</code>。</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnno &#123;</span><br><span class="line">    <span class="comment">//基本数据类型</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">num</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//String类型</span></span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//枚举类型</span></span><br><span class="line">    Lamp <span class="title function_">lamp</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注解类型</span></span><br><span class="line">    MyAnno2 <span class="title function_">myAnno2</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//以上类型的数组</span></span><br><span class="line">    String[] values();</span><br><span class="line">    Lamp[] lamps();</span><br><span class="line">    MyAnno2[] myAnno2s();</span><br><span class="line">    <span class="type">int</span>[] nums();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果没有默认初始化，那么在使用注解时需要进行传参赋值</p>
-<img src="image-20241203133211951.png" class title="image-20241203133211951">
-
-<p>格式为：<code>名称 = 返回值类型参数</code></p>
-<img src="image-20241203133236797.png" class title="image-20241203133236797">
-
-<img src="image-20241203133301572.png" class title="image-20241203133301572">
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>把最常用的参数定义为<code>value()</code>，推荐所有参数都尽量设置默认值。</p>
-<p>第三步，用元注解配置注解：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">type</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    String <span class="title function_">level</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;info&quot;</span>;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中，必须设置<code>@Target</code>和<code>@Retention</code>，<code>@Retention</code>一般设置为<code>RUNTIME</code>，因为我们自定义的注解通常要求在运行期读取。一般情况下，不必写<code>@Inherited</code>和<code>@Repeatable</code>。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>Java使用<code>@interface</code>定义注解；</p>
-<p>可定义多个参数和默认值，核心参数使用<code>value</code>名称；</p>
-<p>必须设置<code>@Target</code>来指定<code>Annotation</code>可以应用的范围；</p>
-<p>应当设置<code>@Retention(RetentionPolicy.RUNTIME)</code>便于运行期读取该<code>Annotation</code>。</p>
-<h2 id="注解分类"><a href="#注解分类" class="headerlink" title="注解分类"></a>注解分类</h2><h3 id="jdk的内置注解"><a href="#jdk的内置注解" class="headerlink" title="jdk的内置注解"></a>jdk的内置注解</h3><blockquote>
-<ul>
-<li><strong>@Override：</strong> 标记在成员方法上，用于标识当前方法是重写父类（父接口）方法，编译器在对该方法进行编译时会检查是否符合重写规则，如果不符合，编译报错。</li>
-<li><strong>@Deprecated：</strong> 用于标记当前类、成员变量、成员方法或者构造方法过时如果开发者调用了被标记为过时的方法，编译器在编译期进行警告。</li>
-<li><strong>@SuppressWarnings：</strong> 压制警告注解，可放置在类和方法上，该注解的作用是阻止编译器发出某些警告信息。</li>
-</ul>
-</blockquote>
-<h3 id="根据注解参数分类"><a href="#根据注解参数分类" class="headerlink" title="根据注解参数分类"></a>根据注解参数分类</h3><p>注解可以根据注解参数分为三大类：</p>
-<blockquote>
-<ul>
-<li>标记注解： 没有参数的注解，仅用自身的存在与否为程序提供信息，如@Override注解，该注解没有参数，用于表示当前方法为重写方法。</li>
-<li>单值注解： 只有一个参数的注解，如果该参数的名字为value，那么可以省略参数名，如 @SuppressWarnings(value &#x3D; “all”)，可以简写为@SuppressWarnings(“all”)。</li>
-<li>完整注解： 有多个参数的注解。</li>
-</ul>
-</blockquote>
-<h4 id="标记注解"><a href="#标记注解" class="headerlink" title="标记注解"></a>标记注解</h4><blockquote>
-<p>说到@Override注解是一个标记注解，那我们进入到该注解的源码查看一下。从上往下看该注解源码，发现它继承了导入了<code>java.lang.annotation.*</code>，也就是有使用到该包的内容。然后下面就是元注解，其实发现注解的定义格式是public修饰的@Interface，最终看到该注解中方法体并没有任何参数，也就是只起到标记作用。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>  Peter von der Ah&amp;eacute;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>  Joshua Bloch</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 8.4.8 Inheritance, Overriding, and Hiding</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 9.4.1 Inheritance and Overriding</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 9.6.4.4 <span class="doctag">@Override</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Override &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="单值注解"><a href="#单值注解" class="headerlink" title="单值注解"></a>单值注解</h4><blockquote>
-<p>我们用到的@SuppressWarnings注解就是一个单值注解。那我们进入到它的源码看一下是怎么个情况。其实，和标记注解比较，它就多一个value参数而已，而这就是单值注解的必要条件，即只有一个参数。并且这一个参数为value时，我们可以省略value。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.annotation.ElementType.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Josh Bloch</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.5</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 4.8 Raw Types</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 4.12.2 Variables of Reference Type</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 5.1.9 Unchecked Conversion</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 5.5.2 Checked Casts and Unchecked Casts</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@jls</span> 9.6.4.5 <span class="doctag">@SuppressWarnings</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(&#123;TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE, MODULE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SuppressWarnings &#123;</span><br><span class="line">    String[] value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="完整注解"><a href="#完整注解" class="headerlink" title="完整注解"></a>完整注解</h4><blockquote>
-<p>有多个参数，每个参数都需要明确指定。</p>
-<ul>
-<li><p>参数可以是 <strong>基本类型</strong>、<strong>字符串</strong>、<strong>枚举</strong>、<strong>类对象</strong> 或 <strong>其他注解</strong>。</p>
-</li>
-<li><p>所有参数都需要在注解使用时赋值，除非参数定义了默认值。</p>
-</li>
-<li><p>例如：@RequestMapping（Spring 中）：用于映射 HTTP 请求。</p>
-<ul>
-<li><pre><code class="java">@RequestMapping(
-    value = &quot;/home&quot;,
-    method = RequestMethod.GET,
-    produces = &quot;application/json&quot;
-)
-public String home() &#123;
-    return &quot;Welcome to the home page&quot;;
-&#125;
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">package org.springframework.web.bind.annotation;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Documented;</span><br><span class="line">import java.lang.annotation.ElementType;</span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line">import java.lang.annotation.Target;</span><br><span class="line">import org.springframework.core.annotation.AliasFor;</span><br><span class="line"></span><br><span class="line">@Target(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Mapping</span><br><span class="line">public @interface RequestMapping &#123;</span><br><span class="line">   String name() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">   @AliasFor(&quot;path&quot;)</span><br><span class="line">   String[] value() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   @AliasFor(&quot;value&quot;)</span><br><span class="line">   String[] path() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   RequestMethod[] method() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] params() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] headers() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] consumes() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">   String[] produces() default &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="注解、反射与动态代理"><a href="#注解、反射与动态代理" class="headerlink" title="注解、反射与动态代理"></a>注解、反射与动态代理</h2><h3 id="使用反射机制解析注解"><a href="#使用反射机制解析注解" class="headerlink" title="使用反射机制解析注解"></a>使用反射机制解析注解</h3><p>自定义注解：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 要想使用反射解析必须是RUNTIME</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Sign &#123;</span><br><span class="line">    String <span class="title function_">methodName</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">className</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Cat：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Cat</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;猫吃鱼&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>准备好，上述代码后，我们就可以开始编写使用反射技术来解析注解的测试类。如下：</p>
-<p>首先，我们先通过反射来获取注解中的methodName和className参数。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.mylifes1110.anno.Sign;</span><br><span class="line"><span class="meta">@Sign(className = &quot;com.mylifes1110.java.Cat&quot;, methodName = &quot;eat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//获取该类的类对象</span></span><br><span class="line">        Class&lt;SignTest&gt; signTestClass = SignTest.class;</span><br><span class="line">        <span class="comment">//获取类对象中的注解对象</span></span><br><span class="line">        <span class="comment">//原理实际上是在内存中生成了一个注解接口的子类实现对象</span></span><br><span class="line">        <span class="type">Sign</span> <span class="variable">sign</span> <span class="operator">=</span> signTestClass.getAnnotation(Sign.class);</span><br><span class="line">        <span class="comment">//调用注解对象中定义的抽象方法（注解中的属性）来获取返回值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> sign.className();</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> sign.methodName();</span><br><span class="line">        System.out.println(className);</span><br><span class="line">        System.out.println(methodName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong> 获取类对象中的注解对象时，其原理实际上是在内存中生成了一个注解接口的子类实现对象并返回的字符串内容。如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignImpl</span> <span class="keyword">implements</span> <span class="title class_">Sign</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">methodName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;eat&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">className</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;com.mylifes1110.java.Cat&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>完整代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.mylifes1110.anno.Sign;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Sign(className = &quot;com.mylifes1110.java.Cat&quot;, methodName = &quot;eat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        <span class="comment">//获取该类的类对象</span></span><br><span class="line">        Class&lt;SignTest&gt; signTestClass = SignTest.class;</span><br><span class="line">        <span class="comment">//获取类对象中的注解对象</span></span><br><span class="line">        <span class="comment">//原理实际上是在内存中生成了一个注解接口的子类实现对象</span></span><br><span class="line">        <span class="type">Sign</span> <span class="variable">sign</span> <span class="operator">=</span> signTestClass.getAnnotation(Sign.class);</span><br><span class="line">        <span class="comment">//调用注解对象中定义的抽象方法（注解中的属性）来获取返回值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> sign.className();</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> sign.methodName();</span><br><span class="line">        <span class="comment">//获取className名称的类对象</span></span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(className);</span><br><span class="line">        <span class="comment">//创建对象</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> clazz.newInstance();</span><br><span class="line">        <span class="comment">//获取methodName名称的方法对象</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">method</span> <span class="operator">=</span> clazz.getMethod(methodName);</span><br><span class="line">        <span class="comment">//执行该方法</span></span><br><span class="line">        method.invoke(o);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="注解与动态代理"><a href="#注解与动态代理" class="headerlink" title="注解与动态代理"></a>注解与动态代理</h3><blockquote>
-<p><strong>Java 注解</strong> 和 <strong>动态代理</strong> 是两个独立的功能，但在实际开发中，这两者常被结合使用，尤其是在框架开发（如 Spring、MyBatis）中，动态代理通过解析注解实现功能增强。以下从基础到结合使用的原理和实现逐步展开讲解。</p>
-</blockquote>
-<h4 id="1-注解的作用"><a href="#1-注解的作用" class="headerlink" title="1. 注解的作用"></a><strong>1. 注解的作用</strong></h4><p>注解本质上是 <strong>元数据</strong>，用于标记类、方法、字段等，并可以附加额外信息。注解的主要功能是：</p>
-<ul>
-<li>在 <strong>编译期</strong> 提供信息（通过 APT）；</li>
-<li>在 <strong>运行时</strong> 提供信息（通过反射）；</li>
-<li>用于扩展框架功能（如依赖注入、事务管理）；</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LogExecution &#123;</span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;Executing method&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-动态代理的作用"><a href="#2-动态代理的作用" class="headerlink" title="2. 动态代理的作用"></a><strong>2. 动态代理的作用</strong></h4><p>动态代理是 Java 提供的一种 <strong>动态生成代理类</strong> 的机制，用于在运行时对目标方法进行增强，例如添加日志、事务处理、权限校验等。</p>
-<ul>
-<li><strong>代理模式</strong>：通过代理对象访问目标对象。</li>
-<li><strong>动态代理的特点</strong>：<ul>
-<li><strong>JDK 动态代理</strong>：只能代理实现了接口的类。</li>
-<li><strong>CGLIB 动态代理</strong>：可代理类本身（通过子类继承方式）。</li>
-</ul>
-</li>
-</ul>
-<p>JDK 动态代理实现：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Service</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">perform</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RealService</span> <span class="keyword">implements</span> <span class="title class_">Service</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">perform</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;RealService performing...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProxyHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ProxyHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Before method call...&quot;</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;After method call...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicProxyDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Service</span> <span class="variable">realService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RealService</span>();</span><br><span class="line">        <span class="type">Service</span> <span class="variable">proxy</span> <span class="operator">=</span> (Service) Proxy.newProxyInstance(</span><br><span class="line">                realService.getClass().getClassLoader(),</span><br><span class="line">                realService.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ProxyHandler</span>(realService)</span><br><span class="line">        );</span><br><span class="line">        proxy.perform();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<blockquote>
-<p>Before method call…<br>RealService performing…<br>After method call…</p>
-</blockquote>
-<h4 id="3-注解与动态代理的结合"><a href="#3-注解与动态代理的结合" class="headerlink" title="3. 注解与动态代理的结合"></a><strong>3. 注解与动态代理的结合</strong></h4><p>在实际开发中，动态代理通过读取注解的元数据来实现特定逻辑，例如：</p>
-<ul>
-<li><strong>日志增强</strong>：根据注解添加日志功能。</li>
-<li><strong>权限校验</strong>：通过注解标记需要校验的方法。</li>
-<li><strong>事务管理</strong>：基于注解动态开启或关闭事务。</li>
-</ul>
-<p>使用注解标记方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RealService</span> <span class="keyword">implements</span> <span class="title class_">Service</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">perform</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;RealService performing...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在代理类中通过反射读取注解信息，并在执行目标方法前后添加逻辑</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LogInvocationHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LogInvocationHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">// 检查是否存在 LogExecution 注解</span></span><br><span class="line">        <span class="keyword">if</span> (method.isAnnotationPresent(LogExecution.class)) &#123;</span><br><span class="line">            <span class="type">LogExecution</span> <span class="variable">logExecution</span> <span class="operator">=</span> method.getAnnotation(LogExecution.class);</span><br><span class="line">            System.out.println(<span class="string">&quot;Before method: &quot;</span> + logExecution.value());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行目标方法</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方法后增强逻辑</span></span><br><span class="line">        System.out.println(<span class="string">&quot;After method execution&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用动态代理生成代理对象，并执行增强功能：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AnnotationProxyDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Service</span> <span class="variable">realService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RealService</span>();</span><br><span class="line">        <span class="type">Service</span> <span class="variable">proxy</span> <span class="operator">=</span> (Service) Proxy.newProxyInstance(</span><br><span class="line">                realService.getClass().getClassLoader(),</span><br><span class="line">                realService.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">LogInvocationHandler</span>(realService)</span><br><span class="line">        );</span><br><span class="line">        proxy.perform();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="框架中的应用场景"><a href="#框架中的应用场景" class="headerlink" title="框架中的应用场景"></a>框架中的应用场景</h3><p><strong>Spring 框架中的注解与动态代理</strong></p>
-<ul>
-<li><p>事务管理（@Transactional）</p>
-</li>
-<li><p>Spring 使用动态代理拦截标记了 @Transactional 的方法，在调用方法前开启事务，方法执行后提交或回滚事务。</p>
-</li>
-<li><p>AOP（Aspect-Oriented Programming）</p>
-<ul>
-<li><p>通过注解（如 @Around, @Before）定义切面逻辑。</p>
-</li>
-<li><p>Spring 使用动态代理或 CGLIB 实现切面增强。</p>
-</li>
-</ul>
-</li>
-<li><p>日志记录（@Loggable）</p>
-<ul>
-<li>自定义注解配合动态代理实现方法调用的日志记录。</li>
-</ul>
-</li>
-</ul>
-<p><strong>MyBatis 中的注解与动态代理</strong></p>
-<ul>
-<li><p>MyBatis 使用动态代理生成 DAO 接口的实现类。</p>
-</li>
-<li><p>注解（如 @Select, @Insert）直接标记 SQL 查询，动态代理读取注解内容执行数据库操作。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>Java基础</tag>
       </tags>
   </entry>
 </search>
