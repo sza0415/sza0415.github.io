@@ -5059,54 +5059,6 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
       </tags>
   </entry>
   <entry>
-    <title>Go 切片：用法和内部机制</title>
-    <url>/Go%20Slices:%20usage%20and%20internals/</url>
-    <content><![CDATA[<blockquote>
-<p>翻译+截取：<a href="https://go.dev/blog/slices-intro">https://go.dev/blog/slices-intro</a></p>
-</blockquote>
-<h1 id="Go-切片：用法和内部机制"><a href="#Go-切片：用法和内部机制" class="headerlink" title="Go 切片：用法和内部机制"></a>Go 切片：用法和内部机制</h1><blockquote>
-<p><em>Andrew Gerrand</em> 安德鲁·杰拉德<br><em>5 January 2011</em> </p>
-</blockquote>
-<h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><p>切片类型是在 Go 的数组类型之上构建的一个抽象，因此要理解切片，我们首先必须理解数组。</p>
-<p>数组类型定义指定了长度和元素类型。例如，类型 <code>[4]int</code> 表示一个包含四个整数的数组。数组的大小是固定的；其长度是其类型的一部分（ <code>[4]int</code> 和 <code>[5]int</code> 是不同的、不兼容的类型）。数组可以按常规方式索引，因此表达式 <code>s[n]</code> 访问从零开始的第 n 个元素。</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a [<span class="number">4</span>]<span class="type">int</span></span><br><span class="line">a[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">i := a[<span class="number">0</span>]</span><br><span class="line"><span class="comment">// i == 1</span></span><br></pre></td></tr></table></figure>
-
-<p>数组不需要显式初始化；数组的零值是一个可直接使用的数组，其元素本身为零：</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// a[2] == 0, the zero value of the int type</span></span><br></pre></td></tr></table></figure>
-
-<p>内存中 <code>[4]int</code> 的表示只是四个按顺序排列的整数值：</p>
-
-
-<p>Go 的数组是值。数组变量表示整个数组；它不是指向第一个数组元素的指针（如在 C 中那样）。这意味着当你赋值或传递数组值时，你将复制其内容。（为了避免复制，你可以传递数组的指针，但那样就变成了指向数组的指针，而不是数组。）一种思考数组的方式是将其视为一种类似于结构体的类型，但字段是按索引而不是按名称组织的：一个固定大小的复合值。</p>
-<h2 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h2><p>数组有其位置，但它们有点不灵活，所以在 Go 代码中不太常见。然而，切片无处不在。它们建立在数组的基础上，提供了强大的功能和便利性。</p>
-<p>切片的类型指定为 <code>[]T</code> ，其中 <code>T</code> 是切片元素的类型。与数组类型不同，切片类型没有指定的长度。</p>
-<p>切片字面量声明方式与数组字面量类似，只是你省略了元素计数：</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">letters := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>切片可以通过名为 <code>make</code> 的内置函数创建，该函数的签名为，</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">([]T, <span class="built_in">len</span>, <span class="built_in">cap</span>)</span></span> []T</span><br></pre></td></tr></table></figure>
-
-<p>T 代表要创建的切片的元素类型。 <code>make</code> 函数接受一个类型、一个长度和一个可选的容量。当被调用时， <code>make</code> 分配一个数组并返回一个指向该数组的切片。</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s []<span class="type">byte</span></span><br><span class="line">s = <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">5</span>, <span class="number">5</span>)</span><br><span class="line"><span class="comment">// s == []byte&#123;0, 0, 0, 0, 0&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>当省略容量参数时，它默认为指定的长度。这是相同代码的更简洁版本：</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-
-<p>切片的长度和容量可以使用内置的 <code>len</code> 和 <code>cap</code> 函数进行检查。</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="built_in">len</span>(s) == <span class="number">5</span></span><br><span class="line"><span class="built_in">cap</span>(s) == <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<p>切片也可以通过“切片”现有的切片或数组来创建。切片是通过指定由冒号分隔的两个索引的半开区间来完成的。例如，表达式 <code>b[1:4]</code> 创建了一个包含 <code>b</code> （结果切片的索引为 0 到 2）中的元素 1 到 3 的切片。</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">b := []<span class="type">byte</span>&#123;<span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;g&#x27;</span>&#125;</span><br><span class="line"><span class="comment">// b[1:4] == []byte&#123;&#x27;o&#x27;, &#x27;l&#x27;, &#x27;a&#x27;&#125;, sharing the same storage as b</span></span><br></pre></td></tr></table></figure>
-
-<p>切片表达式的起始和结束索引是可选的；它们的默认值分别为零和切片的长度：</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// b[:2] == []byte&#123;&#x27;g&#x27;, &#x27;o&#x27;&#125;</span></span><br><span class="line"><span class="comment">// b[2:] == []byte&#123;&#x27;l&#x27;, &#x27;a&#x27;, &#x27;n&#x27;, &#x27;g&#x27;&#125;</span></span><br><span class="line"><span class="comment">// b[:] == b</span></span><br></pre></td></tr></table></figure>
-
-<p>这是创建给定数组的切片的语法：</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">x := [<span class="number">3</span>]<span class="type">string</span>&#123;<span class="string">&quot;Лайка&quot;</span>, <span class="string">&quot;Белка&quot;</span>, <span class="string">&quot;Стрелка&quot;</span>&#125;</span><br><span class="line">s := x[:] <span class="comment">// a slice referencing the storage of x</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Slice-internals-切片内部结构"><a href="#Slice-internals-切片内部结构" class="headerlink" title="Slice internals 切片内部结构"></a>Slice internals 切片内部结构</h2>]]></content>
-  </entry>
-  <entry>
     <title></title>
     <url>/Go%E8%AF%AD%E6%B3%95%EF%BC%9ARange%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<blockquote>
@@ -5174,5 +5126,53 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
 </ul>
 <p>注意：range会复制目标数据。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Go 切片：用法和内部机制</title>
+    <url>/Go_Slices_usage_and_internals/</url>
+    <content><![CDATA[<blockquote>
+<p>翻译+截取：<a href="https://go.dev/blog/slices-intro">https://go.dev/blog/slices-intro</a></p>
+</blockquote>
+<h1 id="Go-切片：用法和内部机制"><a href="#Go-切片：用法和内部机制" class="headerlink" title="Go 切片：用法和内部机制"></a>Go 切片：用法和内部机制</h1><blockquote>
+<p><em>Andrew Gerrand</em> 安德鲁·杰拉德<br><em>5 January 2011</em> </p>
+</blockquote>
+<h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><p>切片类型是在 Go 的数组类型之上构建的一个抽象，因此要理解切片，我们首先必须理解数组。</p>
+<p>数组类型定义指定了长度和元素类型。例如，类型 <code>[4]int</code> 表示一个包含四个整数的数组。数组的大小是固定的；其长度是其类型的一部分（ <code>[4]int</code> 和 <code>[5]int</code> 是不同的、不兼容的类型）。数组可以按常规方式索引，因此表达式 <code>s[n]</code> 访问从零开始的第 n 个元素。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a [<span class="number">4</span>]<span class="type">int</span></span><br><span class="line">a[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">i := a[<span class="number">0</span>]</span><br><span class="line"><span class="comment">// i == 1</span></span><br></pre></td></tr></table></figure>
+
+<p>数组不需要显式初始化；数组的零值是一个可直接使用的数组，其元素本身为零：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// a[2] == 0, the zero value of the int type</span></span><br></pre></td></tr></table></figure>
+
+<p>内存中 <code>[4]int</code> 的表示只是四个按顺序排列的整数值：</p>
+
+
+<p>Go 的数组是值。数组变量表示整个数组；它不是指向第一个数组元素的指针（如在 C 中那样）。这意味着当你赋值或传递数组值时，你将复制其内容。（为了避免复制，你可以传递数组的指针，但那样就变成了指向数组的指针，而不是数组。）一种思考数组的方式是将其视为一种类似于结构体的类型，但字段是按索引而不是按名称组织的：一个固定大小的复合值。</p>
+<h2 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h2><p>数组有其位置，但它们有点不灵活，所以在 Go 代码中不太常见。然而，切片无处不在。它们建立在数组的基础上，提供了强大的功能和便利性。</p>
+<p>切片的类型指定为 <code>[]T</code> ，其中 <code>T</code> 是切片元素的类型。与数组类型不同，切片类型没有指定的长度。</p>
+<p>切片字面量声明方式与数组字面量类似，只是你省略了元素计数：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">letters := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>切片可以通过名为 <code>make</code> 的内置函数创建，该函数的签名为，</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">make</span><span class="params">([]T, <span class="built_in">len</span>, <span class="built_in">cap</span>)</span></span> []T</span><br></pre></td></tr></table></figure>
+
+<p>T 代表要创建的切片的元素类型。 <code>make</code> 函数接受一个类型、一个长度和一个可选的容量。当被调用时， <code>make</code> 分配一个数组并返回一个指向该数组的切片。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s []<span class="type">byte</span></span><br><span class="line">s = <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">5</span>, <span class="number">5</span>)</span><br><span class="line"><span class="comment">// s == []byte&#123;0, 0, 0, 0, 0&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>当省略容量参数时，它默认为指定的长度。这是相同代码的更简洁版本：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<p>切片的长度和容量可以使用内置的 <code>len</code> 和 <code>cap</code> 函数进行检查。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="built_in">len</span>(s) == <span class="number">5</span></span><br><span class="line"><span class="built_in">cap</span>(s) == <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>切片也可以通过“切片”现有的切片或数组来创建。切片是通过指定由冒号分隔的两个索引的半开区间来完成的。例如，表达式 <code>b[1:4]</code> 创建了一个包含 <code>b</code> （结果切片的索引为 0 到 2）中的元素 1 到 3 的切片。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">b := []<span class="type">byte</span>&#123;<span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;g&#x27;</span>&#125;</span><br><span class="line"><span class="comment">// b[1:4] == []byte&#123;&#x27;o&#x27;, &#x27;l&#x27;, &#x27;a&#x27;&#125;, sharing the same storage as b</span></span><br></pre></td></tr></table></figure>
+
+<p>切片表达式的起始和结束索引是可选的；它们的默认值分别为零和切片的长度：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// b[:2] == []byte&#123;&#x27;g&#x27;, &#x27;o&#x27;&#125;</span></span><br><span class="line"><span class="comment">// b[2:] == []byte&#123;&#x27;l&#x27;, &#x27;a&#x27;, &#x27;n&#x27;, &#x27;g&#x27;&#125;</span></span><br><span class="line"><span class="comment">// b[:] == b</span></span><br></pre></td></tr></table></figure>
+
+<p>这是创建给定数组的切片的语法：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">x := [<span class="number">3</span>]<span class="type">string</span>&#123;<span class="string">&quot;Лайка&quot;</span>, <span class="string">&quot;Белка&quot;</span>, <span class="string">&quot;Стрелка&quot;</span>&#125;</span><br><span class="line">s := x[:] <span class="comment">// a slice referencing the storage of x</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Slice-internals-切片内部结构"><a href="#Slice-internals-切片内部结构" class="headerlink" title="Slice internals 切片内部结构"></a>Slice internals 切片内部结构</h2>]]></content>
   </entry>
 </search>
