@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>go package module work | Ziang Sun's Blog</title><meta name="author" content="Ziang Sun"><meta name="copyright" content="Ziang Sun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="package 定义  包是 Go 语言的基本组织单元，用于将代码分组。每个 Go 文件都必须属于一个包，包名通常在文件顶部通过 package 关键字声明。 包可以包含多个 .go 文件，这些文件共享相同的包名，并位于同一目录下。  用途  代码复用：通过包可以将功能模块化，方便在不同项目中复用。 命名空间：包提供命名空间，防止命名冲突。例如，math 包中的 Sin 函数不会与 time 包中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go package module work">
+<meta property="og:url" content="https://sza0415.github.io/go%20package%20module%20work/index.html">
+<meta property="og:site_name" content="Ziang Sun&#39;s Blog">
+<meta property="og:description" content="package 定义  包是 Go 语言的基本组织单元，用于将代码分组。每个 Go 文件都必须属于一个包，包名通常在文件顶部通过 package 关键字声明。 包可以包含多个 .go 文件，这些文件共享相同的包名，并位于同一目录下。  用途  代码复用：通过包可以将功能模块化，方便在不同项目中复用。 命名空间：包提供命名空间，防止命名冲突。例如，math 包中的 Sin 函数不会与 time 包中">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://sza0415.github.io/img/image1.png">
+<meta property="article:published_time" content="2025-03-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-09T11:02:41.093Z">
+<meta property="article:author" content="Ziang Sun">
+<meta property="article:tag" content="GO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sza0415.github.io/img/image1.png"><link rel="shortcut icon" href="/img/image1.png"><link rel="canonical" href="https://sza0415.github.io/go%20package%20module%20work/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":3,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'go package module work',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/image1.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/image1.png" alt="Logo"><span class="site-name">Ziang Sun's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">go package module work</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/contact/"><i class="fa-fw fas fa-comments"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">go package module work</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-03-08T16:00:00.000Z" title="Created 2025-03-09 00:00:00">2025-03-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-03-09T11:02:41.093Z" title="Updated 2025-03-09 19:02:41">2025-03-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>10mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="package"><a href="#package" class="headerlink" title="package"></a>package</h2><blockquote>
+<p>定义</p>
+<ul>
+<li>包是 Go 语言的基本组织单元，用于将代码分组。每个 Go 文件都必须属于一个包，包名通常在文件顶部通过 package 关键字声明。</li>
+<li>包可以包含多个 .go 文件，这些文件共享相同的包名，并位于同一目录下。</li>
+</ul>
+<p>用途</p>
+<ul>
+<li>代码复用：通过包可以将功能模块化，方便在不同项目中复用。</li>
+<li>命名空间：包提供命名空间，防止命名冲突。例如，math 包中的 Sin 函数不会与 time 包中的 Sleep 函数冲突。</li>
+<li>访问控制：包内的标识符可以根据首字母大小写控制访问权限（大写为公开，小写为私有）。</li>
+</ul>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// math.go</span></span><br><span class="line"><span class="keyword">package</span> mathutil</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(a, b <span class="type">float64</span>)</span></span> <span class="type">float64</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;yourproject/mathutil&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    result := mathutil.Add(<span class="number">3.0</span>, <span class="number">4.0</span>)</span><br><span class="line">    <span class="built_in">println</span>(result) <span class="comment">// 输出 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="module"><a href="#module" class="headerlink" title="module"></a>module</h2><blockquote>
+<p>定义</p>
+<ul>
+<li>模块 是 Go 1.11 引入的一种更高层次的组织单位，用于管理依赖和版本。它是一个包含 go.mod 文件的目录树，定义了项目的依赖关系和模块版本。</li>
+<li>模块是 Go 语言的官方依赖管理机制，取代了早期的 GOPATH 模式（尽管 GOPATH 仍然可用）。</li>
+</ul>
+<p>组成</p>
+<ul>
+<li>go.mod 文件：模块的配置文件，记录模块的名称、依赖和版本。</li>
+<li>go.sum 文件：记录依赖的校验和，用于验证依赖的完整性。</li>
+</ul>
+<p>初始化模块</p>
+<p>使用 go mod init 创建一个模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod init example.com/myproject</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>这会生成一个 go.mod 文件，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>example.com&#x2F;myproject 是模块的路径，通常是项目的托管地址（如果有）。</p>
+</li>
+</ul>
+<p>添加依赖</p>
+<ul>
+<li><p>导入外部包时，Go 工具会自动解析并添加到 go.mod：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> <span class="string">&quot;github.com/gorilla/mux&quot;</span></span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="comment">// 使用 mux 包</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行 go mod tidy 或 go build 会自动下载依赖并更新 go.mod 和 go.sum。</p>
+</li>
+</ul>
+<p>示例 go.mod</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br><span class="line"></span><br><span class="line">require (</span><br><span class="line">    github.com/gorilla/mux v1.8.0</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="package与module的关系"><a href="#package与module的关系" class="headerlink" title="package与module的关系"></a>package与module的关系</h2><ul>
+<li>Go Module 的基本概念是将每个项目作为一个模块（module），并有独立的模块路径。每个模块都可以包含多个包（package），并且每个模块都有一个 go.mod 文件来记录包依赖关系。</li>
+</ul>
+<blockquote>
+<p>层次关系</p>
+<ul>
+<li><p>包是模块的组成部分：</p>
+<ul>
+<li><p>一个模块可以包含多个包，包是模块内部的代码组织单元。</p>
+</li>
+<li><p>例如，一个模块 example.com&#x2F;myproject 可能包含以下包：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">example.com/myproject/mathutil</span><br><span class="line">example.com/myproject/web</span><br></pre></td></tr></table></figure>
+
+<p>这里的 mathutil 和 web 是模块中的两个包。</p>
+</li>
+</ul>
+</li>
+<li><p>模块是包的容器：</p>
+<ul>
+<li>模块通过 go.mod 文件定义了项目的根路径，所有包的导入路径都以模块路径为前缀。</li>
+<li>例如，go.mod 中定义的模块路径是 example.com&#x2F;myproject，那么模块内的包 mathutil 的完整导入路径是 example.com&#x2F;myproject&#x2F;mathutil。</li>
+</ul>
+</li>
+</ul>
+<p>依赖管理</p>
+<ul>
+<li><p>模块管理包的依赖：</p>
+<ul>
+<li><p>模块通过 go.mod 文件记录项目依赖的外部包及其版本。例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line">  </span><br><span class="line">go 1.21</span><br><span class="line">  </span><br><span class="line">require github.com/gorilla/mux v1.8.0</span><br></pre></td></tr></table></figure>
+
+<p>这里 github.com&#x2F;gorilla&#x2F;mux 是一个外部包，模块管理它的版本（v1.8.0）。</p>
+</li>
+</ul>
+</li>
+<li><p>包是依赖的实际单位：</p>
+<ul>
+<li>模块依赖的外部包（例如 github.com&#x2F;gorilla&#x2F;mux）实际上是一个模块内的包，Go 会根据模块路径和版本号下载并使用对应的包。</li>
+</ul>
+</li>
+</ul>
+<p>命名空间与路径</p>
+<ul>
+<li><p>模块定义包的导入路径：</p>
+<ul>
+<li><p>包的导入路径由模块路径决定。例如，模块路径 example.com&#x2F;myproject 中的包 mathutil 会被导入为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;example.com/myproject/mathutil&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>模块路径是包路径的前缀：</p>
+<ul>
+<li>模块路径是包路径的一部分，包路径是模块路径加上包所在的子目录。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="module和package示例"><a href="#module和package示例" class="headerlink" title="module和package示例"></a>module和package示例</h2><p>假设你有一个项目，目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">myproject/</span><br><span class="line">├── go.mod</span><br><span class="line">├── main.go</span><br><span class="line">└── mathutil/</span><br><span class="line">    └── math.go</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>go.mod 文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mathutil&#x2F;math.go（包定义）：</p>
+<p>go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mathutil</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>main.go（主程序）：</p>
+<p>go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;example.com/myproject/mathutil&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    result := mathutil.Add(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">    fmt.Println(result) <span class="comment">// 输出 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>关系说明</p>
+<ul>
+<li>模块：example.com&#x2F;myproject 是模块的路径，定义在 go.mod 中。</li>
+<li>包：<ul>
+<li>mathutil 是模块中的一个包，位于 mathutil&#x2F; 目录下。</li>
+<li>main 是模块中的另一个包，位于根目录。</li>
+</ul>
+</li>
+<li>导入路径：example.com&#x2F;myproject&#x2F;mathutil 是包 mathutil 的完整路径，由模块路径和包所在的子目录组成。</li>
+</ul>
+<p>依赖管理</p>
+<p>如果 main.go 还需要一个外部包（如 github.com&#x2F;gorilla&#x2F;mux），Go 会自动更新 go.mod：</p>
+<p>go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gorilla/mux&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行 go mod tidy 后，go.mod 变为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br><span class="line"></span><br><span class="line">require github.com/gorilla/mux v1.8.0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里的 github.com&#x2F;gorilla&#x2F;mux 是另一个模块中的包，example.com&#x2F;myproject 模块依赖它。</li>
+</ul>
+<h2 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h2><blockquote>
+<p>搬运：<a target="_blank" rel="noopener" href="https://polarisxu.studygolang.com/posts/go/workspace/">https://polarisxu.studygolang.com/posts/go/workspace/</a></p>
+</blockquote>
+<h2 id="01-缘起"><a href="#01-缘起" class="headerlink" title="01 缘起"></a>01 缘起</h2><p>为了大家全面理解工作区模式，通过一个具体例子讲解。</p>
+<p>本地有两个项目，分别是两个 module：mypkg 和 example。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/</span><br><span class="line">$ <span class="built_in">mkdir</span> polarisxu</span><br><span class="line">$ <span class="built_in">cd</span> polarisxu</span><br><span class="line">$ <span class="built_in">mkdir</span> mypkg example</span><br><span class="line">$ <span class="built_in">cd</span> mypkg</span><br><span class="line">$ go mod init github.com/polaris1119/mypkg</span><br><span class="line">$ <span class="built_in">touch</span> bar.go</span><br></pre></td></tr></table></figure>
+
+<p>在 bar.go 中增加如下示例代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mypkg</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">&quot;This is package mypkg&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着，在 example 模块中处理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/polarisxu/example</span><br><span class="line">$ go mod init github.com/polaris1119/example</span><br><span class="line">$ <span class="built_in">touch</span> main.go</span><br></pre></td></tr></table></figure>
+
+<p>在 main.go 中增加如下内容：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;github.com/polaris1119/mypkg&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mypkg.Bar()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候，如果我们运行 go mod tidy，肯定会报错，因为我们的 mypkg 包根本没有提交到 github 上，肯定找不到。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ go mod tidy</span><br><span class="line">....</span><br><span class="line">fatal: repository <span class="string">&#x27;https://github.com/polaris1119/mypkg/&#x27;</span> not found</span><br></pre></td></tr></table></figure>
+
+<p><code>go run main.go</code> 也就不成功。</p>
+<p>我们当然可以提交 mypkg 到 github，但我们每修改一次 mypkg，就需要提交（而且每次提交之后需要在 example 中 go get 最新版本），否则 example 中就没法使用上最新的。</p>
+<p>针对这种情况，目前是建议通过 replace 来解决，即在 example 中的 go.mod 增加如下 replace：（v1.0.0 根据具体情况修改，还未提交，可以使用 v1.0.0）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module github.com/polaris1119/example</span><br><span class="line"></span><br><span class="line">go 1.19</span><br><span class="line"></span><br><span class="line">require github.com/polaris1119/mypkg v1.0.0</span><br><span class="line"></span><br><span class="line">replace github.com/polaris1119/mypkg =&gt; ../mypkg</span><br></pre></td></tr></table></figure>
+
+<p>再次运行 go run main.go，输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run main.go</span><br><span class="line">This is package mypkg</span><br></pre></td></tr></table></figure>
+
+<p>当都开发完成时，我们需要手动删除 replace，并执行 go mod tidy 后提交，否则别人使用就报错了。</p>
+<p>这还是挺不方便的，如果本地有多个 module，每一个都得这么处理。</p>
+<h2 id="02-工作区模式"><a href="#02-工作区模式" class="headerlink" title="02 工作区模式"></a>02 工作区模式</h2><p>针对上面的这个问题，Michael Matloob 提出了 Workspace Mode（工作区模式）。相关 issue 讨论：<a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/45713">cmd&#x2F;go: add a workspace mode</a> ，<a target="_blank" rel="noopener" href="https://go.googlesource.com/proposal/+/master/design/45713-workspace.md">这里是 Proposal</a> 。并在 Go1.18 中发布了。</p>
+<p>因此，要使用工作区，请确保 Go 版本在 1.18+。</p>
+<p>我本地当前版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go version</span><br><span class="line">go version go1.19.2 darwin/arm64</span><br></pre></td></tr></table></figure>
+
+<p>通过 go help work 可以看到 work 相关命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">$ go <span class="built_in">help</span> work</span><br><span class="line">Work provides access to operations on workspaces.</span><br><span class="line"></span><br><span class="line">Note that support <span class="keyword">for</span> workspaces is built into many other commands, not</span><br><span class="line">just <span class="string">&#x27;go work&#x27;</span>.</span><br><span class="line"></span><br><span class="line">See <span class="string">&#x27;go help modules&#x27;</span> <span class="keyword">for</span> information about Go<span class="string">&#x27;s module system of which</span></span><br><span class="line"><span class="string">workspaces are a part.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">See https://go.dev/ref/mod#workspaces for an in-depth reference on</span></span><br><span class="line"><span class="string">workspaces.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">See https://go.dev/doc/tutorial/workspaces for an introductory</span></span><br><span class="line"><span class="string">tutorial on workspaces.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">A workspace is specified by a go.work file that specifies a set of</span></span><br><span class="line"><span class="string">module directories with the &quot;use&quot; directive. These modules are used as</span></span><br><span class="line"><span class="string">root modules by the go command for builds and related operations.  A</span></span><br><span class="line"><span class="string">workspace that does not specify modules to be used cannot be used to do</span></span><br><span class="line"><span class="string">builds from local modules.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">go.work files are line-oriented. Each line holds a single directive,</span></span><br><span class="line"><span class="string">made up of a keyword followed by arguments. For example:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    go 1.18</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    use ../foo/bar</span></span><br><span class="line"><span class="string">    use ./baz</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    replace example.com/foo v1.2.3 =&gt; example.com/bar v1.4.5</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The leading keyword can be factored out of adjacent lines to create a block,</span></span><br><span class="line"><span class="string">like in Go imports.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    use (</span></span><br><span class="line"><span class="string">      ../foo/bar</span></span><br><span class="line"><span class="string">      ./baz</span></span><br><span class="line"><span class="string">    )</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The use directive specifies a module to be included in the workspace&#x27;</span>s</span><br><span class="line"><span class="built_in">set</span> of main modules. The argument to the use directive is the directory</span><br><span class="line">containing the module<span class="string">&#x27;s go.mod file.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The go directive specifies the version of Go the file was written at. It</span></span><br><span class="line"><span class="string">is possible there may be future changes in the semantics of workspaces</span></span><br><span class="line"><span class="string">that could be controlled by this version, but for now the version</span></span><br><span class="line"><span class="string">specified has no effect.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The replace directive has the same syntax as the replace directive in a</span></span><br><span class="line"><span class="string">go.mod file and takes precedence over replaces in go.mod files.  It is</span></span><br><span class="line"><span class="string">primarily intended to override conflicting replaces in different workspace</span></span><br><span class="line"><span class="string">modules.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">To determine whether the go command is operating in workspace mode, use</span></span><br><span class="line"><span class="string">the &quot;go env GOWORK&quot; command. This will specify the workspace file being</span></span><br><span class="line"><span class="string">used.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Usage:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    go work &lt;command&gt; [arguments]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The commands are:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    edit        edit go.work from tools or scripts</span></span><br><span class="line"><span class="string">    init        initialize workspace file</span></span><br><span class="line"><span class="string">    sync        sync workspace build list to modules</span></span><br><span class="line"><span class="string">    use         add modules to workspace file</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Use &quot;go help work &lt;command&gt;&quot; for more information about a command.</span></span><br></pre></td></tr></table></figure>
+
+<p><em>注意</em>：上文中提到，工作区不只是 go work 相关命令，Go 其他命令也会涉及工作区内容，比如 go run、go build 等。</p>
+<p>根据这个提示，我们初始化 workspace：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/polarisxu</span><br><span class="line">$ go work init mypkg example</span><br><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">├── example</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── main.go</span><br><span class="line">├── go.work</span><br><span class="line">└── mypkg</span><br><span class="line">    ├── bar.go</span><br><span class="line">    └── go.mod</span><br></pre></td></tr></table></figure>
+
+<p>注意几点：</p>
+<ul>
+<li>多个子模块应该在一个目录下（或其子目录）。比如这里的 polarisxu 目录；（这不是必须的，但更好管理，否则 go work init 需要提供正确的子模块路径）</li>
+<li>go work init 需要在 polarisxu 目录执行；</li>
+<li>go work init 之后跟上需要本地开发的子模块目录名；</li>
+</ul>
+<p>打开 go.work 看看长什么样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">go 1.19</span><br><span class="line"></span><br><span class="line">use (</span><br><span class="line">    ./example</span><br><span class="line">    ./mypkg</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>go.work 文件的语法和 go.mod 类似（go.work 优先级高于 go.mod），因此也支持 replace。</p>
+<p>注意：实际项目中，多个模块之间可能还依赖其他模块，建议在 go.work 所在目录执行 <code>go work sync</code>。</p>
+<p>现在，我们将 example&#x2F;go.mod 中的 replace 语句删除，再次执行 go run main.go（在 example 目录下），得到了正常的输出。也可以在 polarisxu 目录下，这么运行：go run example&#x2F;main.go，也能正常。</p>
+<p>注意，go.work 不需要提交到 Git 中，因为它只是你本地开发使用的。</p>
+<p>当你开发完成，应该先提交 mypkg 包到 GitHub，然后在 example 下面执行 go get：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go get -u github.com/polaris1119/mypkg@latest</span><br></pre></td></tr></table></figure>
+
+<p>然后禁用 workspace（通过 GOWORK&#x3D;off 禁用），再次运行 example 模块，是否正确：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/polarisxu/example</span><br><span class="line">$ GOWORK=off go run main.go</span><br></pre></td></tr></table></figure>
+
+<p>目前 VSCode 的 go 插件已经支持 workspace，不需要做什么配置就可以愉快的玩耍。</p>
+<h2 id="03-总结"><a href="#03-总结" class="headerlink" title="03 总结"></a>03 总结</h2><p>在 GOPATH 年代，多 GOPATH 是一个头疼的问题。当时没有很好的解决，Module 就出现了，多 GOPATH 问题因此消失。但多 Module 问题随之出现。Workspace 方案较好的解决了这个问题。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://sza0415.github.io">Ziang Sun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://sza0415.github.io/go%20package%20module%20work/">https://sza0415.github.io/go%20package%20module%20work/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GO/">GO</a></div><div class="post-share"><div class="social-share" data-image="/img/image1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/GowebProgramming/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">HTTP 简介 HTTP 是一种无状态、由文本构成的请求-响应（request-response）协议，这种协议使用的是客户端-服务器（client-server）计算模型。   请求-响应是两台计算机进行通信的基本方式，其中一台计算机会向另一台计算机发送请求，而接收到请求的计算机则会对请求进行响应。在客户端-服务器计算模型中，发送请求的一方（客户端）负责向返回响应的一方（服务器）发起会话，而服务器则负责为客户端提供服务。在 HTTP协议中，客户端也被称作用户代理（user-agent），而服务器则通常会被称为 Web 服务器。在大多数情况下，HTTP 客户端都是一个Web 浏览器。 HTTP 是一种无状态协议，它唯一知道的就是客户端会向服务器发送请求，而服务器则会向客户端返回响应，并且后续发生的请求对之前发生过的请求一无所知。相对的，像 FTP、Telnet这类面向连接的协议则会在客户端和服务器之间创建一个持续存在的通信通道（其中 Telnet 在进行通信时使用的也是请求-响应方式以及客户端-服务器计算模型）。顺带提一下，HTTP 1.1...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/Go%E8%AF%AD%E6%B3%95%EF%BC%9ARange%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Go语法：range的使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-01</div><div class="info-item-2">Go语法：range的使用</div></div><div class="info-2"><div class="info-item-1"> 转载+修改：https://lewinblog.com/blog/page/2019/191216-Go%E8%AF%AD%E6%B3%95-Range%E7%9A%84%E4%BD%BF%E7%94%A8.md  语法定义 range iterates over elements in a variety of data structures.  range可以遍历多种数据结构体的元素。包括『数组array』、『切片slice』、『字典map』、『字符串string』等，还有一个比较特殊的『通道chan』。 数组与切片这个是最基础的了吧。常用形式是for i := range s &#123;&#125;，此时只遍历索引；还有for i, n := range s &#123;&#125;同时获取索引和元素值；如果只要元素值，用for _, n := range s &#123;&#125;。 我个人经验是，把range看成一个函数，可以破解一切问题： 1func Range(s iterable) (index int, value int)...</div></div></div></a><a class="pagination-related" href="/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" title="go 语言学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-01</div><div class="info-item-2">go 语言学习</div></div><div class="info-2"><div class="info-item-1">引用类型（reference type）特指slice、map、channel new 函数new是go语言的内置函数，用于为制定类型分配内存，并返回一个指向该类型零值的指针。  适用于基本数据类型（如int、float64、bool等）以及结构体（struct）等类型。 不适用于切片（slice）、映射（map）、和通道（channel）引用类型的初始化，因为new仅分配内存并返回指向零值的指针，不会初始化这些类型的内部数据结构。 返回值：指向所分配类型的指针，例如：*int、*struct  12345678910package mainimport &quot;fmt&quot;func main() &#123;    p := new(int)    // 为 int 类型分配内存，返回 *int    fmt.Println(*p)  // 输出 0（int 的零值）    *p = 10          // 通过指针修改值    fmt.Println(*p)  // 输出 10&#125;  make 函数make是 Go...</div></div></div></a><a class="pagination-related" href="/Go_Slices_usage_and_internals/" title="Go 切片：用法和内部机制"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-01</div><div class="info-item-2">Go 切片：用法和内部机制</div></div><div class="info-2"><div class="info-item-1"> 翻译+截取：https://go.dev/blog/slices-intro  Go 切片：用法和内部机制 Andrew Gerrand 安德鲁·杰拉德5 January 2011   Arrays切片类型是在 Go 的数组类型之上构建的一个抽象，因此要理解切片，我们首先必须理解数组。 数组类型定义指定了长度和元素类型。例如，类型 [4]int 表示一个包含四个整数的数组。数组的大小是固定的；其长度是其类型的一部分（ [4]int 和 [5]int 是不同的、不兼容的类型）。数组可以按常规方式索引，因此表达式 s[n] 访问从零开始的第 n 个元素。 1234var a [4]inta[0] = 1i := a[0]// i == 1  数组不需要显式初始化；数组的零值是一个可直接使用的数组，其元素本身为零： 1// a[2] == 0, the zero value of the int type  内存中 [4]int 的表示只是四个按顺序排列的整数值：   Go 的数组是值。数组变量表示整个数组；它不是指向第一个数组元素的指针（如在 C...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comments</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/image1.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ziang Sun</div><div class="author-info-description">直到有另一个人 能体会我的感觉</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sza0415"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#package"><span class="toc-number">1.</span> <span class="toc-text">package</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#module"><span class="toc-number">2.</span> <span class="toc-text">module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#package%E4%B8%8Emodule%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.</span> <span class="toc-text">package与module的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#module%E5%92%8Cpackage%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">module和package示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#go-work"><span class="toc-number">5.</span> <span class="toc-text">go work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#01-%E7%BC%98%E8%B5%B7"><span class="toc-number">6.</span> <span class="toc-text">01 缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02-%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%A8%A1%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">02 工作区模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03-%E6%80%BB%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">03 总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/go%20package%20module%20work/" title="go package module work">go package module work</a><time datetime="2025-03-08T16:00:00.000Z" title="Created 2025-03-09 00:00:00">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/GowebProgramming/" title="Untitled">Untitled</a><time datetime="2025-03-05T11:22:45.567Z" title="Created 2025-03-05 19:22:45">2025-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Go%E8%AF%AD%E6%B3%95%EF%BC%9ARange%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Go语法：range的使用">Go语法：range的使用</a><time datetime="2025-02-28T16:00:00.000Z" title="Created 2025-03-01 00:00:00">2025-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" title="go 语言学习">go 语言学习</a><time datetime="2025-02-28T16:00:00.000Z" title="Created 2025-03-01 00:00:00">2025-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Go_Slices_usage_and_internals/" title="Go 切片：用法和内部机制">Go 切片：用法和内部机制</a><time datetime="2025-02-28T16:00:00.000Z" title="Created 2025-03-01 00:00:00">2025-03-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Ziang Sun</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll to Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = {"language":"zh-CN","perPage":10,"distractionFreeMode":false,"createIssueManually":true}
+
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  const initGitalk = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGitalk = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const gitalk = new Gitalk({
+      clientID: 'Ov23li1nXnygRWmrL22n',
+      clientSecret: 'fdcfbe11c7b66e8cbfe98aeb17100017159cb6d5',
+      repo: 'sza0415.github.io',
+      owner: 'sza0415',
+      admin: ['sza0415'],
+      updateCountCallback: commentCount,
+      ...option,
+      id: isShuoshuo ? path : (option && option.id) || 'b5b9befa66a6e55df3865bb95e369391'
+    })
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async(el, path) => {
+    if (typeof Gitalk === 'function') initGitalk(el, path)
+    else {
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Gitalk' === 'Gitalk'
+      ? window.shuoshuoComment = { loadComment: loadGitalk }
+      : window.loadOtherComment = loadGitalk
+    return
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

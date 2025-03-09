@@ -1,0 +1,7 @@
+package main
+
+import "example.com/myproject/pkg1"
+
+func main() {
+	pkg1.Add1()
+}

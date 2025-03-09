@@ -5059,7 +5059,7 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>Go语法：range的使用</title>
     <url>/Go%E8%AF%AD%E6%B3%95%EF%BC%9ARange%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<blockquote>
 <p>转载+修改：<a href="https://lewinblog.com/blog/page/2019/191216-Go%E8%AF%AD%E6%B3%95-Range%E7%9A%84%E4%BD%BF%E7%94%A8.md">https://lewinblog.com/blog/page/2019/191216-Go%E8%AF%AD%E6%B3%95-Range%E7%9A%84%E4%BD%BF%E7%94%A8.md</a></p>
@@ -5074,9 +5074,15 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
 
 <p>其实整个Golang都是传值的，只要记住这一点，一切都好说。更多关于数组与切片的底层特性，请参考<a href="https://blog.golang.org/go-slices-usage-and-internals">Go Slices: usage and internals - The Go Blog</a>。</p>
 ]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>go 语言学习</title>
     <url>/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<p>引用类型（reference type）特指slice、map、channel</p>
 <h5 id="new-函数"><a href="#new-函数" class="headerlink" title="new 函数"></a>new 函数</h5><p><code>new</code>是go语言的内置函数，用于为制定类型分配内存，并返回一个指向该类型零值的指针。</p>
@@ -5126,6 +5132,12 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
 </ul>
 <p>注意：range会复制目标数据。</p>
 ]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
   </entry>
   <entry>
     <title>Go 切片：用法和内部机制</title>
@@ -5173,6 +5185,424 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
 <p>这是创建给定数组的切片的语法：</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line">x := [<span class="number">3</span>]<span class="type">string</span>&#123;<span class="string">&quot;Лайка&quot;</span>, <span class="string">&quot;Белка&quot;</span>, <span class="string">&quot;Стрелка&quot;</span>&#125;</span><br><span class="line">s := x[:] <span class="comment">// a slice referencing the storage of x</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Slice-internals-切片内部结构"><a href="#Slice-internals-切片内部结构" class="headerlink" title="Slice internals 切片内部结构"></a>Slice internals 切片内部结构</h2>]]></content>
+<h2 id="Slice-internals-切片内部结构"><a href="#Slice-internals-切片内部结构" class="headerlink" title="Slice internals 切片内部结构"></a>Slice internals 切片内部结构</h2><p>切片是数组片段的描述符。它由指向数组的指针、片段的长度以及其容量（片段的最大长度）组成。</p>
+
+
+<p>我们的变量 <code>s</code> ，由 <code>make([]byte, 5)</code> 之前创建，结构如下：</p>
+
+
+<p>切片的长度是切片引用的元素数量。容量是底层数组中元素的数量（从切片指针引用的元素开始）。随着我们浏览接下来的几个示例，长度和容量的区别将变得清晰。</p>
+<p>随着我们切片 <code>s</code> ，观察切片数据结构的变化及其与底层数组的关系：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s = s[<span class="number">2</span>:<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>切片不会复制切片的数据。它创建一个新的切片值，该值指向原始数组。这使得切片操作与操作数组索引一样高效。因此，修改重新切片的元素（而不是切片本身）会修改原始切片的元素：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">d := []<span class="type">byte</span>&#123;<span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;</span><br><span class="line">e := d[<span class="number">2</span>:]</span><br><span class="line"><span class="comment">// e == []byte&#123;&#x27;a&#x27;, &#x27;d&#x27;&#125;</span></span><br><span class="line">e[<span class="number">1</span>] = <span class="string">&#x27;m&#x27;</span></span><br><span class="line"><span class="comment">// e == []byte&#123;&#x27;a&#x27;, &#x27;m&#x27;&#125;</span></span><br><span class="line"><span class="comment">// d == []byte&#123;&#x27;r&#x27;, &#x27;o&#x27;, &#x27;a&#x27;, &#x27;m&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>之前我们将 <code>s</code> 切片的长度切短至其容量以下。我们可以通过再次切片来将 s 增长到其容量：</p>
+
+
+<h2 id="Growing-slices-the-copy-and-append-functions"><a href="#Growing-slices-the-copy-and-append-functions" class="headerlink" title="Growing slices (the copy and append functions)"></a>Growing slices (the copy and append functions)</h2><h2 id="增长切片（复制和追加函数）"><a href="#增长切片（复制和追加函数）" class="headerlink" title="增长切片（复制和追加函数）"></a>增长切片（复制和追加函数）</h2><p>为了增加切片的容量，必须创建一个新的、更大的切片，并将原始切片的内容复制到其中。这种技术是其他语言中动态数组实现背后的工作原理。下一个示例通过创建一个新的切片 <code>t</code> ，将 <code>s</code> 的内容复制到 <code>t</code> 中，然后将切片值 <code>t</code> 赋值给 <code>s</code> 来将 <code>s</code> 的容量加倍：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">t := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="built_in">len</span>(s), (<span class="built_in">cap</span>(s)+<span class="number">1</span>)*<span class="number">2</span>) <span class="comment">// +1 in case cap(s) == 0</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> s &#123;</span><br><span class="line">        t[i] = s[i]</span><br><span class="line">&#125;</span><br><span class="line">s = t</span><br></pre></td></tr></table></figure>
+
+<p>该常见操作的循环部分通过内置的复制函数变得更容易。正如其名所示，复制函数将数据从源切片复制到目标切片。它返回复制的元素数量。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">copy</span><span class="params">(dst, src []T)</span></span> <span class="type">int</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>copy</code> ，我们可以简化上面的代码片段：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">t := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="built_in">len</span>(s), (<span class="built_in">cap</span>(s)+<span class="number">1</span>)*<span class="number">2</span>)</span><br><span class="line"><span class="built_in">copy</span>(t, s)</span><br><span class="line">s = t</span><br></pre></td></tr></table></figure>
+
+<p>将数据追加到切片末尾是一个常见操作，Go 提供了一个适用于大多数目的的内置函数：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">append</span><span class="params">(s []T, x ...T)</span></span> []T</span><br></pre></td></tr></table></figure>
+
+<p><code>append</code> 函数将元素 <code>x</code> 追加到切片 <code>s</code> 的末尾，如果需要更大的容量，则扩展切片。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">a := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">1</span>)</span><br><span class="line"><span class="comment">// a == []int&#123;0&#125;</span></span><br><span class="line">a = <span class="built_in">append</span>(a, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment">// a == []int&#123;0, 1, 2, 3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>将一个切片追加到另一个切片中，请使用 <code>...</code> 来将第二个参数展开为一个参数列表。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">a := []<span class="type">string</span>&#123;<span class="string">&quot;John&quot;</span>, <span class="string">&quot;Paul&quot;</span>&#125;</span><br><span class="line">b := []<span class="type">string</span>&#123;<span class="string">&quot;George&quot;</span>, <span class="string">&quot;Ringo&quot;</span>, <span class="string">&quot;Pete&quot;</span>&#125;</span><br><span class="line">a = <span class="built_in">append</span>(a, b...) <span class="comment">// equivalent to &quot;append(a, b[0], b[1], b[2])&quot;</span></span><br><span class="line"><span class="comment">// a == []string&#123;&quot;John&quot;, &quot;Paul&quot;, &quot;George&quot;, &quot;Ringo&quot;, &quot;Pete&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>由于切片的零值（ <code>nil</code> ）类似于零长度切片，您可以在循环中声明一个切片变量然后向其中追加元素：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">/ Filter returns a <span class="built_in">new</span> slice holding only</span><br><span class="line"><span class="comment">// the elements of s that satisfy fn()</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Filter</span><span class="params">(s []<span class="type">int</span>, fn <span class="keyword">func</span>(<span class="type">int</span>)</span></span> <span class="type">bool</span>) []<span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p []<span class="type">int</span> <span class="comment">// == nil</span></span><br><span class="line">    <span class="keyword">for</span> _, v := <span class="keyword">range</span> s &#123;</span><br><span class="line">        <span class="keyword">if</span> fn(v) &#123;</span><br><span class="line">            p = <span class="built_in">append</span>(p, v)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="A-possible-“gotcha”-一个可能的“陷阱”"><a href="#A-possible-“gotcha”-一个可能的“陷阱”" class="headerlink" title="A possible “gotcha” 一个可能的“陷阱”"></a>A possible “gotcha” 一个可能的“陷阱”</h2><p>如前所述，重新切片不会复制底层数组。整个数组将保留在内存中，直到不再被引用。偶尔这会导致程序保留所有数据在内存中，而只需要其中一小部分。</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/GowebProgramming/</url>
+    <content><![CDATA[<h2 id="HTTP-简介"><a href="#HTTP-简介" class="headerlink" title="HTTP 简介"></a>HTTP 简介</h2><blockquote>
+<p>HTTP 是一种无状态、由文本构成的请求-响应（request-response）协议，这种协议使用的是客户端-服务器（client-server）计算模型。</p>
+</blockquote>
+<blockquote>
+<p>请求-响应是两台计算机进行通信的基本方式，其中一台计算机会向另一台计算机发送请求，而接收到请求的计算机则会对请求进行响应。在客户端-服务器计算模型中，发送请求的一方（客户端）负责向返回响应的一方（服务器）发起会话，而服务器则负责为客户端提供服务。在 HTTP协议中，客户端也被称作用户代理（user-agent），而服务器则通常会被称为 Web 服务器。在大多数情况下，HTTP 客户端都是一个Web 浏览器。</p>
+<p>HTTP 是一种无状态协议，它唯一知道的就是客户端会向服务器发送请求，而服务器则会向客户端返回响应，并且后续发生的请求对之前发生过的请求一无所知。相对的，像 FTP、Telnet这类面向连接的协议则会在客户端和服务器之间创建一个持续存在的通信通道（其中 Telnet 在进行通信时使用的也是请求-响应方式以及客户端-服务器计算模型）。顺带提一下，HTTP 1.1 也可以通过持久化连接来提升性能。</p>
+<p>跟很多互联网协议一样，HTTP也是以纯文本方式而不是二进制方式发送和接收协议数据的。</p>
+<p>这样做是为了让开发者可以在无需使用专门的协议分析工具的情况下，弄清楚通信中正在发生的事情，从而更容易进行故障排查。</p>
+</blockquote>
+<h2 id="HTTP-请求"><a href="#HTTP-请求" class="headerlink" title="HTTP 请求"></a>HTTP 请求</h2><p>HTTP 是一种请求-响应协议，协议涉及的所有事情都以一个请求开始。HTTP请求跟其他所有HTTP报文（message）一样，都由一系列文本行组成，这些文本行会按照以下顺序进行排列：</p>
+<ol>
+<li>请求行（request-line）；</li>
+<li>零个或任意多个请求首部（header）；</li>
+<li>一个空行；</li>
+<li>可选的报文主体（body）。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">GET /Protocols/rfc2616/rfc2616.html HTTP/1.1</span><br><span class="line">Host: www.w3.org</span><br><span class="line">User-Agent: Mozilla/5.0|</span><br><span class="line">(empty line)</span><br></pre></td></tr></table></figure>
+
+<p>这个请求中的第一个文本行就是请求行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GET /Protocols/rfc2616/rfc2616.html HTTP/1.1</span><br></pre></td></tr></table></figure>
+
+<p>请求行中的第一个单词为请求方法（request method），之后跟着的是统一资源标识符（UniformResource Identifier, URI）以及所的HTTP 版本。位于请求行之后的两个文本行为请求的首部。注意，这个报文的最后一行为空行，即使报文的主体部分为空，这个空行也必须存在，至于报文是否包含主体则需要根据请求使用的方法而定。</p>
+<h3 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h3><p>请求方法是请求行中的第一个单词，它指明了客户端想要对资源执行的操作。HTTP O.9只有GET一个方法，HTTP 1.0 添加了 POST方法和 HEAD方法，而HTTP 1.1 则添加了 PUT、DELETE、OPTIONS、TRACE 和 CONNECT这5个方法，并允许开发者自行添加更多方法—很多人立即就把这个功能付诸实践了。</p>
+<p>关于请求方法的一个有趣之处在于，HTTP 1.1 要求必须实现的只有GET 方法和 HEAD方法，</p>
+<p>而其他方法的实现则是可选的，甚至连POST方法也是可选的。</p>
+<p>各个 HTTP方法的作用说明如下：</p>
+<blockquote>
+<p>GET—命令服务器返回指定的资源。</p>
+<p>HEAD—与 GET 方法的作用类似，唯一的不同在于这个方法不要求服务器返回报文的</p>
+<p>主体。这个方法通常用于在不获取报文主体的情况下，取得响应的首部。</p>
+<p>POST—命令服务器将报文主体中的数据传递给URI 指定的资源，至于服务器具体会对</p>
+<p>这些数据执行什么动作则取决于服务器本身。</p>
+<p>PUT—命令服务器将报文主体中的数据设置为URI 指定的资源。如果 URI 指定的位置上已经有数据存在，那么使用报文主体中的数据去代替已有的数据。如果资源尚未存在，那么在 URI 指定的位置上新创建一个资源。</p>
+<p>DELETE—命令服务器删除URI 指定的资源</p>
+<p>TRACE——命令服务器返回请求本身。通过这个方法，客户端可以知道介于它和服务器之间的其他服务器是如何处理请求的。</p>
+<p>﻿﻿OPTIONS—命令服务器返回它支持的 HTTP方法列表。</p>
+<p>﻿﻿CONNECT—命令服务器与客户端建立一个网络连接。这个方法通常用于设置SSL 隧道以开启 HTTPS功能。</p>
+<p>﻿﻿PATCH——命令服务器使用报文主体中的数据对 URI 指定的资源进行修改。</p>
+</blockquote>
+<h3 id="浏览器对请求方法的支持"><a href="#浏览器对请求方法的支持" class="headerlink" title="浏览器对请求方法的支持"></a>浏览器对请求方法的支持</h3><p>GET 方法是最基本的HTTP 方法，它负责从服务器上获取内容，所有浏览器都支持这个方法。POST 方法从 HTMIL 2.0 开始可以通过添加 HTML 表单来实现：HTML 的form 标签有一个名为method 的属性，用户可以通过将这个属性的值设置为 get 或者post 来指定要使用哪种方法。</p>
+<p>HTML 不支持除 GET 和 POST之外的其他HTTP 方法：在 HTML5 规范的早期草案中，HTML表单的method 属性曾经添加过对 PUT 方法和 DBLBTE 方法的支持，但这些支持在之后又被删除了。</p>
+<p>话虽如此，但流行的浏览器通常都不会只支持 HTML 一种数据格式——用户可以使用XMLHttpRequest （XHR） 来获得对 PUT方法和 DEITE 方法的支持。XHR 是一系列浏览器 API，这些 API 通常由 JavaScript 包裹（实际上 XHR 就是一个名为 XMLHttpRequest 的浏览器对象）。</p>
+<p>XHR 允许程序员向服务器发送 HTTP 请求，并且跟“XMILHttpRequest” 这个名字所暗示的不一样，这项技术并不仅仅局限于 XML格式—包括JSON以及纯文本在内的任何格式的请求和响应都可以通过XHR发送。</p>
+<h3 id="请求首部"><a href="#请求首部" class="headerlink" title="请求首部"></a>请求首部</h3><p>HTTP 请求方法定义了发送请求的客户端想要执行的动作，而HTTP 请求的首部则记录了与请求本身以及客户端有关的信息。请求的首部由任意多个用冒号分隔的纯文本键值对组成，最后以回车（CR）和换行（LF）结尾。</p>
+<p>作为 HTTP 1.1 RFC 的一部分，RFC 7231 对主要的一些 HTTP 请求字段（request field）进行了标准化。过去，非标准的HTTP 请求通常以×-作为前缀，但标准并没有沿用这一惯例。</p>
+<p>大多数 HTTP 请求首部都是可选的，宿主（Host）首部字段是 HTTP 1.1 唯一强制要求的首部。根据请求使用的方法不同，如果请求的报文中包含有可选的主体，那么请求的首部还需要带有内容长度（Content-Length）字段或者传输编码（Transfer-Encoding）字段。表1-1展示了一些常见的请求首部。</p>
+<table>
+<thead>
+<tr>
+<th align="center">首部字段</th>
+<th align="center">作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Accept</td>
+<td align="center">客户端在 HTTP 响应中能够接收的内容类型。比如说，客户端可以通过 Accept： text&#x2F;html 这个首部，告知服务器自己希望在响应的主体中收到 HTML 类型的内容</td>
+</tr>
+<tr>
+<td align="center">Accept-Charset</td>
+<td align="center">客户端要求服务器使用的字符集编码。比如说，客户端可以通过 Accept-Charset： utf-8这个首部，告知服务器自己希望响应的主体使用UTF-8字符集</td>
+</tr>
+<tr>
+<td align="center">Authorization</td>
+<td align="center">这个首部用于向服务器发送基本的身份验证证书</td>
+</tr>
+<tr>
+<td align="center">Cookie</td>
+<td align="center">客户端应该在这个首部中把服务器之前设置的所有 cookie 回传给服务器。比如说，如果服务器之前在浏览器上设置了3个 cookie，那么 Cookie 首部字段将在一个字符串里面包含这3个 cookie，并使用分号对这些 cookie 进行分隔。以下是一个 Cookie 首部示 9: Cookie: my_first_cookie&#x3D;hello; my_second_cookie&#x3D;world</td>
+</tr>
+<tr>
+<td align="center">Content-Length</td>
+<td align="center">请求主体的字节长度</td>
+</tr>
+<tr>
+<td align="center">Content-Type</td>
+<td align="center">当请求包含主体的时候，这个首部用于记录主体内容的类型。在发送 POST 或 PUT 请求时，内容的类型默认为 x-ww-form-urlen-coded，但是在上传文件时，内容的类型应该设置为 multipart&#x2F;form-data（上传文件这一操作可以通过将 input 标签的类型设置为 王ile 来实现）</td>
+</tr>
+<tr>
+<td align="center">Host</td>
+<td align="center">服务器的名字以及端口号。如果这个首部没有记录服务器的端口号，就表示服务器使用的是 80端口</td>
+</tr>
+<tr>
+<td align="center">Referrer</td>
+<td align="center">发起请求的页面所在的地址</td>
+</tr>
+<tr>
+<td align="center">User-Agent</td>
+<td align="center">对发起请求的客户端进行描述</td>
+</tr>
+</tbody></table>
+<h2 id="HTTP-响应"><a href="#HTTP-响应" class="headerlink" title="HTTP 响应"></a>HTTP 响应</h2><p>HTTP 响应报文是对 HTTP 请求报文的回复。跟HTTP 请求一样，HTTP 响应也是由一系列</p>
+<p>文本行组成的，其中包括：</p>
+<ol>
+<li>一个状态行</li>
+<li>零个或任意数量的响应首部</li>
+<li>一个空行</li>
+<li>一个可选的报文主体</li>
+</ol>
+<p>也许你已经发现了，HTTP 响应的组织方式跟 HTTP 请求的组织方式是完全相同的。以下是一个典型的HTTP 响应的样子（为了节省篇幅，我们省略了报文主体中的部分内容）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">200 OK</span><br><span class="line">Date: Sat, 22 Nov 2014</span><br><span class="line">12:58:58</span><br><span class="line">GMT</span><br><span class="line">Server: Apache/2</span><br><span class="line">Last-Modified: Thu, 28 Aug 2014 21:01:33</span><br><span class="line">GMT</span><br><span class="line">Content-Length: 33115</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1|</span><br><span class="line">&lt;! DOCTYPE html PUBLIC</span><br><span class="line">&quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/</span><br><span class="line">TR/xhtm11/DTD/xhtmll-strict.dtd&quot;&gt; &lt;html xmlns=&#x27;http://www.w3.org/1999/</span><br><span class="line">xhtml&#x27;&gt; ‹head&gt;&lt;title&gt;Hypertext Transfer Protocol -- HTTP/1.1&lt;/title&gt;&lt;/ head&gt;&lt;body&gt;...&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>HTTP 响应的第一行为状态行，这个文本行包含了状态码（status code）和相应的原因短语（reason phrase），原因短语对状态码进行了简单的描述。除此之外，这个例子中的 HTTP 响应还包含了一个HTML格式的报文主体。</p>
+<h3 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h3><p>正如之前所说，HTTP 响应中的状态码表明了响应的类型。HTTP 响应状态码共有5种类型，</p>
+<p>它们分别以不同的数字作为前缀。</p>
+<table>
+<thead>
+<tr>
+<th align="center">状态码类型</th>
+<th align="center">作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1XX</td>
+<td align="center">情报状态码。服务器通过这些状态码来告知客户端，自己已经接收到了客户端发送的请求，并且已经对请求进行了处理</td>
+</tr>
+<tr>
+<td align="center">2XX</td>
+<td align="center">成功状态码。这些状态码说明服务器已经接收到了客户端发送的请求，并且己经成功地对请求进行了处理。这类状态码的标准响应为“200OK”</td>
+</tr>
+<tr>
+<td align="center">3XX</td>
+<td align="center">重定向状态码。这些状态码表示服务器已经接收到了客户端发送的请求，并且已经成功处理了请求，但为了完成请求指定的动作，客户端还需要再做一些其他工作。 这类状态码大多用于实现 URL 重定向</td>
+</tr>
+<tr>
+<td align="center">4XX</td>
+<td align="center">客户端错误状态码。这类状态码说明客户端发送的请求出现了某些问题。在这一类型的状态码中，最常见的就是“404 Not Found”了，这个状态码表示服务器无法从请求指定的 URL 中找到客户端想要的资源</td>
+</tr>
+<tr>
+<td align="center">5XX</td>
+<td align="center">服务器错误状态码。当服务器因为某些原因而无法正确地处理请求时，服务器就会使用这类状态码来通知客户端。在这一类状态码中，最常见的就是“500 InternalServer Error”状态码了</td>
+</tr>
+</tbody></table>
+<h3 id><a href="#" class="headerlink" title></a></h3><h2 id="Web应用的各个组成部分"><a href="#Web应用的各个组成部分" class="headerlink" title="Web应用的各个组成部分"></a>Web应用的各个组成部分</h2><p>Web应用是一个执行以下任务的程序：</p>
+<ol>
+<li>通过HTTP 协议，以HTTP 请求报文的形式获取客户端输人</li>
+<li>对HTTP 请求报文进行处理，并执行必要的操作</li>
+<li>生成 HTML，并以 HTTP 响应报文的形式将其返回给客户端</li>
+</ol>
+<p>为了完成这些任务，Web 应用被分成了处理器（handler） 和模板引擎（template engine）这两个部分。</p>
+<h3 id="处理器handler"><a href="#处理器handler" class="headerlink" title="处理器handler"></a>处理器handler</h3><p>web 应用中的处理器除了要接收和处理客户端发来的请求，还需要调用模板引擎，然后由模板引擎生成 HTML 并把数据填充至将要回传给客户端的响应报文当中。</p>
+<p>用MVC 模式来讲，处理器既是控制器（controller），也是模型（model）。在理想的 MVC模式实现中，控制器应该是“苗条的”，它应该只包含路由（routing）代码以及 HTTP 报文的解包和打包逻辑；而模型则应该是“丰满的”，它应该包含应用的逻辑以及数据。</p>
+<blockquote>
+<p>“模型-视图-控制器”模式</p>
+<p>模型-视图一控制器（Model-View-Controller, MVC）模式是编写Web应用时常用的模式，这个模式是如此的流行，以至于人们有时候会错误地把这一模式当成了Web应用开发本身。</p>
+<p>实际上，MVC模式最初是在20世纪70年代未的施乐帕罗奥多研究中心（Xerox PARC）被引入到Smaltalk语言里面的，这一模式将程序分成了模型、视图和控制器3个部分，其中模型用于表示底层的数据，而视图则以可视化的方式向用户展示模型，至于控制器则会根据用户的输入对模型进行修改。每当模型发生变化时，视图都会自动进行更新，从而展现出模型的最新状态。</p>
+<p>尽管 MVC模式起源于桌面开发，但它在编写Web 应用方面也流行了起来一包括 Ruby on Rails、</p>
+<p>Codelgniter、Play 和 Spring MVC在内的很多Web 应用框架都把MVC用作它们的基本模式。在这些框架里面，模型一般都会通过结构（struct）或对象（object）映射（map）到数据库，而视图则会被渲染为 HTML，至于控制器则负责对请求进行路由，并管理对模型的访问。</p>
+<p>使用MVC框架进行Web应用开发的新手程序员常常会误以为MVC模式是开发Web 应用的唯一方法，但Web 应用本质上只是一个通过HTTP 协议与用户互动的程序，只要能够实现这种互动，程序本身可以使用任何一种模式开发，甚至不使用模式也是可以的。</p>
+</blockquote>
+<p>为了防止模型变得过于臃肿，并且出于代码复用的需要，开发者有时候会使用服务对象（service object ）或者函数（function）对模型进行操作。尽管服务对象严格来说并不是 MVC模式的一部分，但是通过把相同的逻辑放置到服务对象里面，并将同一个服务对象应用到不同的模型之上，可以有效地避免在多个模型里面复制相同代码的窘境。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>go package module work</title>
+    <url>/go%20package%20module%20work/</url>
+    <content><![CDATA[<h2 id="package"><a href="#package" class="headerlink" title="package"></a>package</h2><blockquote>
+<p>定义</p>
+<ul>
+<li>包是 Go 语言的基本组织单元，用于将代码分组。每个 Go 文件都必须属于一个包，包名通常在文件顶部通过 package 关键字声明。</li>
+<li>包可以包含多个 .go 文件，这些文件共享相同的包名，并位于同一目录下。</li>
+</ul>
+<p>用途</p>
+<ul>
+<li>代码复用：通过包可以将功能模块化，方便在不同项目中复用。</li>
+<li>命名空间：包提供命名空间，防止命名冲突。例如，math 包中的 Sin 函数不会与 time 包中的 Sleep 函数冲突。</li>
+<li>访问控制：包内的标识符可以根据首字母大小写控制访问权限（大写为公开，小写为私有）。</li>
+</ul>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// math.go</span></span><br><span class="line"><span class="keyword">package</span> mathutil</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;math&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(a, b <span class="type">float64</span>)</span></span> <span class="type">float64</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// main.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;yourproject/mathutil&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    result := mathutil.Add(<span class="number">3.0</span>, <span class="number">4.0</span>)</span><br><span class="line">    <span class="built_in">println</span>(result) <span class="comment">// 输出 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="module"><a href="#module" class="headerlink" title="module"></a>module</h2><blockquote>
+<p>定义</p>
+<ul>
+<li>模块 是 Go 1.11 引入的一种更高层次的组织单位，用于管理依赖和版本。它是一个包含 go.mod 文件的目录树，定义了项目的依赖关系和模块版本。</li>
+<li>模块是 Go 语言的官方依赖管理机制，取代了早期的 GOPATH 模式（尽管 GOPATH 仍然可用）。</li>
+</ul>
+<p>组成</p>
+<ul>
+<li>go.mod 文件：模块的配置文件，记录模块的名称、依赖和版本。</li>
+<li>go.sum 文件：记录依赖的校验和，用于验证依赖的完整性。</li>
+</ul>
+<p>初始化模块</p>
+<p>使用 go mod init 创建一个模块：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go mod init example.com/myproject</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>这会生成一个 go.mod 文件，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>example.com&#x2F;myproject 是模块的路径，通常是项目的托管地址（如果有）。</p>
+</li>
+</ul>
+<p>添加依赖</p>
+<ul>
+<li><p>导入外部包时，Go 工具会自动解析并添加到 go.mod：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">import</span> <span class="string">&quot;github.com/gorilla/mux&quot;</span></span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="comment">// 使用 mux 包</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行 go mod tidy 或 go build 会自动下载依赖并更新 go.mod 和 go.sum。</p>
+</li>
+</ul>
+<p>示例 go.mod</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br><span class="line"></span><br><span class="line">require (</span><br><span class="line">    github.com/gorilla/mux v1.8.0</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="package与module的关系"><a href="#package与module的关系" class="headerlink" title="package与module的关系"></a>package与module的关系</h2><ul>
+<li>Go Module 的基本概念是将每个项目作为一个模块（module），并有独立的模块路径。每个模块都可以包含多个包（package），并且每个模块都有一个 go.mod 文件来记录包依赖关系。</li>
+</ul>
+<blockquote>
+<p>层次关系</p>
+<ul>
+<li><p>包是模块的组成部分：</p>
+<ul>
+<li><p>一个模块可以包含多个包，包是模块内部的代码组织单元。</p>
+</li>
+<li><p>例如，一个模块 example.com&#x2F;myproject 可能包含以下包：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">example.com/myproject/mathutil</span><br><span class="line">example.com/myproject/web</span><br></pre></td></tr></table></figure>
+
+<p>这里的 mathutil 和 web 是模块中的两个包。</p>
+</li>
+</ul>
+</li>
+<li><p>模块是包的容器：</p>
+<ul>
+<li>模块通过 go.mod 文件定义了项目的根路径，所有包的导入路径都以模块路径为前缀。</li>
+<li>例如，go.mod 中定义的模块路径是 example.com&#x2F;myproject，那么模块内的包 mathutil 的完整导入路径是 example.com&#x2F;myproject&#x2F;mathutil。</li>
+</ul>
+</li>
+</ul>
+<p>依赖管理</p>
+<ul>
+<li><p>模块管理包的依赖：</p>
+<ul>
+<li><p>模块通过 go.mod 文件记录项目依赖的外部包及其版本。例如：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line">  </span><br><span class="line">go 1.21</span><br><span class="line">  </span><br><span class="line">require github.com/gorilla/mux v1.8.0</span><br></pre></td></tr></table></figure>
+
+<p>这里 github.com&#x2F;gorilla&#x2F;mux 是一个外部包，模块管理它的版本（v1.8.0）。</p>
+</li>
+</ul>
+</li>
+<li><p>包是依赖的实际单位：</p>
+<ul>
+<li>模块依赖的外部包（例如 github.com&#x2F;gorilla&#x2F;mux）实际上是一个模块内的包，Go 会根据模块路径和版本号下载并使用对应的包。</li>
+</ul>
+</li>
+</ul>
+<p>命名空间与路径</p>
+<ul>
+<li><p>模块定义包的导入路径：</p>
+<ul>
+<li><p>包的导入路径由模块路径决定。例如，模块路径 example.com&#x2F;myproject 中的包 mathutil 会被导入为：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;example.com/myproject/mathutil&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>模块路径是包路径的前缀：</p>
+<ul>
+<li>模块路径是包路径的一部分，包路径是模块路径加上包所在的子目录。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="module和package示例"><a href="#module和package示例" class="headerlink" title="module和package示例"></a>module和package示例</h2><p>假设你有一个项目，目录结构如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">myproject/</span><br><span class="line">├── go.mod</span><br><span class="line">├── main.go</span><br><span class="line">└── mathutil/</span><br><span class="line">    └── math.go</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>go.mod 文件：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mathutil&#x2F;math.go（包定义）：</p>
+<p>go</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> mathutil</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>main.go（主程序）：</p>
+<p>go</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;example.com/myproject/mathutil&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    result := mathutil.Add(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">    fmt.Println(result) <span class="comment">// 输出 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>关系说明</p>
+<ul>
+<li>模块：example.com&#x2F;myproject 是模块的路径，定义在 go.mod 中。</li>
+<li>包：<ul>
+<li>mathutil 是模块中的一个包，位于 mathutil&#x2F; 目录下。</li>
+<li>main 是模块中的另一个包，位于根目录。</li>
+</ul>
+</li>
+<li>导入路径：example.com&#x2F;myproject&#x2F;mathutil 是包 mathutil 的完整路径，由模块路径和包所在的子目录组成。</li>
+</ul>
+<p>依赖管理</p>
+<p>如果 main.go 还需要一个外部包（如 github.com&#x2F;gorilla&#x2F;mux），Go 会自动更新 go.mod：</p>
+<p>go</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gorilla/mux&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行 go mod tidy 后，go.mod 变为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">module example.com/myproject</span><br><span class="line"></span><br><span class="line">go 1.21</span><br><span class="line"></span><br><span class="line">require github.com/gorilla/mux v1.8.0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里的 github.com&#x2F;gorilla&#x2F;mux 是另一个模块中的包，example.com&#x2F;myproject 模块依赖它。</li>
+</ul>
+<h2 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h2><blockquote>
+<p>搬运：<a href="https://polarisxu.studygolang.com/posts/go/workspace/">https://polarisxu.studygolang.com/posts/go/workspace/</a></p>
+</blockquote>
+<h2 id="01-缘起"><a href="#01-缘起" class="headerlink" title="01 缘起"></a>01 缘起</h2><p>为了大家全面理解工作区模式，通过一个具体例子讲解。</p>
+<p>本地有两个项目，分别是两个 module：mypkg 和 example。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/</span><br><span class="line">$ <span class="built_in">mkdir</span> polarisxu</span><br><span class="line">$ <span class="built_in">cd</span> polarisxu</span><br><span class="line">$ <span class="built_in">mkdir</span> mypkg example</span><br><span class="line">$ <span class="built_in">cd</span> mypkg</span><br><span class="line">$ go mod init github.com/polaris1119/mypkg</span><br><span class="line">$ <span class="built_in">touch</span> bar.go</span><br></pre></td></tr></table></figure>
+
+<p>在 bar.go 中增加如下示例代码：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> mypkg</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Bar</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">&quot;This is package mypkg&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着，在 example 模块中处理：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/polarisxu/example</span><br><span class="line">$ go mod init github.com/polaris1119/example</span><br><span class="line">$ <span class="built_in">touch</span> main.go</span><br></pre></td></tr></table></figure>
+
+<p>在 main.go 中增加如下内容：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;github.com/polaris1119/mypkg&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    mypkg.Bar()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候，如果我们运行 go mod tidy，肯定会报错，因为我们的 mypkg 包根本没有提交到 github 上，肯定找不到。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go mod tidy</span><br><span class="line">....</span><br><span class="line">fatal: repository <span class="string">&#x27;https://github.com/polaris1119/mypkg/&#x27;</span> not found</span><br></pre></td></tr></table></figure>
+
+<p><code>go run main.go</code> 也就不成功。</p>
+<p>我们当然可以提交 mypkg 到 github，但我们每修改一次 mypkg，就需要提交（而且每次提交之后需要在 example 中 go get 最新版本），否则 example 中就没法使用上最新的。</p>
+<p>针对这种情况，目前是建议通过 replace 来解决，即在 example 中的 go.mod 增加如下 replace：（v1.0.0 根据具体情况修改，还未提交，可以使用 v1.0.0）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">module github.com/polaris1119/example</span><br><span class="line"></span><br><span class="line">go 1.19</span><br><span class="line"></span><br><span class="line">require github.com/polaris1119/mypkg v1.0.0</span><br><span class="line"></span><br><span class="line">replace github.com/polaris1119/mypkg =&gt; ../mypkg</span><br></pre></td></tr></table></figure>
+
+<p>再次运行 go run main.go，输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go run main.go</span><br><span class="line">This is package mypkg</span><br></pre></td></tr></table></figure>
+
+<p>当都开发完成时，我们需要手动删除 replace，并执行 go mod tidy 后提交，否则别人使用就报错了。</p>
+<p>这还是挺不方便的，如果本地有多个 module，每一个都得这么处理。</p>
+<h2 id="02-工作区模式"><a href="#02-工作区模式" class="headerlink" title="02 工作区模式"></a>02 工作区模式</h2><p>针对上面的这个问题，Michael Matloob 提出了 Workspace Mode（工作区模式）。相关 issue 讨论：<a href="https://github.com/golang/go/issues/45713">cmd&#x2F;go: add a workspace mode</a> ，<a href="https://go.googlesource.com/proposal/+/master/design/45713-workspace.md">这里是 Proposal</a> 。并在 Go1.18 中发布了。</p>
+<p>因此，要使用工作区，请确保 Go 版本在 1.18+。</p>
+<p>我本地当前版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go version</span><br><span class="line">go version go1.19.2 darwin/arm64</span><br></pre></td></tr></table></figure>
+
+<p>通过 go help work 可以看到 work 相关命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go <span class="built_in">help</span> work</span><br><span class="line">Work provides access to operations on workspaces.</span><br><span class="line"></span><br><span class="line">Note that support <span class="keyword">for</span> workspaces is built into many other commands, not</span><br><span class="line">just <span class="string">&#x27;go work&#x27;</span>.</span><br><span class="line"></span><br><span class="line">See <span class="string">&#x27;go help modules&#x27;</span> <span class="keyword">for</span> information about Go<span class="string">&#x27;s module system of which</span></span><br><span class="line"><span class="string">workspaces are a part.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">See https://go.dev/ref/mod#workspaces for an in-depth reference on</span></span><br><span class="line"><span class="string">workspaces.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">See https://go.dev/doc/tutorial/workspaces for an introductory</span></span><br><span class="line"><span class="string">tutorial on workspaces.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">A workspace is specified by a go.work file that specifies a set of</span></span><br><span class="line"><span class="string">module directories with the &quot;use&quot; directive. These modules are used as</span></span><br><span class="line"><span class="string">root modules by the go command for builds and related operations.  A</span></span><br><span class="line"><span class="string">workspace that does not specify modules to be used cannot be used to do</span></span><br><span class="line"><span class="string">builds from local modules.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">go.work files are line-oriented. Each line holds a single directive,</span></span><br><span class="line"><span class="string">made up of a keyword followed by arguments. For example:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    go 1.18</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    use ../foo/bar</span></span><br><span class="line"><span class="string">    use ./baz</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    replace example.com/foo v1.2.3 =&gt; example.com/bar v1.4.5</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The leading keyword can be factored out of adjacent lines to create a block,</span></span><br><span class="line"><span class="string">like in Go imports.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    use (</span></span><br><span class="line"><span class="string">      ../foo/bar</span></span><br><span class="line"><span class="string">      ./baz</span></span><br><span class="line"><span class="string">    )</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The use directive specifies a module to be included in the workspace&#x27;</span>s</span><br><span class="line"><span class="built_in">set</span> of main modules. The argument to the use directive is the directory</span><br><span class="line">containing the module<span class="string">&#x27;s go.mod file.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The go directive specifies the version of Go the file was written at. It</span></span><br><span class="line"><span class="string">is possible there may be future changes in the semantics of workspaces</span></span><br><span class="line"><span class="string">that could be controlled by this version, but for now the version</span></span><br><span class="line"><span class="string">specified has no effect.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The replace directive has the same syntax as the replace directive in a</span></span><br><span class="line"><span class="string">go.mod file and takes precedence over replaces in go.mod files.  It is</span></span><br><span class="line"><span class="string">primarily intended to override conflicting replaces in different workspace</span></span><br><span class="line"><span class="string">modules.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">To determine whether the go command is operating in workspace mode, use</span></span><br><span class="line"><span class="string">the &quot;go env GOWORK&quot; command. This will specify the workspace file being</span></span><br><span class="line"><span class="string">used.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Usage:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    go work &lt;command&gt; [arguments]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The commands are:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    edit        edit go.work from tools or scripts</span></span><br><span class="line"><span class="string">    init        initialize workspace file</span></span><br><span class="line"><span class="string">    sync        sync workspace build list to modules</span></span><br><span class="line"><span class="string">    use         add modules to workspace file</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Use &quot;go help work &lt;command&gt;&quot; for more information about a command.</span></span><br></pre></td></tr></table></figure>
+
+<p><em>注意</em>：上文中提到，工作区不只是 go work 相关命令，Go 其他命令也会涉及工作区内容，比如 go run、go build 等。</p>
+<p>根据这个提示，我们初始化 workspace：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/polarisxu</span><br><span class="line">$ go work init mypkg example</span><br><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">├── example</span><br><span class="line">│   ├── go.mod</span><br><span class="line">│   └── main.go</span><br><span class="line">├── go.work</span><br><span class="line">└── mypkg</span><br><span class="line">    ├── bar.go</span><br><span class="line">    └── go.mod</span><br></pre></td></tr></table></figure>
+
+<p>注意几点：</p>
+<ul>
+<li>多个子模块应该在一个目录下（或其子目录）。比如这里的 polarisxu 目录；（这不是必须的，但更好管理，否则 go work init 需要提供正确的子模块路径）</li>
+<li>go work init 需要在 polarisxu 目录执行；</li>
+<li>go work init 之后跟上需要本地开发的子模块目录名；</li>
+</ul>
+<p>打开 go.work 看看长什么样：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go 1.19</span><br><span class="line"></span><br><span class="line">use (</span><br><span class="line">    ./example</span><br><span class="line">    ./mypkg</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>go.work 文件的语法和 go.mod 类似（go.work 优先级高于 go.mod），因此也支持 replace。</p>
+<p>注意：实际项目中，多个模块之间可能还依赖其他模块，建议在 go.work 所在目录执行 <code>go work sync</code>。</p>
+<p>现在，我们将 example&#x2F;go.mod 中的 replace 语句删除，再次执行 go run main.go（在 example 目录下），得到了正常的输出。也可以在 polarisxu 目录下，这么运行：go run example&#x2F;main.go，也能正常。</p>
+<p>注意，go.work 不需要提交到 Git 中，因为它只是你本地开发使用的。</p>
+<p>当你开发完成，应该先提交 mypkg 包到 GitHub，然后在 example 下面执行 go get：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ go get -u github.com/polaris1119/mypkg@latest</span><br></pre></td></tr></table></figure>
+
+<p>然后禁用 workspace（通过 GOWORK&#x3D;off 禁用），再次运行 example 模块，是否正确：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/polarisxu/example</span><br><span class="line">$ GOWORK=off go run main.go</span><br></pre></td></tr></table></figure>
+
+<p>目前 VSCode 的 go 插件已经支持 workspace，不需要做什么配置就可以愉快的玩耍。</p>
+<h2 id="03-总结"><a href="#03-总结" class="headerlink" title="03 总结"></a>03 总结</h2><p>在 GOPATH 年代，多 GOPATH 是一个头疼的问题。当时没有很好的解决，Module 就出现了，多 GOPATH 问题因此消失。但多 Module 问题随之出现。Workspace 方案较好的解决了这个问题。</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
   </entry>
 </search>
