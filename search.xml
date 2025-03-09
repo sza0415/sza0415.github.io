@@ -5234,7 +5234,7 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>Go WEB</title>
     <url>/GowebProgramming/</url>
     <content><![CDATA[<h2 id="HTTP-简介"><a href="#HTTP-简介" class="headerlink" title="HTTP 简介"></a>HTTP 简介</h2><blockquote>
 <p>HTTP 是一种无状态、由文本构成的请求-响应（request-response）协议，这种协议使用的是客户端-服务器（client-server）计算模型。</p>
@@ -5387,6 +5387,12 @@ setTimeout()：在指定的毫秒数后调用函数或者计算表达式
 </blockquote>
 <p>为了防止模型变得过于臃肿，并且出于代码复用的需要，开发者有时候会使用服务对象（service object ）或者函数（function）对模型进行操作。尽管服务对象严格来说并不是 MVC模式的一部分，但是通过把相同的逻辑放置到服务对象里面，并将同一个服务对象应用到不同的模型之上，可以有效地避免在多个模型里面复制相同代码的窘境。</p>
 ]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
   </entry>
   <entry>
     <title>go package module work</title>
