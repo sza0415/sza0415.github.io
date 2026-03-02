@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><%= page.title ? page.title + " | " : "" %><%= config.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="<%- config.root %>css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="<%- config.root %>"><%= config.title %></a></h1>
+      <p class="subtitle"><%= config.subtitle %></p>
+    </header>
+    <main>
+      <%- body %>
+    </main>
+    <footer>
+      <p>&copy; <%= new Date().getFullYear() %> <%= config.author %></p>
+    </footer>
+  </div>
+</body>
+</html>
