@@ -12,7 +12,9 @@
     "version": "8.1.1"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "hexo": "^8.0.0",
+    "hexo-admin": "^2.3.0",
     "hexo-deployer-git": "^4.0.0",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",

@@ -99,6 +99,13 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: minimal
 
+# Admin
+admin:
+  username: sza0415
+  # password_hash: $2a$10$3TiyTCdi8qIhYqbvpjmQqOHhFIBiTa49bVd8mf4fPbqpdOqivRtbe
+  secret: my_secret_session_key
+  deployCommand: 'hexo clean && hexo deploy'
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
