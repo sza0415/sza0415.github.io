@@ -110,5 +110,5 @@ admin:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:sza0415/githubPage.git
+  repo: git@github.com:sza0415/sza0415.github.io.git
   branch: gh-pages
