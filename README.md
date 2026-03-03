@@ -1,4 +1,4 @@
-# 个人博客写作指南
+# 博客
 
 本博客基于 [Hexo](https://hexo.io/) 搭建，托管于 GitHub Pages。
 
@@ -21,7 +21,7 @@ npx hexo server
 👉 **[http://localhost:4000/admin/](http://localhost:4000/admin/)**
 
 - **用户名**: `sza0415`
-- **密码**: `szaZIANG0415!` (或你后来修改的密码)
+- **密码**: `xxxxxxx` (或你后来修改的密码)
 
 ### 3. 写作与发布
 1. 点击右上角 **New Post** 创建新文章。
