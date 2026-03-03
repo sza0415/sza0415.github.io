@@ -2,6 +2,9 @@
   <% page.posts.each(function(post){ %>
     <li>
       <span class="date"><%= date(post.date, "YYYY-MM-DD") %></span>
+      <% if (post.categories && post.categories.length > 0) { %>
+        <span class="category-tag"><%= post.categories.data[0].name %></span>
+      <% } %>
       <a href="<%- url_for(post.path) %>"><%= post.title %></a>
     </li>
   <% }) %>
