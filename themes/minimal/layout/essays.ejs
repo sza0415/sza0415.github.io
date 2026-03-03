@@ -1,0 +1,19 @@
+<div class="essays-page">
+  <ul class="post-list">
+    <% 
+      var essayCat = site.categories.findOne({name: '随笔'});
+      if (essayCat && essayCat.posts.length > 0) {
+        essayCat.posts.sort('date', -1).each(function(post){ 
+    %>
+      <li>
+        <span class="date"><%= date(post.date, "YYYY-MM-DD") %></span>
+        <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+      </li>
+    <% 
+        })
+      } else {
+    %>
+      <p>暂无随笔内容。</p>
+    <% } %>
+  </ul>
+</div>

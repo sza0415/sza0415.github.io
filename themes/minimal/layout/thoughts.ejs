@@ -1,0 +1,19 @@
+<div class="thoughts-page">
+  <ul class="post-list">
+    <% 
+      var thoughtCat = site.categories.findOne({name: '随想'});
+      if (thoughtCat && thoughtCat.posts.length > 0) {
+        thoughtCat.posts.sort('date', -1).each(function(post){ 
+    %>
+      <li>
+        <span class="date"><%= date(post.date, "YYYY-MM-DD") %></span>
+        <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+      </li>
+    <% 
+        })
+      } else {
+    %>
+      <p>暂无随想内容。</p>
+    <% } %>
+  </ul>
+</div>

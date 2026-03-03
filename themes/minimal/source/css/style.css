@@ -28,6 +28,24 @@ header h1 a {
   margin-top: 5px;
 }
 
+/* Navigation */
+.site-nav {
+  margin-top: 20px;
+}
+
+.site-nav a {
+  margin-right: 20px;
+  color: #666;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+.site-nav a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
 a {
   color: #0066cc;
   text-decoration: none;
@@ -80,6 +98,24 @@ a:hover {
   padding: 15px;
   overflow-x: auto;
   border-radius: 5px;
+}
+
+/* Feishu-style Blockquote */
+.post-content blockquote {
+  margin: 1.5em 0;
+  padding: 10px 15px;
+  border-left: 4px solid #646a73; /* Feishu grey border */
+  background-color: #f5f6f7; /* Light grey background */
+  color: #646a73;
+  border-radius: 0 4px 4px 0;
+}
+
+.post-content blockquote p {
+  margin: 0.5em 0;
+}
+
+.post-content blockquote strong {
+  color: #1f2329; /* Darker color for bold text in quotes */
 }
 
 footer {

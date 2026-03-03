@@ -11,6 +11,11 @@
     <header>
       <h1><a href="<%- config.root %>"><%= config.title %></a></h1>
       <p class="subtitle"><%= config.subtitle %></p>
+      <nav class="site-nav">
+        <a href="<%- config.root %>">首页</a>
+        <a href="<%- config.root %>essays/">随笔</a>
+        <a href="<%- config.root %>thoughts/">随想</a>
+      </nav>
     </header>
     <main>
       <%- body %>
