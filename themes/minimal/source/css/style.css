@@ -1,110 +1,283 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+/* Reset & Base */
+:root {
+  --bg-body: #f5f6f7;
+  --bg-content: #ffffff;
+  --text-primary: #1f2329;
+  --text-secondary: #646a73;
+  --text-tertiary: #8f959e;
+  --primary-color: #3370ff;
+  --primary-hover: #2955cc;
+  --border-color: #dee0e3;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --radius-card: 8px;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: "Menlo", "Monaco", "Consolas", "Courier New", monospace;
 }
 
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-body);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Layout Container */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Header */
 header {
-  margin-bottom: 40px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 20px;
+  background: var(--bg-content);
+  padding: 40px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.5em;
+  font-size: 2.2em;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 header h1 a {
+  color: var(--text-primary);
   text-decoration: none;
-  color: #333;
 }
 
 .subtitle {
-  color: #666;
-  margin-top: 5px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+  font-size: 1.1em;
+  font-weight: 400;
 }
 
-a {
-  color: #0066cc;
-  text-decoration: none;
+/* Main Content Area */
+main {
+  background: var(--bg-content);
+  padding: 48px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  min-height: 400px;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
+/* Post List (Home/Archive) */
 .post-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .post-list li {
-  margin-bottom: 15px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.2s;
+}
+
+.post-list li:last-child {
+  border-bottom: none;
+}
+
+.post-list li:hover {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+.post-list a {
+  font-size: 1.1em;
+  color: var(--text-primary);
+  font-weight: 500;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.post-list a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 .post-list .date {
-  font-family: monospace;
-  color: #999;
-  margin-right: 15px;
-  min-width: 100px;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+/* Article/Post View */
+.post {
+  max-width: 100%;
 }
 
 .post-title {
   margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 2.4em;
+  color: var(--text-primary);
+  line-height: 1.3;
 }
 
 .post-meta {
-  color: #999;
-  margin-bottom: 30px;
-  font-size: 0.9em;
+  color: var(--text-tertiary);
+  margin-bottom: 40px;
+  font-size: 0.95em;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+/* Post Content Typography */
+.post-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.post-content h2, 
+.post-content h3, 
+.post-content h4 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.post-content h2 { font-size: 1.8em; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+.post-content h3 { font-size: 1.5em; }
+.post-content h4 { font-size: 1.25em; }
+
+.post-content p {
+  margin-bottom: 24px;
+}
+
+.post-content ul, 
+.post-content ol {
+  padding-left: 24px;
+  margin-bottom: 24px;
+}
+
+.post-content li {
+  margin-bottom: 8px;
+}
+
+.post-content blockquote {
+  border-left: 4px solid var(--primary-color);
+  margin: 0 0 24px 0;
+  padding: 12px 20px;
+  background-color: #f8f9fa;
+  color: var(--text-secondary);
+  border-radius: 0 4px 4px 0;
 }
 
 .post-content img {
   max-width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .post-content code {
-  background: #f4f4f4;
-  padding: 2px 5px;
-  border-radius: 3px;
+  font-family: var(--font-mono);
+  background-color: rgba(31, 35, 41, 0.05);
+  color: #c7254e;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
 }
 
 .post-content pre {
-  background: #f4f4f4;
-  padding: 15px;
+  background-color: #f5f6f7;
+  padding: 20px;
+  border-radius: 8px;
   overflow-x: auto;
-  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
 }
 
+.post-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Footer */
 footer {
-  margin-top: 60px;
-  border-top: 1px solid #eee;
+  margin-top: 40px;
   padding-top: 20px;
   text-align: center;
-  color: #999;
-  font-size: 0.8em;
+  color: var(--text-tertiary);
+  font-size: 0.9em;
 }
 
+/* Pagination */
 .pagination {
-  margin-top: 30px;
+  margin-top: 40px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
 
-.pagination .page-number {
+.pagination .page-number,
+.pagination .extend {
   display: inline-block;
-  padding: 5px 10px;
-  margin: 0 2px;
-  border: 1px solid #eee;
-  color: #333;
+  padding: 8px 16px;
+  background: var(--bg-content);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.pagination .page-number:hover,
+.pagination .extend:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 .pagination .current {
-  background: #eee;
-  border-color: #ddd;
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+  
+  header, main {
+    padding: 24px;
+  }
+  
+  .post-title {
+    font-size: 1.8em;
+  }
 }
