@@ -1,0 +1,19 @@
+<div class="excerpts-page">
+  <ul class="post-list">
+    <% 
+      var excerptCat = site.categories.findOne({name: '摘录'});
+      if (excerptCat && excerptCat.posts.length > 0) {
+        excerptCat.posts.sort('date', -1).each(function(post){ 
+    %>
+      <li>
+        <span class="date"><%= date(post.date, "YYYY-MM-DD") %></span>
+        <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+      </li>
+    <% 
+        })
+      } else {
+    %>
+      <p>暂无摘录内容。</p>
+    <% } %>
+  </ul>
+</div>
