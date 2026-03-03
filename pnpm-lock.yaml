@@ -11,6 +11,9 @@ dependencies:
   hexo:
     specifier: ^8.0.0
     version: 8.1.1
+  hexo-abbrlink:
+    specifier: ^2.2.1
+    version: 2.2.1
   hexo-admin:
     specifier: ^2.3.0
     version: 2.3.0
@@ -1887,6 +1890,13 @@ packages:
     dev: false
     optional: true
 
+  /hexo-abbrlink@2.2.1:
+    resolution: {integrity: sha512-yvazN7bbrIb7p8QU3nJ/8fbDmir1mFroYvUYcJz5xpc6DtszKggschmqZg6WNUdjhDBFyDwksrIUfwQnw0OOuA==}
+    dependencies:
+      hexo-front-matter: 1.0.0
+      hexo-fs: 3.1.0
+    dev: false
+
   /hexo-admin@2.3.0:
     resolution: {integrity: sha512-dbfy2AugRql+7uuEkefcPiByWumPMr7er/5wTxEsCwOQjSlidpHpwryuUUuSfyKVktA3rpDwv8vHjHoAiMGHhg==}
     dependencies:
@@ -1946,6 +1956,13 @@ packages:
       js-yaml: 3.14.2
     dev: false
 
+  /hexo-front-matter@1.0.0:
+    resolution: {integrity: sha512-Hn8IIzgWWnxYTekrjnA0rxwWMoQHifyrxKMqVibmFaRKf4AQ2V6Xo13Jiso6CDwYfS+OdA41QS5DG1Y+QXA5gw==}
+    engines: {node: '>=8.6.0'}
+    dependencies:
+      js-yaml: 3.14.2
+    dev: false
+
   /hexo-front-matter@4.2.1:
     resolution: {integrity: sha512-sJJI0GNmejYiwBvgnGRKn5V3sbODB4dNPr8jyw2Qp0PRHr4Uuyv8iyxw6WfK3+T7yvzYvJOh+tZ7jnwr2BYARA==}
     engines: {node: '>=14'}
@@ -1962,6 +1979,16 @@ packages:
       graceful-fs: 4.2.11
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /hexo-fs@3.1.0:
+    resolution: {integrity: sha512-SfoDH7zlU9Iop+bAfEONXezbNIkpVX1QqjNCBYpapilZR+xVOCfTEdlNixanrKBbLGPb2fXqrdDBFgrKuiVGQQ==}
+    engines: {node: '>=10.13.0'}
+    dependencies:
+      bluebird: 3.7.2
+      chokidar: 3.6.0
+      graceful-fs: 4.2.11
+      hexo-util: 2.7.0
     dev: false
 
   /hexo-fs@4.1.3:
