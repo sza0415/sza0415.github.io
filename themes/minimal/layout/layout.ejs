@@ -11,6 +11,9 @@
     <header>
       <h1><a href="<%- config.root %>"><%= config.title %></a></h1>
       <p class="subtitle"><%= config.subtitle %></p>
+      <% if (config.description) { %>
+        <p class="description"><%- String(config.description).replace(/\r?\n/g, '<br>') %></p>
+      <% } %>
       <nav class="site-nav">
         <a href="<%- config.root %>">首页</a>
         <a href="<%- config.root %>essays/">随笔</a>
