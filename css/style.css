@@ -28,6 +28,12 @@ header h1 a {
   margin-top: 5px;
 }
 
+.description {
+  color: #999;
+  margin-top: 8px;
+  font-size: 0.9em;
+}
+
 /* Navigation */
 .site-nav {
   margin-top: 20px;
