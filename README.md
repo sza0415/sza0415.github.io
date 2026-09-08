@@ -9,6 +9,13 @@
 
 ## 🚀 快速开始
 
+### 0. 首次安装依赖
+首次克隆项目后，或 `node_modules` 目录被删除后，在项目目录运行：
+```bash
+pnpm install --frozen-lockfile
+```
+项目使用 `pnpm-lock.yaml` 锁定依赖版本，请先安装 pnpm。安装完成后再启动服务，否则会出现 `Cannot find module 'hexo'`。无需为此升级全局 npm。
+
 ### 1. 启动写作服务
 每次写博客前，打开终端进入项目目录，运行：
 ```bash
