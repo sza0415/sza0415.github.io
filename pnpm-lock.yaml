@@ -4,6 +4,13 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+packageExtensionsChecksum: 1e0aa457808648c0ebe30af4682be88a
+
+patchedDependencies:
+  hexo-admin@2.3.0:
+    hash: amzjzjgwklwuq4n2v3sg6nyvgq
+    path: patches/hexo-admin@2.3.0.patch
+
 dependencies:
   bcryptjs:
     specifier: ^3.0.3
@@ -16,7 +23,7 @@ dependencies:
     version: 2.2.1
   hexo-admin:
     specifier: ^2.3.0
-    version: 2.3.0
+    version: 2.3.0(patch_hash=amzjzjgwklwuq4n2v3sg6nyvgq)
   hexo-deployer-git:
     specifier: ^4.0.0
     version: 4.0.0
@@ -1897,7 +1904,7 @@ packages:
       hexo-fs: 3.1.0
     dev: false
 
-  /hexo-admin@2.3.0:
+  /hexo-admin@2.3.0(patch_hash=amzjzjgwklwuq4n2v3sg6nyvgq):
     resolution: {integrity: sha512-dbfy2AugRql+7uuEkefcPiByWumPMr7er/5wTxEsCwOQjSlidpHpwryuUUuSfyKVktA3rpDwv8vHjHoAiMGHhg==}
     dependencies:
       bcrypt-nodejs: 0.0.3
@@ -1911,6 +1918,7 @@ packages:
       hexo-front-matter: 0.2.3
       hexo-fs: 0.1.6
       hexo-util: 0.1.7
+      js-yaml: 4.1.1
       less: 2.7.3
       moment: 2.30.1
       serve-static: 1.16.3
@@ -1918,6 +1926,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+    patched: true
 
   /hexo-cli@4.3.2:
     resolution: {integrity: sha512-druJeBgLpG9ncDS5AhBHdAXk0G4CFj8Qes09pApyZ6bR+nJW1JYiDMuilhudaKDdq+1l49jWXVTidkcb7p0Jbw==}

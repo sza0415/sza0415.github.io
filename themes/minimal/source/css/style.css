@@ -37,10 +37,12 @@ header h1 a {
 /* Navigation */
 .site-nav {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
 }
 
 .site-nav a {
-  margin-right: 20px;
   color: #666;
   font-weight: bold;
   text-decoration: none;
@@ -77,6 +79,23 @@ a:hover {
   color: #999;
   margin-right: 15px;
   min-width: 100px;
+}
+
+.notes-page h2 {
+  margin-bottom: 8px;
+}
+
+.notes-intro,
+.notes-empty {
+  color: #666;
+}
+
+.notes-empty {
+  padding: 24px 0;
+}
+
+.notes-page .post-list a {
+  overflow-wrap: anywhere;
 }
 
 /* Category Tag */

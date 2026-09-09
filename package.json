@@ -11,6 +11,18 @@
   "hexo": {
     "version": "8.1.1"
   },
+  "pnpm": {
+    "packageExtensions": {
+      "hexo-admin@2.3.0": {
+        "dependencies": {
+          "js-yaml": "^4.1.1"
+        }
+      }
+    },
+    "patchedDependencies": {
+      "hexo-admin@2.3.0": "patches/hexo-admin@2.3.0.patch"
+    }
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "hexo": "^8.0.0",

@@ -1,0 +1,19 @@
+<section class="notes-page" aria-labelledby="notes-title">
+  <h2 id="notes-title">学习笔记</h2>
+  <p class="notes-intro">记录学到的知识、实践中的发现，以及还没想明白的问题。</p>
+  <%
+    var notesCategory = site.categories.findOne({name: '学习笔记'});
+    if (notesCategory && notesCategory.posts.length > 0) {
+  %>
+    <ul class="post-list">
+      <% notesCategory.posts.sort('date', -1).each(function(post){ %>
+        <li>
+          <time class="date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+          <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p class="notes-empty">还没有学习笔记，慢慢积累，从第一篇开始。</p>
+  <% } %>
+</section>

@@ -1,0 +1,22 @@
+diff --git a/api.js b/api.js
+index 43dde8de4fb34e6a0ce78fe720a8a3d83b3d1665..ba00475a6805075f8d2e1b17f4b4f974643f4e4e 100644
+--- a/api.js
++++ b/api.js
+@@ -41,7 +41,7 @@ module.exports = function (app, hexo) {
+       fs.writeFile(hexo.base_dir+'_admin-config.yml', '')
+       return {}
+     } else {
+-      var settings = yml.safeLoad(fs.readFileSync(path))
++      var settings = yml.load(fs.readFileSync(path))
+ 
+       if (!settings) return {}
+       return settings
+@@ -185,7 +185,7 @@ module.exports = function (app, hexo) {
+     }
+     hexo.log.d('set', name, '=', value, 'with', JSON.stringify(addedOptions))
+ 
+-    fs.writeFileSync(hexo.base_dir + '_admin-config.yml', yml.safeDump(settings))
++    fs.writeFileSync(hexo.base_dir + '_admin-config.yml', yml.dump(settings))
+     res.done({
+       updated: 'Successfully updated ' + name + ' = ' + value,
+       settings: settings
