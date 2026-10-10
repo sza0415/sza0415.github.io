@@ -85,6 +85,56 @@ a:hover {
   margin-bottom: 8px;
 }
 
+.projects {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.projects h2 {
+  margin: 0 0 16px;
+  color: #666;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.project-link {
+  display: block;
+  padding: 8px 0;
+  color: #333;
+}
+
+.project-title {
+  display: block;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.project-title span {
+  margin-left: 4px;
+  color: #999;
+}
+
+.project-description {
+  display: block;
+  margin-top: 4px;
+  color: #999;
+  font-size: 0.9em;
+}
+
+.project-link:hover {
+  text-decoration: none;
+}
+
+.project-link:hover .project-title {
+  text-decoration: underline;
+}
+
+.project-link:focus-visible {
+  outline: 2px solid #666;
+  outline-offset: 4px;
+}
+
 .notes-intro,
 .notes-empty {
   color: #666;
