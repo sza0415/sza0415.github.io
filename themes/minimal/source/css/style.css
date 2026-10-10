@@ -99,9 +99,25 @@ a:hover {
 }
 
 .project-link {
-  display: block;
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
   padding: 8px 0;
   color: #333;
+}
+
+.project-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.project-info {
+  min-width: 0;
 }
 
 .project-title {
@@ -118,7 +134,7 @@ a:hover {
 .project-description {
   display: block;
   margin-top: 4px;
-  color: #999;
+  color: #777;
   font-size: 0.9em;
 }
 
@@ -133,6 +149,17 @@ a:hover {
 .project-link:focus-visible {
   outline: 2px solid #666;
   outline-offset: 4px;
+}
+
+@media (max-width: 520px) {
+  .project-link {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .project-preview {
+    max-width: 320px;
+  }
 }
 
 .notes-intro,
